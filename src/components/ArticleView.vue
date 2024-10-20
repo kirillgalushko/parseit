@@ -26,6 +26,7 @@ const props = defineProps<ArticleViewProps>()
 .scrollable {
   height: 100%;
   overflow: auto;
+  padding-top: 40px;
 }
 
 .article-content {
@@ -36,5 +37,6 @@ const props = defineProps<ArticleViewProps>()
 
 .article-content:deep(img) {
   max-width: 100%;
+  height: auto;
 }
 </style>

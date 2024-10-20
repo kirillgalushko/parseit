@@ -3,14 +3,15 @@ export type Gap = 1 | 2 | 3 | 4 | 5 | 6
 
 export interface StackProps {
     direction: 'row' | 'column',
-    gap: Gap
+    gap?: Gap,
+    fullHeight?: boolean;
 }
 
 const props = defineProps<StackProps>()
 </script>
 
 <template>
-    <div :class="['stack', props.direction, `gap-${props.gap}`]">
+    <div :class="['stack', props.direction, { [`gap-${props.gap}`]: !!gap, 'fullHeight': props.fullHeight }]">
         <slot></slot>
     </div>
 </template>
@@ -26,6 +27,10 @@ const props = defineProps<StackProps>()
 
 .column {
     flex-direction: column;
+}
+
+.fullHeight {
+  height: 100%;
 }
 
 .gap-1 {

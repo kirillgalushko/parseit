@@ -22,14 +22,18 @@
   
   .light-theme {
     --color-bg: var(--color-bg-light);
+    --color-bg-opposite: var(--color-bg-dark);
     --color-bg-secondary: var(--color-bg-secondary-light);
     --color-text: var(--color-text-light);
+    --color-text-opposite: var(--color-text-dark);
     --color-border: var(--color-border-light);
   }
   
     .dark-theme {
     --color-bg: var(--color-bg-dark);
+    --color-bg-opposite: var(--color-bg-light);
     --color-bg-secondary: var(--color-bg-secondary-dark);
     --color-text: var(--color-text-dark);
+    --color-text-opposite: var(--color-text-light);
     --color-border: var(--color-border-dark);
   }
