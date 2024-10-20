@@ -15,6 +15,12 @@ export const useArticleStore = defineStore('articleStore', {
     addArticle(article: Article) {
       this.articles.push(article);
     },
+    removeArticle(article: Article) {
+      this.articles = this.articles.filter(a => a.id !== article.id)
+      if (this.selectedArticle?.id === article.id) {
+        this.selectedArticle = null;
+      }
+    },
     setSelectedArticle(article: Article) {
       this.selectedArticle = article;
     },

@@ -8,6 +8,7 @@ import { ViewVariant } from '../types/View';
 import Tabs from './Tabs.vue';
 import Tab from './Tab.vue';
 import { ref } from 'vue';
+import { useArticleStore } from '../store';
 
 interface ArticleViewProps {
   article?: Article | null
@@ -15,6 +16,7 @@ interface ArticleViewProps {
 
 const props = defineProps<ArticleViewProps>()
 const viewVariant = ref<ViewVariant>('reader')
+const articleStore = useArticleStore();
 
 const onChangeViewVariant = (variant: ViewVariant) => {
   viewVariant.value = variant
@@ -23,17 +25,24 @@ const onChangeViewVariant = (variant: ViewVariant) => {
 const handleOpenPage = () => {
   window.open(props.article?.originalUrl, '_blank');
 }
+
+const handleRemoveArticle = () => {
+  if (props.article) {
+    articleStore.removeArticle(props.article)
+  }
+}
 </script>
 
 <template>
   <div :class="['article']">
-    <Toolbar>
+    <Toolbar v-if="props.article">
       <Stack direction="row" :gap="2">
         <Tabs>
           <Tab :onClick="() => onChangeViewVariant('reader')" :selected="viewVariant === 'reader'">Режим чтения</Tab>
           <Tab :onClick="() => onChangeViewVariant('html')" :selected="viewVariant === 'html'">HTML</Tab>
         </Tabs>
         <Button mode="default" @click="handleOpenPage">Открыть страницу</Button>
+        <Button mode="default" @click="handleRemoveArticle">Удалить</Button>
       </Stack>
     </Toolbar>
     <div class="scrollable">
