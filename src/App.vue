@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import Button from './components/Button.vue'
-import Text from './components/Text.vue'
 import Stack from './components/Stack.vue'
 import Sidebar from './components/Sidebar.vue';
 import Row from './components/Row.vue';
@@ -12,20 +11,20 @@ import ArticleView from './components/ArticleView.vue'
 import Input from './components/Input.vue'
 import ArticleCard from './components/ArticleCard.vue'
 
+
 const urls = [
   'https://vuejs.org/guide/essentials/lifecycle.html',
   'https://vite.dev/guide/why.html',
   'https://react.dev/learn/thinking-in-react'
 ]
 
+const articles = ref<Article[]>([])
+const selectedArticle = ref<Article>()
+const urlValue = ref<string>('')
+
 const onSelectArticle = (article: Article) => {
   selectedArticle.value = article
-  console.log(article.content)
 }
-
-const articles = ref<Article[]>([])
-const selectedArticle = ref<Article | null>(null)
-const urlValue = ref<string>('')
 
 const getArticle = async (url: string) => {
   const page = await parseWebpage(url)
@@ -74,14 +73,7 @@ onMounted(() => {
           </div>
         </Stack>
       </Sidebar>
-      <ArticleView>
-        <div v-if="selectedArticle">
-          <Text typography="title-1-semibold">{{ selectedArticle.title }}</Text>
-          <Text typography="subtitle-1-semibold">{{ selectedArticle.excerpt }}</Text>
-          <iframe :srcdoc="selectedArticle.originalHtml"></iframe>
-          <div v-html="selectedArticle.content"></div>
-        </div>
-      </ArticleView>
+      <ArticleView :article="selectedArticle" />
     </Row>
   </Stack>
 </template>

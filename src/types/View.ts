@@ -1,0 +1,1 @@
+export type ViewVariant = 'html' | 'reader'

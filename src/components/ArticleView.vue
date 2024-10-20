@@ -1,16 +1,41 @@
 <script setup lang="ts">
+import Toolbar from './Toolbar.vue';
+import Button from './Button.vue';
+import Stack from './Stack.vue';
+import Text from './Text.vue'
+import { Article } from '../types/Article';
+import { ViewVariant } from '../types/View';
+import { ref } from 'vue';
 
-interface ArticleViewProps { }
+interface ArticleViewProps {
+  article?: Article
+}
 
 const props = defineProps<ArticleViewProps>()
 
+const viewVariant = ref<ViewVariant>('reader')
+
+const onChangeViewVariant = (variant: ViewVariant) => {
+  viewVariant.value = variant
+}
 </script>
 
 <template>
   <div :class="['article']">
+    <Toolbar>
+      <Stack direction="row" :gap="2">
+        <Button mode="default" @click="() => onChangeViewVariant('html')">HTML</Button>
+        <Button mode="default" @click="() => onChangeViewVariant('reader')">Reader</Button>
+      </Stack>
+    </Toolbar>
     <div class="scrollable">
       <div class="article-content">
-        <slot></slot>
+        <div v-if="props.article">
+          <Text typography="title-1-semibold">{{ props.article.title }}</Text>
+          <Text typography="subtitle-1-semibold">{{ props.article.excerpt }}</Text>
+          <iframe v-if="viewVariant === 'html'" :srcdoc="props.article.originalHtml"></iframe>
+          <div v-if="viewVariant === 'reader'" v-html="props.article.content"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -21,13 +46,13 @@ const props = defineProps<ArticleViewProps>()
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: relative;
 }
 
 .scrollable {
   height: 100%;
   overflow: auto;
   padding-top: 40px;
+  position: relative;
 }
 
 .article-content {
@@ -40,6 +65,7 @@ const props = defineProps<ArticleViewProps>()
   max-width: 100%;
   height: auto;
 }
+
 .article-content:deep(iframe) {
   width: 100%;
   height: 100%;
