@@ -1,5 +1,5 @@
 <script setup lang="ts">
-export type Gap = 1 | 2 | 3 | 4 | 5 | 6
+import { Gap } from '../types/gui';
 
 export interface StackProps {
     direction: 'row' | 'column',
@@ -30,7 +30,7 @@ const props = defineProps<StackProps>()
 }
 
 .fullHeight {
-  height: 100%;
+    height: 100%;
 }
 
 .gap-1 {
