@@ -21,7 +21,7 @@ const parseWebpage = async (url: string) => {
       }
     });
     const reader = new Readability(doc);
-    return reader.parse();
+    return { ...(reader.parse()), originalHtml: htmlWithFixedDomain }
   } catch (error) {
     console.error('Ошибка при извлечении контента:', error);
   }

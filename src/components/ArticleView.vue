@@ -21,6 +21,7 @@ const props = defineProps<ArticleViewProps>()
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .scrollable {
@@ -38,5 +39,14 @@ const props = defineProps<ArticleViewProps>()
 .article-content:deep(img) {
   max-width: 100%;
   height: auto;
+}
+.article-content:deep(iframe) {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 </style>

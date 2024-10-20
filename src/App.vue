@@ -82,7 +82,8 @@ onMounted(() => {
         <div v-if="selectedArticle">
           <Text typography="title-1-semibold">{{ selectedArticle.title }}</Text>
           <Text typography="subtitle-1-semibold">{{ selectedArticle.excerpt }}</Text>
-          <div v-html="selectedArticle?.content"></div>
+          <iframe :srcdoc="selectedArticle.originalHtml"></iframe>
+          <div v-html="selectedArticle.content"></div>
         </div>
       </ArticleView>
     </Row>
