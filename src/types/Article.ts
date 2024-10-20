@@ -5,4 +5,6 @@ export interface Article {
   content?: string;
   textContent?: string;
   originalHtml: string;
+  domain: string;
+  faviconUrl?: string;
 }
