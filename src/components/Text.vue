@@ -20,20 +20,53 @@ export type Typography = 'label-1-regular' |
 
 
 export interface TextProps {
-    typography: Typography
+    typography: Typography,
+    clamp?: 2 | 3 | 4,
+    ellipsis?: boolean,
 }
 
 const props = defineProps<TextProps>()
 </script>
 
 <template>
-    <div :class="['text', props.typography]">
+    <div :class="['text', props.typography, {
+        ellipsis,
+        clamp,
+        [`clamp-${clamp}`]: !!clamp
+    }]">
         <slot></slot>
     </div>
 </template>
 
 <style scoped>
 .text {}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.clamp {
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+}
+
+.clamp-2 {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.clamp-3 {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.clamp-4 {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
 
 .title-1-semibold {
     font-size: 32px;

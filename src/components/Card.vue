@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
 interface Card {
-    background?: 'default' | 'secondary'
+    background?: 'default' | 'secondary';
+    stretched?: boolean;
 }
 
 interface NonInteractiveCard extends Card {
@@ -25,7 +26,8 @@ const props = withDefaults(defineProps<CardProps>(), {
 
 <template>
     <component :is="props.interactive ? 'button' : 'div'"
-        :class="['card', props.background, { interactive: props.interactive }]" @click="onClick">
+        :class="['card', props.background, { interactive: props.interactive, stretched: props.stretched }]"
+        @click="onClick">
         <slot></slot>
     </component>
 </template>
@@ -54,5 +56,9 @@ const props = withDefaults(defineProps<CardProps>(), {
 
 .interactive:hover {
     background-color: var(--color-bg-secondary);
+}
+
+.stretched {
+    width: 100%;
 }
 </style>
