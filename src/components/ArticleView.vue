@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Toolbar from './Toolbar.vue';
+import Button from './Button.vue';
 import Stack from './Stack.vue';
 import Text from './Text.vue'
 import { Article } from '../types/Article';
@@ -13,11 +14,14 @@ interface ArticleViewProps {
 }
 
 const props = defineProps<ArticleViewProps>()
-
 const viewVariant = ref<ViewVariant>('reader')
 
 const onChangeViewVariant = (variant: ViewVariant) => {
   viewVariant.value = variant
+}
+
+const handleOpenPage = () => {
+  window.open(props.article?.originalUrl, '_blank');
 }
 </script>
 
@@ -26,9 +30,10 @@ const onChangeViewVariant = (variant: ViewVariant) => {
     <Toolbar>
       <Stack direction="row" :gap="2">
         <Tabs>
-          <Tab :onClick="() => onChangeViewVariant('reader')" :selected="viewVariant === 'reader'">Reader</Tab>
+          <Tab :onClick="() => onChangeViewVariant('reader')" :selected="viewVariant === 'reader'">Режим чтения</Tab>
           <Tab :onClick="() => onChangeViewVariant('html')" :selected="viewVariant === 'html'">HTML</Tab>
         </Tabs>
+        <Button mode="default" @click="handleOpenPage">Открыть страницу</Button>
       </Stack>
     </Toolbar>
     <div class="scrollable">

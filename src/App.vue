@@ -29,7 +29,7 @@ const onSelectArticle = (article: Article) => {
 const getArticle = async (url: string) => {
   const page = await parseWebpage(url)
   if (page) {
-    articles.value.push({ ...page, id: String(urls.indexOf(url)) })
+    articles.value.push({ ...page, id: String(urls.indexOf(url)), originalUrl: url })
   }
 }
 
