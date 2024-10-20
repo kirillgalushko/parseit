@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { ref } from 'vue'
 import Button from './components/Button.vue'
 import Stack from './components/Stack.vue'
 import Sidebar from './components/Sidebar.vue';
@@ -10,26 +10,22 @@ import { Article } from './types/Article'
 import ArticleView from './components/ArticleView.vue'
 import Input from './components/Input.vue'
 import ArticleCard from './components/ArticleCard.vue'
+import { useDemoArticles } from './hooks/useDemoArticles';
+import { useArticleStore } from './store';
+import { v4 as uuidv4 } from 'uuid';
 
-
-const urls = [
-  'https://vuejs.org/guide/essentials/lifecycle.html',
-  'https://vite.dev/guide/why.html',
-  'https://react.dev/learn/thinking-in-react'
-]
-
-const articles = ref<Article[]>([])
-const selectedArticle = ref<Article>()
 const urlValue = ref<string>('')
+const articleStore = useArticleStore();
+useDemoArticles();
 
 const onSelectArticle = (article: Article) => {
-  selectedArticle.value = article
+  articleStore.setSelectedArticle(article)
 }
 
 const getArticle = async (url: string) => {
   const page = await parseWebpage(url)
   if (page) {
-    articles.value.push({ ...page, id: String(urls.indexOf(url)), originalUrl: url })
+    articleStore.addArticle({ ...page, id: uuidv4(), originalUrl: url })
   }
 }
 
@@ -40,21 +36,6 @@ const handleAddArticle = () => {
   }
 }
 
-watch(articles.value, () => {
-  if (!selectedArticle.value && articles.value[0]) {
-    selectedArticle.value = articles.value[0]
-  }
-})
-
-const fetchArticles = async () => {
-  for (const url of urls) {
-    getArticle(url)
-  }
-}
-
-onMounted(() => {
-  fetchArticles()
-})
 </script>
 
 <template>
@@ -68,12 +49,12 @@ onMounted(() => {
     <Row fullHeight>
       <Sidebar>
         <Stack :gap="2" direction="column">
-          <div v-for="article of articles" :key="article.title">
+          <div v-for="article of articleStore.articles" :key="article.title">
             <ArticleCard :article="article" :onClick="() => onSelectArticle(article)" />
           </div>
         </Stack>
       </Sidebar>
-      <ArticleView :article="selectedArticle" />
+      <ArticleView :article="articleStore.selectedArticle" />
     </Row>
   </Stack>
 </template>

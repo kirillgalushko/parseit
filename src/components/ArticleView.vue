@@ -10,7 +10,7 @@ import Tab from './Tab.vue';
 import { ref } from 'vue';
 
 interface ArticleViewProps {
-  article?: Article
+  article?: Article | null
 }
 
 const props = defineProps<ArticleViewProps>()

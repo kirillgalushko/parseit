@@ -11,9 +11,12 @@
   "dependencies": {
     "@mozilla/readability": "^0.5.0",
     "gui": "github:kirillgalushko/gui",
+    "pinia": "^2.2.4",
+    "uuid": "9.0.0",
     "vue": "^3.5.10"
   },
   "devDependencies": {
+    "@types/uuid": "9.0.0",
     "@vitejs/plugin-vue": "^5.1.4",
     "typescript": "^5.5.3",
     "vite": "^5.4.8",
