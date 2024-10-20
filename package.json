@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mozilla/readability": "^0.5.0",
     "gui": "github:kirillgalushko/gui",
     "vue": "^3.5.10"
   },

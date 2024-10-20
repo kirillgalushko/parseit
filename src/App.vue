@@ -1,36 +1,55 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import 'gui/dist/style.css'
 import { Button } from 'gui'
+import { onMounted, ref } from 'vue'
+import Text from './components/Text.vue'
+import Stack from './components/Stack.vue'
+import Card from './components/Card.vue'
+import Sidebar from './components/Sidebar.vue';
+import Row from './components/Row.vue';
+
+import parseWebpage from './api/parseWebpage';
+
+const onClick = (event: MouseEvent) => {
+  console.log(event)
+}
+
+const content = ref<string>('')
+
+const fetchPage = async () => {
+  const page = await parseWebpage('https://vuejs.org/guide/essentials/lifecycle.html')
+  content.value = page?.content || ''
+}
+
+onMounted(() => {
+  fetchPage()
+})
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-  <Button mode="default">Default</Button>
-  <Button mode="accent">Accent</Button>
+  <Row fullHeight>
+    <Sidebar>
+      <Stack :gap="2" direction="column">
+        <Card interactive :onClick="onClick">
+          <Text typography="title-4-semibold">Title</Text>
+          <Text typography="subtitle-2-semibold">Subtitle</Text>
+          <Text typography="paragraph-3-regular">paragraph-1-regular</Text>
+        </Card>
+
+        <Card>
+          <Text typography="title-4-semibold">Title</Text>
+          <Text typography="subtitle-2-semibold">Subtitle</Text>
+          <Text typography="paragraph-3-regular">paragraph-1-regular</Text>
+        </Card>
+
+        <Card background="secondary">
+          <Text typography="title-4-semibold">Title</Text>
+          <Text typography="subtitle-2-semibold">Subtitle</Text>
+          <Text typography="paragraph-3-regular">paragraph-1-regular</Text>
+        </Card>
+      </Stack>
+    </Sidebar>
+    <div>
+      {{ content }}
+    </div>
+  </Row>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
