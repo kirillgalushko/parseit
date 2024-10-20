@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "gui": "github:kirillgalushko/gui",
     "vue": "^3.5.10"
   },
   "devDependencies": {
