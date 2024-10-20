@@ -13,8 +13,8 @@ import ArticleView from './components/ArticleView.vue'
 
 const urls = [
   'https://vuejs.org/guide/essentials/lifecycle.html',
-  'https://vuejs.org/guide/essentials/forms',
-  'https://vuejs.org/guide/essentials/event-handling'
+  'https://vite.dev/guide/why.html',
+  'https://react.dev/learn/thinking-in-react'
 ]
 
 const onSelectArticle = (article: Article) => {

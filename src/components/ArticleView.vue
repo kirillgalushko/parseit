@@ -33,4 +33,8 @@ const props = defineProps<ArticleViewProps>()
   max-width: 800px;
   margin: 0 auto
 }
+
+.article-content:deep(img) {
+  max-width: 100%;
+}
 </style>
