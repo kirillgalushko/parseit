@@ -5,6 +5,7 @@ import Stack from './Stack.vue';
 import Text from './Text.vue'
 import { Article } from '../types/Article';
 import { ViewVariant } from '../types/View';
+import PlaceholderView from './PlaceholderView.vue';
 import Tabs from './Tabs.vue';
 import Tab from './Tab.vue';
 import { ref } from 'vue';
@@ -31,6 +32,12 @@ const handleRemoveArticle = () => {
     articleStore.removeArticle(props.article)
   }
 }
+
+const handleCloseArticle = () => {
+  if (props.article) {
+    articleStore.setSelectedArticle(null)
+  }
+}
 </script>
 
 <template>
@@ -41,12 +48,14 @@ const handleRemoveArticle = () => {
           <Tab :onClick="() => onChangeViewVariant('reader')" :selected="viewVariant === 'reader'">Режим чтения</Tab>
           <Tab :onClick="() => onChangeViewVariant('html')" :selected="viewVariant === 'html'">HTML</Tab>
         </Tabs>
-        <Button mode="default" @click="handleOpenPage">Открыть страницу</Button>
-        <Button mode="default" @click="handleRemoveArticle">Удалить</Button>
+        <Button @click="handleOpenPage" mode="default">Открыть страницу</Button>
+        <Button @click="handleRemoveArticle" mode="default">Удалить</Button>
+        <Button @click="handleCloseArticle" mode="default">Закрыть</Button>
       </Stack>
     </Toolbar>
     <div class="scrollable">
       <div class="article-content">
+        <PlaceholderView v-if="!props.article" />
         <div v-if="props.article">
           <Text typography="title-1-semibold">{{ props.article.title }}</Text>
           <Text typography="subtitle-1-semibold">{{ props.article.excerpt }}</Text>
@@ -63,12 +72,15 @@ const handleRemoveArticle = () => {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .scrollable {
   height: 100%;
   overflow: auto;
   padding-top: 40px;
+  padding-bottom: 40px;
   position: relative;
 }
 

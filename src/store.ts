@@ -21,7 +21,7 @@ export const useArticleStore = defineStore('articleStore', {
         this.selectedArticle = null;
       }
     },
-    setSelectedArticle(article: Article) {
+    setSelectedArticle(article: Article | null) {
       this.selectedArticle = article;
     },
   },

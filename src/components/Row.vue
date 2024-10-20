@@ -22,5 +22,6 @@ const props = defineProps<RowProps>()
 
 .fullHeight {
   height: 100%;
+  overflow: hidden;
 }
 </style>
