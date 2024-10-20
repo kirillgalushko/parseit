@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import Toolbar from './Toolbar.vue';
-import Button from './Button.vue';
 import Stack from './Stack.vue';
 import Text from './Text.vue'
 import { Article } from '../types/Article';
 import { ViewVariant } from '../types/View';
+import Tabs from './Tabs.vue';
+import Tab from './Tab.vue';
 import { ref } from 'vue';
 
 interface ArticleViewProps {
@@ -24,8 +25,10 @@ const onChangeViewVariant = (variant: ViewVariant) => {
   <div :class="['article']">
     <Toolbar>
       <Stack direction="row" :gap="2">
-        <Button mode="default" @click="() => onChangeViewVariant('html')">HTML</Button>
-        <Button mode="default" @click="() => onChangeViewVariant('reader')">Reader</Button>
+        <Tabs>
+          <Tab :onClick="() => onChangeViewVariant('reader')" :selected="viewVariant === 'reader'">Reader</Tab>
+          <Tab :onClick="() => onChangeViewVariant('html')" :selected="viewVariant === 'html'">HTML</Tab>
+        </Tabs>
       </Stack>
     </Toolbar>
     <div class="scrollable">
