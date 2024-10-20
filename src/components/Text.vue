@@ -23,13 +23,16 @@ export interface TextProps {
     typography: Typography,
     clamp?: 2 | 3 | 4,
     ellipsis?: boolean,
+    mode?: 'default' | 'secondary'
 }
 
-const props = defineProps<TextProps>()
+const props = withDefaults(defineProps<TextProps>(), {
+    mode: 'default',
+})
 </script>
 
 <template>
-    <div :class="['text', props.typography, {
+    <div :class="['text', props.typography, props.mode, {
         ellipsis,
         clamp,
         [`clamp-${clamp}`]: !!clamp
@@ -40,6 +43,14 @@ const props = defineProps<TextProps>()
 
 <style scoped>
 .text {}
+
+.default {
+    color: var(--color-text);
+}
+
+.secondary {
+    color: var(--color-text-secondary);
+}
 
 .ellipsis {
     overflow: hidden;

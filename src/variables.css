@@ -5,11 +5,13 @@
     --color-bg-light: #ffffff;
     --color-bg-secondary-light: #929292;
     --color-text-light: #000000;
+    --color-text-secondary-light: #343434;
     --color-border-light: #e0e0e0;
   
     --color-bg-dark: #000000;
     --color-bg-secondary-dark: #27272a;
     --color-text-dark: #ffffff;
+    --color-text-secondary-dark: #a1a1aa;
     --color-border-dark: #27272a;
 
     --gap-1: 4px;
@@ -25,6 +27,7 @@
     --color-bg-opposite: var(--color-bg-dark);
     --color-bg-secondary: var(--color-bg-secondary-light);
     --color-text: var(--color-text-light);
+    --color-text-secondary: var(--color-text-secondary-light);
     --color-text-opposite: var(--color-text-dark);
     --color-border: var(--color-border-light);
   }
@@ -34,6 +37,7 @@
     --color-bg-opposite: var(--color-bg-light);
     --color-bg-secondary: var(--color-bg-secondary-dark);
     --color-text: var(--color-text-dark);
+    --color-text-secondary: var(--color-text-secondary-dark);
     --color-text-opposite: var(--color-text-light);
     --color-border: var(--color-border-dark);
   }
