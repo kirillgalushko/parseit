@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@mozilla/readability": "0.5.0",
-    "gui": "github:kirillgalushko/gui#v1.0.2",
+    "gui": "github:kirillgalushko/gui#v1.1.0",
     "pinia": "2.2.4",
     "uuid": "9.0.0",
     "vue": "3.5.10"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Toolbar from './Toolbar.vue';
-import { Button, Stack, Text, Tabs, Tab } from 'gui';
+import { Button, Stack, Text, Tabs, Tab, Icon } from 'gui';
 import { Article } from '../types/Article';
 import PlaceholderView from './PlaceholderView.vue';
 import { ref } from 'vue';
@@ -45,9 +45,15 @@ const handleCloseArticle = () => {
           <Tab :onClick="() => onChangeViewVariant('reader')" :selected="viewVariant === 'reader'">Режим чтения</Tab>
           <Tab :onClick="() => onChangeViewVariant('html')" :selected="viewVariant === 'html'">HTML</Tab>
         </Tabs>
-        <Button @click="handleOpenPage" mode="default">Открыть страницу</Button>
-        <Button @click="handleRemoveArticle" mode="default">Удалить</Button>
-        <Button @click="handleCloseArticle" mode="default">Закрыть</Button>
+        <Button @click="handleOpenPage" mode="default">
+          <Icon name="external-link" />Открыть страницу
+        </Button>
+        <Button @click="handleRemoveArticle" mode="default">
+          <Icon name="delete" /> Удалить
+        </Button>
+        <Button @click="handleCloseArticle" mode="default">
+          <Icon name="close" /> Закрыть
+        </Button>
       </Stack>
     </Toolbar>
     <div class="scrollable">
