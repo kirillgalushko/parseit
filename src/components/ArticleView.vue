@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import Toolbar from './Toolbar.vue';
-import Button from './Button.vue';
-import Stack from './Stack.vue';
-import Text from './Text.vue'
+import { Button, Stack, Text, Tabs, Tab } from 'gui';
 import { Article } from '../types/Article';
-import { ViewVariant } from '../types/View';
 import PlaceholderView from './PlaceholderView.vue';
-import Tabs from './Tabs.vue';
-import Tab from './Tab.vue';
 import { ref } from 'vue';
 import { useArticleStore } from '../store';
+
+export type ViewVariant = 'html' | 'reader'
 
 interface ArticleViewProps {
   article?: Article | null

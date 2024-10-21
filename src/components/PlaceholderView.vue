@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { useAddArticle } from '../hooks/useAddArticle';
-import Button from './Button.vue';
-import Stack from './Stack.vue';
-import Input from './Input.vue';
-import Text from './Text.vue';
-import Gap from './Gap.vue';
+import { Button, Stack, Input, Text, Gap } from 'gui';
 
 const { articleUrl, addArticle } = useAddArticle();
 </script>

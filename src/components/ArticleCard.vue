@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { Article } from '../types/Article';
-import Text from '../components/Text.vue'
-import Stack from '../components/Stack.vue'
-import Card from '../components/Card.vue'
-import Gap from '../components/Gap.vue'
+import { Text, Stack, Card, Gap } from 'gui'
 import Favicon from '../components/Favicon.vue'
 import { useArticleStore } from '../store';
 

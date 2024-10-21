@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import Button from './components/Button.vue'
-import Stack from './components/Stack.vue'
-import Sidebar from './components/Sidebar.vue';
-import Row from './components/Row.vue';
+
+import { Button, Stack, Sidebar, Row, Input } from 'gui'
 import Header from './components/Header.vue'
 import { Article } from './types/Article'
 import ArticleView from './components/ArticleView.vue'
-import Input from './components/Input.vue'
 import ArticleCard from './components/ArticleCard.vue'
 import { useDemoArticles } from './hooks/useDemoArticles';
 import { useArticleStore } from './store';
