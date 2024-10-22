@@ -26,7 +26,7 @@ const onSelectArticle = (article: Article) => {
         <Button mode="accent" @click="addArticle">Добавить статью</Button>
       </Stack>
     </Header>
-    <Row fullHeight>
+    <div class="grid">
       <Sidebar>
         <Stack :gap="2" direction="column">
           <div v-for="article of articleStore.articles" :key="article.title">
@@ -35,6 +35,14 @@ const onSelectArticle = (article: Article) => {
         </Stack>
       </Sidebar>
       <ArticleView :article="articleStore.selectedArticle" />
-    </Row>
+    </div>
   </Stack>
 </template>
+
+<style scoped>
+.grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  height: 100%;
+}
+</style>
