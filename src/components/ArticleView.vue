@@ -16,8 +16,8 @@ const props = defineProps<ArticleViewProps>()
 const viewVariant = ref<ViewVariant>('reader')
 const articleStore = useArticleStore();
 
-const onChangeViewVariant = (variant: ViewVariant) => {
-  viewVariant.value = variant
+const onChangeViewVariant = (variant: string) => {
+  viewVariant.value = variant as ViewVariant
 }
 
 const handleOpenPage = () => {
@@ -41,9 +41,9 @@ const handleCloseArticle = () => {
   <div :class="['article']">
     <Toolbar v-if="props.article">
       <Stack direction="row" :gap="2">
-        <Tabs>
-          <Tab :onClick="() => onChangeViewVariant('reader')" :selected="viewVariant === 'reader'">Режим чтения</Tab>
-          <Tab :onClick="() => onChangeViewVariant('html')" :selected="viewVariant === 'html'">HTML</Tab>
+        <Tabs :value="viewVariant" :onChange="onChangeViewVariant">
+          <Tab name="reader">Режим чтения</Tab>
+          <Tab name="html">HTML</Tab>
         </Tabs>
         <Button @click="handleOpenPage" mode="default">
           <Icon name="external-link" />Открыть страницу
@@ -60,8 +60,8 @@ const handleCloseArticle = () => {
       <div class="article-content">
         <PlaceholderView v-if="!props.article" />
         <div v-if="props.article">
-          <Text typography="title-1-semibold">{{ props.article.title }}</Text>
-          <Text typography="subtitle-1-semibold">{{ props.article.excerpt }}</Text>
+          <h1>{{ props.article.title }}</h1>
+          <h5>{{ props.article.excerpt }}</h5>
           <iframe v-if="viewVariant === 'html'" :srcdoc="props.article.originalHtml"></iframe>
           <div v-if="viewVariant === 'reader'" v-html="props.article.content"></div>
         </div>
