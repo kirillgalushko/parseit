@@ -9,3 +9,5 @@ export interface Article {
   domain: string;
   faviconUrl?: string;
 }
+
+export type ViewVariant = 'html' | 'reader'

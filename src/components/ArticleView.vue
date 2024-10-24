@@ -1,69 +1,28 @@
 <script setup lang="ts">
 import Toolbar from './Toolbar.vue';
-import { Button, Stack, Text, Tabs, Tab, Icon } from 'gui';
 import { Article } from '../types/Article';
 import PlaceholderView from './PlaceholderView.vue';
-import { ref } from 'vue';
 import { useArticleStore } from '../store';
-
-export type ViewVariant = 'html' | 'reader'
 
 interface ArticleViewProps {
   article?: Article | null
 }
 
 const props = defineProps<ArticleViewProps>()
-const viewVariant = ref<ViewVariant>('reader')
-const articleStore = useArticleStore();
-
-const onChangeViewVariant = (variant: string) => {
-  viewVariant.value = variant as ViewVariant
-}
-
-const handleOpenPage = () => {
-  window.open(props.article?.originalUrl, '_blank');
-}
-
-const handleRemoveArticle = () => {
-  if (props.article) {
-    articleStore.removeArticle(props.article)
-  }
-}
-
-const handleCloseArticle = () => {
-  if (props.article) {
-    articleStore.setSelectedArticle(null)
-  }
-}
+const { articleView } = useArticleStore()
 </script>
 
 <template>
   <div :class="['article']">
-    <Toolbar v-if="props.article">
-      <Stack direction="row" :gap="2">
-        <Tabs :value="viewVariant" :onChange="onChangeViewVariant">
-          <Tab name="reader">Режим чтения</Tab>
-          <Tab name="html">HTML</Tab>
-        </Tabs>
-        <Button @click="handleOpenPage" mode="default">
-          <Icon name="external-link" />Открыть страницу
-        </Button>
-        <Button @click="handleRemoveArticle" mode="default">
-          <Icon name="delete" /> Удалить
-        </Button>
-        <Button @click="handleCloseArticle" mode="default">
-          <Icon name="close" /> Закрыть
-        </Button>
-      </Stack>
-    </Toolbar>
+    <Toolbar v-if="props.article" />
     <div class="scrollable">
       <div class="article-content">
         <PlaceholderView v-if="!props.article" />
         <div v-if="props.article">
           <h1>{{ props.article.title }}</h1>
           <h5>{{ props.article.excerpt }}</h5>
-          <iframe v-if="viewVariant === 'html'" :srcdoc="props.article.originalHtml"></iframe>
-          <div v-if="viewVariant === 'reader'" v-html="props.article.content"></div>
+          <iframe v-if="articleView === 'html'" :srcdoc="props.article.originalHtml"></iframe>
+          <div v-if="articleView === 'reader'" v-html="props.article.content"></div>
         </div>
       </div>
     </div>

@@ -1,15 +1,17 @@
 import { defineStore } from 'pinia';
-import { Article } from './types/Article';
+import { Article, ViewVariant } from './types/Article';
 
 interface ArticleState {
   articles: Article[],
   selectedArticle: Article | null,
+  articleView: ViewVariant,
 }
 
 export const useArticleStore = defineStore('articleStore', {
   state: (): ArticleState => ({
     articles: [],
     selectedArticle: null,
+    articleView: 'reader',
   }),
   actions: {
     addArticle(article: Article) {
@@ -23,6 +25,9 @@ export const useArticleStore = defineStore('articleStore', {
     },
     setSelectedArticle(article: Article | null) {
       this.selectedArticle = article;
+    },
+    setArticleView(articleView: ViewVariant) {
+      this.articleView = articleView;
     },
   },
 });
