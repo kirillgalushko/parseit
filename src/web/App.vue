@@ -11,7 +11,7 @@ import { useAddArticle } from './hooks/useAddArticle';
 import logoSrc from './assets/logo-white-rectangle-clip.svg'
 
 const articleStore = useArticleStore();
-const { articleUrl, addArticle } = useAddArticle();
+const { addArticle } = useAddArticle();
 useDemoArticles();
 
 const onSelectArticle = (article: Article) => {

@@ -80,6 +80,7 @@ const parseWebpage = async (url: string) => {
     return { ...(reader.parse()), originalHtml: html, domain, faviconUrl }
   } catch (error) {
     console.error('Ошибка при извлечении контента:', error);
+    return undefined
   }
 }
 

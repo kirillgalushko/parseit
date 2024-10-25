@@ -1,13 +1,3 @@
-<script setup lang="ts">
-
-interface HeaderProps {
-
-}
-
-const props = defineProps<HeaderProps>()
-
-</script>
-
 <template>
   <div :class="['header']">
     <slot></slot>

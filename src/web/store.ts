@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { Article, ViewVariant } from '../types/Article';
+import { Article, ViewVariant } from './types/Article';
 
 interface ArticleState {
   articles: Article[],
