@@ -11,7 +11,8 @@
     "build-app": "electron-vite build",
     "pack:win": "npm run build-app && electron-builder --win",
     "pack:mac": "npm run build-app && electron-builder --mac",
-    "pack:linux": "npm run build-app && electron-builder --linux"
+    "pack:linux": "npm run build-app && electron-builder --linux",
+    "release": "node release.js"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
