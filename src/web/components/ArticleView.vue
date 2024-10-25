@@ -2,6 +2,7 @@
 import Toolbar from './Toolbar.vue';
 import { Article } from '../types/Article';
 import PlaceholderView from './PlaceholderView.vue';
+import Editor from './Editor/Editor.vue'
 import { useArticleStore } from '../store';
 
 interface ArticleViewProps {
@@ -19,10 +20,12 @@ const { articleView } = useArticleStore()
       <div class="article-content">
         <PlaceholderView v-if="!props.article" />
         <div v-if="props.article">
-          <h1>{{ props.article.title }}</h1>
-          <h5>{{ props.article.excerpt }}</h5>
-          <iframe v-if="articleView === 'html'" :srcdoc="props.article.originalHtml"></iframe>
-          <div v-if="articleView === 'reader'" v-html="props.article.content"></div>
+          <!-- <h1>{{ props.article.title }}</h1>
+          <h5>{{ props.article.excerpt }}</h5> -->
+          <!-- <iframe v-if="articleView === 'html'" :srcdoc="props.article.originalHtml"></iframe> -->
+          <div v-if="articleView === 'reader'">
+            <Editor :modelValue="props.article.content" />
+          </div>
         </div>
       </div>
     </div>
@@ -41,14 +44,11 @@ const { articleView } = useArticleStore()
 .scrollable {
   height: 100%;
   overflow: auto;
-  padding-top: 40px;
-  padding-bottom: 40px;
   position: relative;
 }
 
 .article-content {
-  width: 80%;
-  max-width: 800px;
+  width: 100%;
   margin: 0 auto
 }
 
