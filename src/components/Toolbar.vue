@@ -75,6 +75,7 @@ const actions = [{
   width: 100%;
   border-bottom: 1px solid hsl(var(--border));
   padding: var(--gap-3);
-  box-sizing: border-box;
+  padding-top: var(--gap-4);
+  height: calc(40px + (var(--gap-3)));
 }
 </style>

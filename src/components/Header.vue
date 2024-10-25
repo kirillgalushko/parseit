@@ -16,9 +16,10 @@ const props = defineProps<HeaderProps>()
 
 <style scoped>
 .header {
-  width: 100%;
   border-bottom: 1px solid hsl(var(--border));
-  padding: var(--gap-3);
-  box-sizing: border-box;
+  padding: 0 var(--gap-4);
+  padding-bottom: var(--gap-3);
+  margin: 0 calc(0px - var(--gap-4));
+  height: 40px;
 }
 </style>
