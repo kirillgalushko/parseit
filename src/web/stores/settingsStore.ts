@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { Settings as AppSettings, defaultAppSettings } from '../../common/types';
 import { StateWithInitialization } from './types'
+import { isDesktopApp } from '../utils/isDesktopApp';
 
 type Settings = AppSettings & StateWithInitialization
 
@@ -19,12 +20,16 @@ export const useSettingsStore = defineStore('settings', {
   state: (): Settings => defaultSettings,
   actions: {
     async init() {
-      const settings = await window.api.getSettings();
-      this.$patch(settings);
+      if (isDesktopApp()) {
+        const settings = await window.api.getSettings();
+        this.$patch(settings);
+      }
       this._initialized = true;
     },
     async saveSettings(newSettings: Settings) {
-      await window.api.setSettings(prepareState(newSettings));
+      if (isDesktopApp()) {
+        await window.api.setSettings(prepareState(newSettings));
+      }
       this.$patch(newSettings);
     },
     async setSettingsItem<T extends keyof Settings>(key: T, value: Settings[T]) {
@@ -32,7 +37,9 @@ export const useSettingsStore = defineStore('settings', {
         ...this.$state,
         [key]: value,
       }
-      await window.api.setSettings(prepareState(newSettings));
+      if (isDesktopApp()) {
+        await window.api.setSettings(prepareState(newSettings));
+      }
       this.$patch(newSettings);
     }
   },

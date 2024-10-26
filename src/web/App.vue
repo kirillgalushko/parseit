@@ -5,6 +5,7 @@ import { useSettingsStore } from './stores/settingsStore'
 import { useAppInit } from './hooks/useAppInit'
 import { useFilesWatcher } from './hooks/useFilesWatcher'
 import LoadedApp from './LoadedApp.vue'
+import { isDesktopApp } from './utils/isDesktopApp'
 
 const { isInitialized } = useAppInit();
 const appSettings = useSettingsStore();
@@ -20,7 +21,9 @@ const checkForSettings = async () => {
 }
 
 watch(() => isInitialized, () => {
-  checkForSettings()
+  if (isDesktopApp()) {
+    checkForSettings()
+  }
 })
 </script>
 

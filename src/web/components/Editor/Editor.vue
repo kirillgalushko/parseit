@@ -6,21 +6,25 @@ import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/d
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { onMounted, ref, watch } from 'vue';
 import TurndownService from 'turndown';
+import { useArticleStore } from '../../stores/articleStore';
+import { Article } from '../../types/Article';
 
 interface EditorProps {
-  markdown?: string;
-  path?: string;
+  article: Article
 }
 
 const turndownService = new TurndownService({ headingStyle: 'atx' });
 const props = defineProps<EditorProps>();
 const emit = defineEmits(['update:markdown']);
-
+const articleStore = useArticleStore();
 const editorRef = ref();
 const editorInstance = ref<Editor | null>(null);
 
 const handleChange = (newMarkdown: string) => {
-  window.api.writeFile(props.path, newMarkdown)
+  articleStore.updateArticle({
+    ...props.article,
+    markdown: newMarkdown
+  });
 }
 
 const createEditor = () => {
@@ -35,7 +39,7 @@ const createEditor = () => {
       target: "_blank",
       rel: "noopener noreferrer",
     },
-    initialValue: props.markdown,
+    initialValue: props.article.markdown,
     usageStatistics: false,
     theme: 'dark',
     events: {
@@ -51,7 +55,7 @@ onMounted(() => {
   createEditor()
 });
 
-watch(() => props.markdown, () => {
+watch(() => props.article.markdown, () => {
   createEditor();
 });
 </script>
