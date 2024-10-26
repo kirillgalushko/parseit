@@ -1,5 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import type { readFile, getAllFiles } from '../main/files'
+import type { readFile, getAllFiles, writeFile } from '../main/files'
 import type { createAppVault } from '../main/vault'
 import type { getSettings, setSettings } from '../main/settings'
 
@@ -9,6 +9,7 @@ declare global {
     electron: ElectronAPI
     api: {
       readFile: readFile,
+      writeFile: writeFile,
       getAllFiles: getAllFiles,
       createAppVault: createAppVault,
       getSettings: getSettings,

@@ -24,7 +24,7 @@ const { articleView } = useArticleStore()
           <h5>{{ props.article.excerpt }}</h5> -->
           <!-- <iframe v-if="articleView === 'html'" :srcdoc="props.article.originalHtml"></iframe> -->
           <div v-if="articleView === 'reader'">
-            <Editor :markdown="props.article.markdown" />
+            <Editor :markdown="props.article.markdown" :path="props.article.path" />
           </div>
         </div>
       </div>

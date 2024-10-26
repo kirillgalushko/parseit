@@ -21,7 +21,7 @@ export const useArticleStore = defineStore('articleStore', {
     async init() {
       const settings = useSettingsStore();
       const files = await window.api.getAllFiles(settings.vaultPath);
-      const articles: Article[] = files.map(file => ({ id: uuidv4(), markdown: file.content })) 
+      const articles: Article[] = files.map(file => ({ id: uuidv4(), markdown: file.content, path: file.path })) 
       this.articles = articles
       this._initialized = true;
     },

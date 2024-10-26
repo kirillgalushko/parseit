@@ -8,7 +8,8 @@ import { onMounted, ref, watch } from 'vue';
 import TurndownService from 'turndown';
 
 interface EditorProps {
-  markdown?: string
+  markdown?: string;
+  path?: string;
 }
 
 const turndownService = new TurndownService({ headingStyle: 'atx' });
@@ -17,7 +18,10 @@ const emit = defineEmits(['update:markdown']);
 
 const editorRef = ref();
 const editorInstance = ref<Editor | null>(null);
-console.log(props.markdown)
+
+const handleChange = (newMarkdown: string) => {
+  window.api.writeFile(props.path, newMarkdown)
+}
 
 const createEditor = () => {
   // const markdown = turndownService.turndown(props.modelValue);
@@ -35,7 +39,9 @@ const createEditor = () => {
     usageStatistics: false,
     theme: 'dark',
     events: {
-      change: () => emit('update:markdown', editorInstance.value?.getMarkdown()),
+      change: () => {
+        handleChange(editorInstance.value?.getMarkdown());
+      },
     },
     plugins: [codeSyntaxHighlight],
   });

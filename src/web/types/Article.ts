@@ -6,6 +6,7 @@ export interface Article {
   textContent?: string;
   originalHtml?: string;
   markdown?: string;
+  path?: string;
   originalUrl?: string;
   domain?: string;
   faviconUrl?: string;

@@ -12,6 +12,16 @@ export const readFile = async (filePath) => {
   }
 }
 
+export const writeFile = async (filePath, content) => {
+  try {
+    console.log(filePath)
+    fs.writeFileSync(filePath, content, 'utf8');
+  } catch (error) {
+    console.error('Ошибка записи файла:', error);
+    throw error;
+  }
+}
+
 export const getAllFiles = async (directory: string) => {
   const allFilesList = await listFiles(directory)
   const filesWithContent = [];
@@ -24,5 +34,6 @@ export const getAllFiles = async (directory: string) => {
 
 export default () => {
   ipcMain.handle('read-file', (_event, filePath) => readFile(filePath));
+  ipcMain.handle('write-file', (_event, filePath, content) => writeFile(filePath, content));
   ipcMain.handle('get-all-files', (_event, directoryPath) => getAllFiles(directoryPath));
 }
