@@ -9,14 +9,33 @@ import { useDemoArticles } from './hooks/useDemoArticles';
 import { useArticleStore } from './stores/articleStore';
 import { useAddArticle } from './hooks/useAddArticle';
 import logoSrc from './assets/logo-white-rectangle-clip.svg'
+import { watch } from 'vue'
+import { useSettingsStore } from './stores/settingsStore'
 
+const appSettings = useSettingsStore();
 const articleStore = useArticleStore();
 const { addArticle } = useAddArticle();
-useDemoArticles();
+// useDemoArticles();
 
 const onSelectArticle = (article: Article) => {
   articleStore.setSelectedArticle(article)
 }
+
+const checkForSettings = async () => {
+  if (!appSettings.vaultPath) {
+    const vaultPath = await window.api.createAppVault();
+    if (vaultPath) {
+      appSettings.setSettingsItem('vaultPath', vaultPath);
+    }
+  }
+}
+
+watch(() => appSettings._initialized, () => {
+  if (appSettings._initialized) {
+    checkForSettings()
+  }
+})
+
 </script>
 
 <template>

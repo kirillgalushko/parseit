@@ -29,5 +29,5 @@
       ]
     },
   },
-  "include": ["src/web/**/*.ts", "src/web/**/*.tsx", "src/**/*.vue", "src/web/env.d.ts", "src/electron/preload/*.d.ts"]
+  "include": ["src/web/**/*.ts", "src/web/**/*.tsx", "src/**/*.vue", "src/web/env.d.ts", "src/electron/preload/*.d.ts", "src/common/**/*.ts"]
 }

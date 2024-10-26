@@ -1,7 +1,9 @@
 import { app, BrowserWindow } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
-import { createWindow } from './window'
-import files from './files'
+import { createWindow } from './window.ts'
+import filesModule from './files.ts'
+import vaultModule from './vault.ts'
+import settingsModule from './settings.ts'
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
@@ -10,7 +12,9 @@ app.whenReady().then(() => {
   })
 
   createWindow()
-  files();
+  filesModule();
+  vaultModule();
+  settingsModule();
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
