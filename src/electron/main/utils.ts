@@ -2,6 +2,7 @@ import { promisify } from 'util'
 import fs from 'fs';
 import path from 'path'
 import { BrowserWindow  } from 'electron';
+import chokidar from 'chokidar'
 
 
 const mkdir = promisify(fs.mkdir);
@@ -12,7 +13,7 @@ export const createDirectory = (dirPath: string) => {
 
 export const getMainWindow = () => {
   const windows = BrowserWindow.getAllWindows();
-  return windows[1];
+  return windows[0];
 }
 
 export const listFiles = (currentPath) => {
@@ -28,4 +29,18 @@ export const listFiles = (currentPath) => {
     }
   }
   return results
+};
+
+export const watchDirectory = (directoryPath, callback: () => void) => {
+  const watcher = chokidar.watch(directoryPath, {
+    ignored: /(^|[\/\\])\../,
+    persistent: true,
+  });
+  watcher
+    .on('add', callback)
+    .on('addDir', callback)
+    .on('change', callback)
+    .on('unlink', callback)
+    .on('unlinkDir', callback)
+  return watcher
 };

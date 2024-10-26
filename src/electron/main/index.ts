@@ -4,6 +4,7 @@ import { createWindow } from './window.ts'
 import filesModule from './files.ts'
 import vaultModule from './vault.ts'
 import settingsModule from './settings.ts'
+import sync from './sync.ts'
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
@@ -15,6 +16,7 @@ app.whenReady().then(() => {
   filesModule();
   vaultModule();
   settingsModule();
+  sync.subscribe();
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -22,6 +24,8 @@ app.whenReady().then(() => {
 })
 
 app.on('window-all-closed', () => {
+  sync.unsubscribe();
+
   if (process.platform !== 'darwin') {
     app.quit()
   }

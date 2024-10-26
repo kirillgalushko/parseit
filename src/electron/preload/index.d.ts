@@ -13,6 +13,7 @@ declare global {
       createAppVault: createAppVault,
       getSettings: getSettings,
       setSettings: setSettings,
+      onFilesUpdated: (callback: () => void) => void,
     }
   }
 }

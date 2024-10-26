@@ -13,7 +13,6 @@ export const readFile = async (filePath) => {
 }
 
 export const getAllFiles = async (directory: string) => {
-  console.log(directory)
   const allFilesList = await listFiles(directory)
   const filesWithContent = [];
   for (const filePath of allFilesList) {
