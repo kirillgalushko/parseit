@@ -22,6 +22,15 @@ export const writeFile = async (filePath, content) => {
   }
 }
 
+export const deleteFile = async (filePath) => {
+  try {
+    await fs.promises.unlink(filePath);
+  } catch (error) {
+    console.error('Ошибка при удалении файла:', error);
+    throw error;
+  }
+};
+
 export const getAllFiles = async (directory: string) => {
   const allFilesList = await listFiles(directory)
   const filesWithContent = [];
@@ -35,5 +44,6 @@ export const getAllFiles = async (directory: string) => {
 export default () => {
   ipcMain.handle('read-file', (_event, filePath) => readFile(filePath));
   ipcMain.handle('write-file', (_event, filePath, content) => writeFile(filePath, content));
+  ipcMain.handle('delete-file', (_event, filePath) => deleteFile(filePath));
   ipcMain.handle('get-all-files', (_event, directoryPath) => getAllFiles(directoryPath));
 }
