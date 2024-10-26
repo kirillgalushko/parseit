@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia';
 import { Settings as AppSettings, defaultAppSettings } from '../../common/types';
+import { StateWithInitialization } from './types'
 
-interface Settings extends AppSettings {
-  _initialized: boolean;
-}
+type Settings = AppSettings & StateWithInitialization
 
 const defaultSettings: Settings = {
   _initialized: false,
@@ -16,35 +15,26 @@ const prepareState = (settings: Settings) => {
   );
 }
 
-export const useSettingsStore = () => {
-  const store = defineStore('settings', {
-    state: (): Settings => defaultSettings,
-    actions: {
-      async updateSettings() {
-        const settings = await window.api.getSettings();
-        this.$patch(settings);
-        this._initialized = true;
-      },
-      async saveSettings(newSettings: Settings) {
-        await window.api.setSettings(prepareState(newSettings));
-        this.$patch(newSettings);
-      },
-      async setSettingsItem<T extends keyof Settings>(key: T, value: Settings[T]) {
-        const newSettings = {
-          ...this.$state,
-          [key]: value,
-        }
-        await window.api.setSettings(prepareState(newSettings));
-        this.$patch(newSettings);
-      }
+export const useSettingsStore = defineStore('settings', {
+  state: (): Settings => defaultSettings,
+  actions: {
+    async init() {
+      const settings = await window.api.getSettings();
+      this.$patch(settings);
+      this._initialized = true;
     },
-  });
-
-  const settingsStore = store()
-	if (!settingsStore._initialized) {
-		settingsStore.updateSettings()
-	}
-
-	return settingsStore
-}
+    async saveSettings(newSettings: Settings) {
+      await window.api.setSettings(prepareState(newSettings));
+      this.$patch(newSettings);
+    },
+    async setSettingsItem<T extends keyof Settings>(key: T, value: Settings[T]) {
+      const newSettings = {
+        ...this.$state,
+        [key]: value,
+      }
+      await window.api.setSettings(prepareState(newSettings));
+      this.$patch(newSettings);
+    }
+  },
+});
 

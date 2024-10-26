@@ -4,9 +4,10 @@ export interface Article {
   excerpt?: string;
   content?: string;
   textContent?: string;
-  originalHtml: string;
-  originalUrl: string;
-  domain: string;
+  originalHtml?: string;
+  markdown?: string;
+  originalUrl?: string;
+  domain?: string;
   faviconUrl?: string;
 }
 

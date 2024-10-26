@@ -8,18 +8,19 @@ import { onMounted, ref, watch } from 'vue';
 import TurndownService from 'turndown';
 
 interface EditorProps {
-  modelValue?: string
+  markdown?: string
 }
 
 const turndownService = new TurndownService({ headingStyle: 'atx' });
 const props = defineProps<EditorProps>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:markdown']);
 
 const editorRef = ref();
 const editorInstance = ref<Editor | null>(null);
+console.log(props.markdown)
 
 const createEditor = () => {
-  const markdown = turndownService.turndown(props.modelValue);
+  // const markdown = turndownService.turndown(props.modelValue);
   editorInstance.value = new Editor({
     el: editorRef.value,
     height: 'auto',
@@ -30,11 +31,11 @@ const createEditor = () => {
       target: "_blank",
       rel: "noopener noreferrer",
     },
-    initialValue: markdown,
+    initialValue: props.markdown,
     usageStatistics: false,
     theme: 'dark',
     events: {
-      change: () => emit('update:modelValue', editorInstance.value?.getMarkdown()),
+      change: () => emit('update:markdown', editorInstance.value?.getMarkdown()),
     },
     plugins: [codeSyntaxHighlight],
   });
@@ -44,7 +45,7 @@ onMounted(() => {
   createEditor()
 });
 
-watch(() => props.modelValue, () => {
+watch(() => props.markdown, () => {
   createEditor();
 });
 </script>
