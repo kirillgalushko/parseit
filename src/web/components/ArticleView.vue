@@ -3,7 +3,7 @@ import Toolbar from './Toolbar.vue';
 import { Article } from '../types/Article';
 import PlaceholderView from './PlaceholderView.vue';
 import Editor from './Editor/Editor.vue'
-import { useArticleStore } from '../store';
+import { useArticleStore } from '../stores/articleStore';
 
 interface ArticleViewProps {
   article?: Article | null

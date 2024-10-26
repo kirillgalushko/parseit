@@ -6,7 +6,7 @@ import { Article } from './types/Article'
 import ArticleView from './components/ArticleView.vue'
 import ArticleCard from './components/ArticleCard.vue'
 import { useDemoArticles } from './hooks/useDemoArticles';
-import { useArticleStore } from './store';
+import { useArticleStore } from './stores/articleStore';
 import { useAddArticle } from './hooks/useAddArticle';
 import logoSrc from './assets/logo-white-rectangle-clip.svg'
 

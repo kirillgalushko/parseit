@@ -2,7 +2,7 @@
 import { Article } from '../types/Article';
 import { Text, Stack, Card, Gap } from 'gui'
 import Favicon from '../components/Favicon.vue'
-import { useArticleStore } from '../store';
+import { useArticleStore } from '../stores/articleStore';
 
 interface ArticleCardProps {
   article: Article;

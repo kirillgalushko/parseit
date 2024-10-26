@@ -1,6 +1,6 @@
 import { onMounted, watch } from 'vue'
 import parseWebpage from '../api/parseWebpage';
-import { useArticleStore } from '../store';
+import { useArticleStore } from '../stores/articleStore';
 
 const urls = [
   'https://vuejs.org/guide/essentials/lifecycle.html',

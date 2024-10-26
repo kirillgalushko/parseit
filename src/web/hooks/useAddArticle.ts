@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { useArticleStore } from "../store";
+import { useArticleStore } from "../stores/articleStore";
 import { v4 as uuidv4 } from 'uuid';
 import parseWebpage from '../api/parseWebpage';
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button, Stack, Tabs, Tab, Icon, Separator, Tooltip } from 'gui';
-import { useArticleStore } from '../store';
+import { useArticleStore } from '../stores/articleStore';
 import { ViewVariant } from '../types/Article';
 
 const articleStore = useArticleStore();
