@@ -62,7 +62,7 @@ const onSelectArticle = (article: Article) => {
         </Stack>
         <Gap direction="vertical" :default="4" />
         <Stack stretched :gap="2" direction="column">
-          <div v-for="article of articleStore.articles" :key="article.title">
+          <div v-for="article of articleStore.articles" :key="article.name">
             <ArticleCard :article="article" :onClick="() => onSelectArticle(article)" />
           </div>
         </Stack>

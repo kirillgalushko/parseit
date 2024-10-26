@@ -5,6 +5,7 @@ import filesModule from './files.ts'
 import vaultModule from './vault.ts'
 import settingsModule from './settings.ts'
 import sync from './sync.ts'
+import htmlModule from './html.ts'
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
@@ -16,6 +17,7 @@ app.whenReady().then(() => {
   filesModule();
   vaultModule();
   settingsModule();
+  htmlModule();
   sync.subscribe();
 
   app.on('activate', function () {

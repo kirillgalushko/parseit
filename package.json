@@ -25,6 +25,7 @@
     "electron-store": "^10.0.0",
     "gui": "github:kirillgalushko/gui#v3.1.2",
     "pinia": "2.2.4",
+    "sanitize-filename": "^1.6.3",
     "turndown": "^7.2.0",
     "uuid": "9.0.0",
     "vue": "3.5.10"

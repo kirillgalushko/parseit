@@ -5,7 +5,6 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { onMounted, ref, watch } from 'vue';
-import TurndownService from 'turndown';
 import { useArticleStore } from '../../stores/articleStore';
 import { Article } from '../../types/Article';
 
@@ -13,7 +12,6 @@ interface EditorProps {
   article: Article
 }
 
-const turndownService = new TurndownService({ headingStyle: 'atx' });
 const props = defineProps<EditorProps>();
 const emit = defineEmits(['update:markdown']);
 const articleStore = useArticleStore();
@@ -28,7 +26,6 @@ const handleChange = (newMarkdown: string) => {
 }
 
 const createEditor = () => {
-  // const markdown = turndownService.turndown(props.modelValue);
   editorInstance.value = new Editor({
     el: editorRef.value,
     height: 'auto',

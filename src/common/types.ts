@@ -3,7 +3,9 @@ export interface Settings {
   vaultPath: string | null,
 }
 
-export const defaultAppSettings: Settings = {
-  vaultPath: null,
-  theme: 'dark'
+export interface ParseitFile {
+  name: string;
+  filePath: string;
+  content: string;
+  extension: string;
 }

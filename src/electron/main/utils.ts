@@ -44,3 +44,11 @@ export const watchDirectory = (directoryPath, callback: () => void) => {
     .on('unlinkDir', callback)
   return watcher
 };
+
+export const getFileExtension = (filePath: string): string => {
+  return path.extname(filePath)
+}
+
+export const getFileName = (filePath: string): string => {
+  return path.basename(filePath, path.extname(filePath));
+}

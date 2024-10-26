@@ -1,4 +1,6 @@
 import { Readability } from '@mozilla/readability';
+import { isDesktopApp } from '../utils/isDesktopApp';
+import { ParsedWebpage } from '../types/ParsedWebpage'
 
 const cleanDoc = (doc: Document) => {
   const images = doc.querySelectorAll('img');
@@ -15,16 +17,32 @@ const getDomain = (url: string) => {
   return domain
 }
 
-const getHtml = async (url: string) => {
-  const proxyUrl = `http://localhost:3122/proxy?url=${encodeURIComponent(url)}`;
-  const domain = getDomain(url);
-  const response = await fetch(proxyUrl);
-  const html = await response.text();
+const fixHtmlLinksDomain = (domain: string, html: string) => {
   const htmlWithFixedDomain = html.replace(/(src|href|srcset)=(["'])(\/[^"']*)\2/g, (_match, p1, p2, p3) => {
     const newValue = `${domain}${p3}`;
     return `${p1}=${p2}${newValue}${p2}`;
   });
   return htmlWithFixedDomain
+}
+
+const getHtmlViaProxy = async (url: string) => {
+  const proxyUrl = `http://localhost:3122/proxy?url=${encodeURIComponent(url)}`;
+  const domain = getDomain(url);
+  const response = await fetch(proxyUrl);
+  const html = await response.text();
+  return fixHtmlLinksDomain(domain, html)
+}
+
+const getHtmlWithNode = async (url: string) => {
+  const html = await window.api.fetchHtml(url) as string;
+  return html
+}
+
+const getHtml = async (url: string) => {
+  if (isDesktopApp()) {
+    return getHtmlWithNode(url)
+  }
+  return getHtmlViaProxy(url);
 }
 
 const htmlToDocument = (html: string) => {
@@ -70,7 +88,7 @@ const getDocument = async (html: string) => {
   return doc
 }
 
-const parseWebpage = async (url: string) => {
+const parseWebpage = async (url: string): Promise<ParsedWebpage | undefined> => {
   try {
     const domain = getDomain(url)
     const html = await getHtml(url)

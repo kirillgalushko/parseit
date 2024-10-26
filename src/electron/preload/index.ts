@@ -10,8 +10,10 @@ const api = {
     ipcRenderer.on('files-updated', (_event, data) => callback(data));
   },
   createAppVault: () => ipcRenderer.invoke('create-app-vault'),
+  createAppFile: (fileName, content) => ipcRenderer.invoke('create-app-file', fileName, content),
   getSettings: () => ipcRenderer.invoke('get-settings'),
   setSettings: (settings: Object) => ipcRenderer.invoke('set-settings', settings),
+  fetchHtml: (url) => ipcRenderer.invoke('fetch-html', url),
 }
  
 try {

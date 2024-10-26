@@ -1,6 +1,9 @@
 import { ipcMain, dialog, app  } from 'electron';
+import sanitizeFilename from 'sanitize-filename';
 import path from 'path';
+import { writeFile } from './files.ts';
 import { createDirectory, getMainWindow } from './utils.ts';
+import { getSettings } from './settings.ts'
 
 const DEFAULT_VAULT_NAME = 'Parseit'
 
@@ -26,6 +29,17 @@ export const createAppVault = async () => {
   return appDataPath;
 }
 
+export const createParseitFile = async (name: string, content: string) => {
+  const vaultPath = getSettings().vaultPath
+  if (vaultPath) {
+    const filePath = path.join(vaultPath, sanitizeFilename(name) + '.md')
+    await writeFile(filePath, content)
+  } else {
+    throw new Error(`Can't create a file: ${name}`)
+  }
+}
+
 export default () => {
   ipcMain.handle('create-app-vault', createAppVault);
+  ipcMain.handle('create-app-file', (_event, name: string, content: string) => createParseitFile(name, content));
 }

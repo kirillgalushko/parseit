@@ -1,6 +1,6 @@
 import { onMounted, watch } from 'vue'
-import parseWebpage from '../api/parseWebpage';
 import { useArticleStore } from '../stores/articleStore';
+import { useAddArticle } from './useAddArticle';
 
 const urls = [
   'https://vuejs.org/guide/essentials/lifecycle.html',
@@ -10,13 +10,7 @@ const urls = [
 
 export const useDemoArticles = () => {
   const articleStore = useArticleStore();
-
-  const getArticle = async (url: string) => {
-    const page = await parseWebpage(url)
-    if (page) {
-      articleStore.addArticle({ ...page, id: String(urls.indexOf(url)), originalUrl: url })
-    }
-  }
+  const { parsePageAndCreateArticle } = useAddArticle()
 
   watch(() => articleStore.articles.length, () => {
     if (!articleStore.selectedArticle && articleStore.articles[0]) {
@@ -26,7 +20,7 @@ export const useDemoArticles = () => {
   
   const fetchArticles = async () => {
     for (const url of urls) {
-      getArticle(url)
+      parsePageAndCreateArticle(url)
     }
   }
   

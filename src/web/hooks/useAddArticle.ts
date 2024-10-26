@@ -1,25 +1,38 @@
 import { ref } from "vue";
 import { useArticleStore } from "../stores/articleStore";
-import { v4 as uuidv4 } from 'uuid';
+import TurndownService from 'turndown';
 import parseWebpage from '../api/parseWebpage';
+import { ParsedWebpage } from "../types/ParsedWebpage";
+
+const convertParsedWebpageToMarkdown = (page: ParsedWebpage): string => {
+  const turndownService = new TurndownService({ headingStyle: 'atx' });
+  const markdown = turndownService.turndown(page.content);
+  return markdown
+}
 
 export const useAddArticle = () => {
   const articleUrl = ref<string>('')
   const articleStore = useArticleStore();
 
-  const getArticle = async (url: string) => {
+  const parsePageAndCreateArticle = async (url: string) => {
     const page = await parseWebpage(url)
     if (page) {
-      articleStore.addArticle({ ...page, id: uuidv4(), originalUrl: url })
+      const markdown = convertParsedWebpageToMarkdown(page);
+      const name = page.title || page.excerpt || page.domain
+      if (name) {
+        articleStore.createArticle(name, markdown)
+      } else {
+        throw new Error('No name found for webpage')
+      }
     }
   }
   
-  const addArticle = () => {
+  const handleAddArticle = () => {
     if (articleUrl.value) {
-      getArticle(articleUrl.value)
+      parsePageAndCreateArticle(articleUrl.value)
       articleUrl.value = ''
     }
   }
 
-  return { articleUrl, addArticle }
+  return { articleUrl, addArticle: handleAddArticle, parsePageAndCreateArticle }
 }

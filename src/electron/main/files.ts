@@ -1,6 +1,8 @@
 import { ipcMain  } from 'electron';
 import fs from 'fs';
 import { listFiles } from './utils.ts';
+import { type ParseitFile } from '../../common/types.ts'
+import { getFileName, getFileExtension } from './utils.ts'
 
 export const readFile = async (filePath) => {
   try {
@@ -14,7 +16,6 @@ export const readFile = async (filePath) => {
 
 export const writeFile = async (filePath, content) => {
   try {
-    console.log(filePath)
     fs.writeFileSync(filePath, content, 'utf8');
   } catch (error) {
     console.error('Ошибка записи файла:', error);
@@ -33,17 +34,19 @@ export const deleteFile = async (filePath) => {
 
 export const getAllFiles = async (directory: string) => {
   const allFilesList = await listFiles(directory)
-  const filesWithContent = [];
+  const filesWithContent: ParseitFile[] = [];
   for (const filePath of allFilesList) {
     const fileContent = await readFile(filePath);
-    filesWithContent.push({ path: filePath, content: fileContent })
+    const name = getFileName(filePath)
+    const extension = getFileExtension(filePath)
+    filesWithContent.push({ filePath, content: fileContent, name, extension })
   }
   return filesWithContent
 }
 
 export default () => {
-  ipcMain.handle('read-file', (_event, filePath) => readFile(filePath));
-  ipcMain.handle('write-file', (_event, filePath, content) => writeFile(filePath, content));
-  ipcMain.handle('delete-file', (_event, filePath) => deleteFile(filePath));
-  ipcMain.handle('get-all-files', (_event, directoryPath) => getAllFiles(directoryPath));
+  ipcMain.handle('read-file', (_event, filePath: string) => readFile(filePath));
+  ipcMain.handle('write-file', (_event, filePath: string, content: string) => writeFile(filePath, content));
+  ipcMain.handle('delete-file', (_event, filePath: string) => deleteFile(filePath));
+  ipcMain.handle('get-all-files', (_event, directoryPath: string) => getAllFiles(directoryPath));
 }
