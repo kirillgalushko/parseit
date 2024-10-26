@@ -4,19 +4,18 @@ import { useArticleStore } from '../stores/articleStore';
 import { ViewVariant } from '../types/Article';
 
 const articleStore = useArticleStore();
-const { selectedArticle, articleView } = articleStore
 
 const onChangeViewVariant = (variant: string) => {
   articleStore.setArticleView(variant as ViewVariant)
 }
 
 const handleOpenPage = () => {
-  window.open(selectedArticle?.originalUrl, '_blank');
+  window.open(articleStore.selectedArticle?.originalUrl, '_blank');
 }
 
 const handleRemoveArticle = () => {
-  if (selectedArticle) {
-    articleStore.removeArticle(selectedArticle)
+  if (articleStore.selectedArticle) {
+    articleStore.removeArticle(articleStore.selectedArticle)
   }
 }
 
@@ -47,7 +46,7 @@ const actions = [{
 <template>
   <div :class="['toolbar']">
     <Stack alignItems="center" direction="row" :gap="2">
-      <Tabs :value="articleView" :onChange="onChangeViewVariant">
+      <Tabs :value="articleStore.articleView" :onChange="onChangeViewVariant">
         <Tab name="reader">Режим чтения</Tab>
         <Tab name="html">HTML</Tab>
       </Tabs>
