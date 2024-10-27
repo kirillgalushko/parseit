@@ -49,13 +49,17 @@ export const useArticleStore = defineStore('articleStore', {
           this.articles = articles
         }
       }
+      if (this.selectedArticle && !this.articles.find(a => a.id === this.selectedArticle?.id)) {
+        this.selectedArticle = null
+      }
     },
     addArticle(article: Article) {
       this.articles.push(article);
     },
     createArticle(name: string, content: string) {
       if (isDesktopApp()) {
-          window.api.createAppFile(name, content)
+        const foldersStore = useFoldersStore();
+        window.api.createAppFile(name, content, foldersStore.selectedFolder?.name)
       }
     },
     removeArticle(article: Article) {

@@ -63,3 +63,24 @@ export const getFileExtension = (filePath: string): string => {
 export const getFileName = (filePath: string): string => {
   return path.basename(filePath, path.extname(filePath));
 }
+
+export const writeFileWithDirs = (filePath, data) => {
+  const dir = path.dirname(filePath);
+
+  fs.mkdir(dir, { recursive: true }, (err) => {
+    if (err) throw err;
+
+    fs.writeFile(filePath, data, 'utf8', (err) => {
+      if (err) throw err;
+    });
+  });
+};
+
+export function getUniqueFileName(filePath, count = 1) {
+  const dir = path.dirname(filePath);
+  const ext = path.extname(filePath);
+  const baseName = path.basename(filePath, ext);
+  const newFilePath = count === 1 ? filePath : path.join(dir, `${baseName}_${count}${ext}`);
+
+  return fs.existsSync(newFilePath) ? getUniqueFileName(filePath, count + 1) : newFilePath;
+}

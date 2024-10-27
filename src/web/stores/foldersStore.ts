@@ -37,6 +37,9 @@ export const useFoldersStore = defineStore('foldersStore', {
           const folders = await window.api.getAllFolders(settings.vaultPath);
           this.folders = folders
         }
+        if (this.selectedFolder && !this.folders.find(a => a.folderPath === this.selectedFolder?.folderPath)) {
+          this.selectedFolder = null
+        }
     },
     addFolder(folder: Folder) {
       // this.articles.push(article);

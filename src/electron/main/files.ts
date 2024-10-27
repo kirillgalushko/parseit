@@ -2,7 +2,7 @@ import { ipcMain  } from 'electron';
 import fs from 'fs';
 import { listFiles, listFolders } from './utils.ts';
 import { type ParseitFile, type ParseitFolder } from '../../common/types.ts'
-import { getFileName, getFileExtension } from './utils.ts'
+import { getFileName, getFileExtension, writeFileWithDirs, getUniqueFileName } from './utils.ts'
 
 export const readFile = async (filePath) => {
   try {
@@ -16,7 +16,16 @@ export const readFile = async (filePath) => {
 
 export const writeFile = async (filePath, content) => {
   try {
-    fs.writeFileSync(filePath, content, 'utf8');
+    writeFileWithDirs(filePath, content);
+  } catch (error) {
+    console.error('Ошибка записи файла:', error);
+    throw error;
+  }
+}
+
+export const createFile = async (filePath, content) => {
+  try {
+    writeFileWithDirs(getUniqueFileName(filePath), content);
   } catch (error) {
     console.error('Ошибка записи файла:', error);
     throw error;
