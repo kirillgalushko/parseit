@@ -4,7 +4,7 @@ import { is } from '@electron-toolkit/utils'
 
 export function createWindow(): void {
   const mainWindow = new BrowserWindow({
-    width: 900,
+    width: 1280,
     height: 670,
     show: false,
     autoHideMenuBar: true,
