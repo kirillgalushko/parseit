@@ -8,7 +8,7 @@ import ArticleCard from './components/ArticleCard.vue'
 import { useDemoArticles } from './hooks/useDemoArticles';
 import { useArticleStore } from './stores/articleStore';
 import { useAddArticle } from './hooks/useAddArticle';
-import logoSrc from './assets/logo-white-rectangle-clip.svg'
+import Logo from './components/Logo.vue'
 import { useFoldersStore } from './stores/foldersStore'
 
 const articleStore = useArticleStore();
@@ -27,7 +27,7 @@ const onSelectArticle = (article: Article) => {
     <div class="grid">
       <Sidebar :width="150" minWidth="100px" maxWidth="300px">
         <Header>
-          <img :src="logoSrc" />
+          <Logo />
         </Header>
         <Gap direction="vertical" :default="4" />
         <Stack :gap="2" direction="column" stretched>
@@ -49,7 +49,7 @@ const onSelectArticle = (article: Article) => {
       </Sidebar>
       <Sidebar :width="300">
         <Header>
-          <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             Сохраненные
             <Button mode="accent" @click="addArticle">
               <Icon name="circle-plus" /> Добавить
