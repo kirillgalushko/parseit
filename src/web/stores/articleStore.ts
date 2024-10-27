@@ -40,6 +40,16 @@ export const useArticleStore = defineStore('articleStore', {
       }
       this._initialized = true;
     },
+    async updateArticles() {
+      if (isDesktopApp()) {
+        const foldersStore = useFoldersStore();
+        if (foldersStore.selectedFolder) {
+          const files = await window.api.getAllFiles(foldersStore.selectedFolder.folderPath);
+          const articles: Article[] = files.map(convertParseitFileToArticle) 
+          this.articles = articles
+        }
+      }
+    },
     addArticle(article: Article) {
       this.articles.push(article);
     },

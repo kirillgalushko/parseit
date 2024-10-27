@@ -9,13 +9,13 @@ export const useFilesWatcher = () => {
 
   const watchChanges = () => {
     window.api.onFilesUpdated(() => {
-      foldersStore.init();
-      articleStore.init();
+      foldersStore.updateFolders();
+      articleStore.updateArticles();
     })
   }
 
   watch(() => foldersStore.selectedFolder, () => {
-    articleStore.init();
+    articleStore.updateArticles();
   })
 
   onMounted(() => {

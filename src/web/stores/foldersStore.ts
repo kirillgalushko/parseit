@@ -31,6 +31,13 @@ export const useFoldersStore = defineStore('foldersStore', {
       }
       this._initialized = true;
     },
+    async updateFolders() {
+      const settings = useSettingsStore();
+        if (settings.vaultPath) {
+          const folders = await window.api.getAllFolders(settings.vaultPath);
+          this.folders = folders
+        }
+    },
     addFolder(folder: Folder) {
       // this.articles.push(article);
     },
