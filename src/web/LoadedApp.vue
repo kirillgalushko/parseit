@@ -24,7 +24,7 @@ const onSelectArticle = (article: Article) => {
   <div class="app-layout">
     <div class="grid">
       <FoldersSidebar />
-      <Sidebar :width="300">
+      <Sidebar :width="300" :padding="8">
         <Header>
           <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             Сохраненные

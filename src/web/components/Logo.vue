@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { computed, inject, Ref } from 'vue';
+import { inject, Ref } from 'vue';
 import logoLong from '../assets/logo-white-long.svg'
 import logoCompact from '../assets/logo-white-clip.svg'
 
-const sidebarWidth = inject<Ref<number>>('sidebar-width')
-const isCompact = computed(() => (sidebarWidth?.value || 0) < 150)
+const isCompact = inject<Ref<boolean>>('sidebar-is-compact')
 </script>
 
 <template>

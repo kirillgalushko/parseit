@@ -7,10 +7,10 @@
 <style scoped>
 .header {
   border-bottom: 1px solid hsl(var(--border));
-  padding: 0 var(--gap-4);
-  padding-bottom: var(--gap-2);
+  padding: var(--gap-2) var(--gap-4);
   margin: 0 calc(0px - var(--gap-2));
-  height: 40px;
+  margin-top: -8px;
+  height: 60px;
   display: flex;
   align-items: center;
   box-sizing: border-box;
