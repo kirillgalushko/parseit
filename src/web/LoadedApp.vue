@@ -25,7 +25,7 @@ const onSelectArticle = (article: Article) => {
 <template>
   <div class="app-layout">
     <div class="grid">
-      <Sidebar minWidth="100px" maxWidth="300px">
+      <Sidebar :width="150" minWidth="100px" maxWidth="300px">
         <Header>
           <img :src="logoSrc" />
         </Header>
@@ -47,7 +47,7 @@ const onSelectArticle = (article: Article) => {
           </Card>
         </Stack>
       </Sidebar>
-      <Sidebar>
+      <Sidebar :width="300">
         <Header>
           <div style="display: flex; justify-content: space-between; align-items: center;">
             Сохраненные
