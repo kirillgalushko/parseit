@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { Button, Stack, Sidebar, Input, Gap, Icon, Card, Text } from 'gui'
+import { Button, Stack, Sidebar, Input, Gap, Icon } from 'gui'
 import Header from './components/Header.vue'
 import { Article } from './types/Article'
 import ArticleView from './components/ArticleView.vue'
@@ -8,11 +8,9 @@ import ArticleCard from './components/ArticleCard.vue'
 import { useDemoArticles } from './hooks/useDemoArticles';
 import { useArticleStore } from './stores/articleStore';
 import { useAddArticle } from './hooks/useAddArticle';
-import Logo from './components/Logo.vue'
-import { useFoldersStore } from './stores/foldersStore'
+import FoldersSidebar from './components/FoldersSidebar/FoldersSidebar.vue'
 
 const articleStore = useArticleStore();
-const foldersStore = useFoldersStore();
 const { addArticle } = useAddArticle();
 // useDemoArticles();
 
@@ -25,28 +23,7 @@ const onSelectArticle = (article: Article) => {
 <template>
   <div class="app-layout">
     <div class="grid">
-      <Sidebar :width="150" minWidth="100px" maxWidth="300px">
-        <Header>
-          <Logo />
-        </Header>
-        <Gap direction="vertical" :default="4" />
-        <Stack :gap="2" direction="column" stretched>
-          <Card v-for="folder of foldersStore.folders" @click="() => foldersStore.setSelectedFolder(folder)" interactive
-            stretched>
-            <Stack :gap="2" direction="row" alignItems="center" stretched>
-              <Icon :style="'font-size: 16px'" name="inbox" /><Text typography="paragraph-2-regular" ellipsis>{{
-                folder.name }}</Text>
-              <strong>{{ folder.filesCount }}</strong>
-            </Stack>
-          </Card>
-          <Card interactive stretched>
-            <Stack :gap="2" direction="row" alignItems="center" stretched>
-              <Icon :style="'font-size: 16px'" name="archive " /><Text typography="paragraph-2-regular"
-                ellipsis>Архив</Text>
-            </Stack>
-          </Card>
-        </Stack>
-      </Sidebar>
+      <FoldersSidebar />
       <Sidebar :width="300">
         <Header>
           <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
