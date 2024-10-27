@@ -9,8 +9,10 @@ import { useDemoArticles } from './hooks/useDemoArticles';
 import { useArticleStore } from './stores/articleStore';
 import { useAddArticle } from './hooks/useAddArticle';
 import logoSrc from './assets/logo-white-rectangle-clip.svg'
+import { useFoldersStore } from './stores/foldersStore'
 
 const articleStore = useArticleStore();
+const foldersStore = useFoldersStore();
 const { addArticle } = useAddArticle();
 // useDemoArticles();
 
@@ -29,11 +31,12 @@ const onSelectArticle = (article: Article) => {
         </Header>
         <Gap direction="vertical" :default="4" />
         <Stack :gap="2" direction="column" stretched>
-          <Card interactive stretched>
+          <Card v-for="folder of foldersStore.folders" @click="() => foldersStore.setSelectedFolder(folder)" interactive
+            stretched>
             <Stack :gap="2" direction="row" alignItems="center" stretched>
-              <Icon :style="'font-size: 16px'" name="inbox" /><Text typography="paragraph-2-regular"
-                ellipsis>Сохраненные</Text>
-              <strong>{{ articleStore.articles.length }}</strong>
+              <Icon :style="'font-size: 16px'" name="inbox" /><Text typography="paragraph-2-regular" ellipsis>{{
+                folder.name }}</Text>
+              <strong>{{ folder.filesCount }}</strong>
             </Stack>
           </Card>
           <Card interactive stretched>

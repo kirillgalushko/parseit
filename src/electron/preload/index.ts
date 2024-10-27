@@ -6,6 +6,7 @@ const api = {
   writeFile: (filePath, content) => ipcRenderer.invoke('write-file', filePath, content),
   deleteFile: (filePath) => ipcRenderer.invoke('delete-file', filePath),
   getAllFiles: (directory) => ipcRenderer.invoke('get-all-files', directory),
+  getAllFolders: (directory) => ipcRenderer.invoke('get-all-folders', directory),
   onFilesUpdated: (callback) => {
     ipcRenderer.on('files-updated', (_event, data) => callback(data));
   },

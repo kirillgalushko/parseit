@@ -9,3 +9,9 @@ export interface ParseitFile {
   content: string;
   extension: string;
 }
+
+export interface ParseitFolder {
+  name: string;
+  folderPath: string;
+  filesCount: number;
+}

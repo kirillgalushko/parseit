@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { Article, ViewVariant } from '../types/Article';
 import { useSettingsStore } from './settingsStore';
+import { useFoldersStore } from './foldersStore';
 import { StateWithInitialization } from './types'
 import { isDesktopApp } from '../utils/isDesktopApp'
 import { ParseitFile } from '../../common/types';
@@ -30,9 +31,9 @@ export const useArticleStore = defineStore('articleStore', {
   actions: {
     async init() {
       if (isDesktopApp()) {
-        const settings = useSettingsStore();
-        if (settings.vaultPath) {
-          const files = await window.api.getAllFiles(settings.vaultPath);
+        const foldersStore = useFoldersStore();
+        if (foldersStore.selectedFolder) {
+          const files = await window.api.getAllFiles(foldersStore.selectedFolder.folderPath);
           const articles: Article[] = files.map(convertParseitFileToArticle) 
           this.articles = articles
         }

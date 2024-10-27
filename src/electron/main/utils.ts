@@ -22,10 +22,21 @@ export const listFiles = (currentPath) => {
   for (const item of items) {
     const fullPath = path.join(currentPath, item);
     const stat = fs.statSync(fullPath);
-    if (stat.isDirectory()) {
-      listFiles(fullPath);
-    } else if (stat.isFile() && path.extname(fullPath) === '.md') {
+    if (stat.isFile() && path.extname(fullPath) === '.md') {
       results.push(fullPath);
+    }
+  }
+  return results
+};
+
+export const listFolders = (currentPath) => {
+  const results: string[] = [];
+  const items = fs.readdirSync(currentPath);
+  for (const item of items) {
+    const fullPath = path.join(currentPath, item);
+    const stat = fs.statSync(fullPath);
+    if (stat.isDirectory()) {
+      results.push(fullPath)
     }
   }
   return results

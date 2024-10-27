@@ -6,6 +6,8 @@ import { createDirectory, getMainWindow } from './utils.ts';
 import { getSettings } from './settings.ts'
 
 const DEFAULT_VAULT_NAME = 'Parseit'
+const ARCHIVE_DIR_NAME = '.archive'
+const DEFAULT_DIR_NAME = 'Сохранено'
 
 const askAppPath = async () => {
   const documentsPath = app.getPath('documents');
@@ -26,6 +28,8 @@ export const createAppVault = async () => {
   const chosenPath = await askAppPath();
   const appDataPath = path.join(chosenPath, DEFAULT_VAULT_NAME)
   await createDirectory(appDataPath);
+  await createDirectory(path.join(chosenPath, ARCHIVE_DIR_NAME));
+  await createDirectory(path.join(chosenPath, DEFAULT_DIR_NAME));
   return appDataPath;
 }
 

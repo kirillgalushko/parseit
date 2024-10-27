@@ -1,11 +1,13 @@
 import { useArticleStore } from "../stores/articleStore"
 import { useSettingsStore } from "../stores/settingsStore"
+import { useFoldersStore } from '../stores/foldersStore'
 import { onMounted, ref } from "vue";
 
 export const useAppInit = () => {
   const settingsStore = useSettingsStore()
+  const foldersStore = useFoldersStore();
   const articleStore = useArticleStore();
-  const stores = [settingsStore, articleStore]
+  const stores = [settingsStore, foldersStore, articleStore]
   const isInitialized = ref<boolean>(false)
 
   const initAllStores = async () => {
