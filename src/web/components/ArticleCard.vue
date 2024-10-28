@@ -7,6 +7,7 @@ import { storeToRefs } from 'pinia';
 import { useSearchStore } from '../stores/searchStore';
 import { computed } from 'vue';
 import { trimAroundSubstring } from '../utils/trimAroundSubstring';
+import HighlightText from './HighlightText.vue'
 
 interface ArticleCardProps {
   article: Article;
@@ -28,7 +29,9 @@ const searchResultText = computed(() => {
     <Text ellipsis typography="title-4-semibold">{{ article.name }}</Text>
     <!-- <Text ellipsis typography="subtitle-2-semibold">{{ article.excerpt }}</Text> -->
     <Gap direction="vertical" :default="1" />
-    <Text ellipsis :clamp="2" typography="paragraph-3-regular">{{ searchResultText || article.markdown }}</Text>
+    <Text ellipsis :clamp="2" typography="paragraph-3-regular">
+      <HighlightText :text="searchResultText || article.markdown" :searchQuery="searchQuery" />
+    </Text>
     <Gap direction="vertical" :default="2" />
     <Stack direction="row" :gap="2">
       <!-- <Favicon v-if="article.faviconUrl" :src="article.faviconUrl" /> -->
