@@ -5,11 +5,15 @@ import { Article } from '../../types/Article';
 import ArticleCard from '../ArticleCard.vue'
 import { useArticleStore } from '../../stores/articleStore';
 import { useFoldersStore } from '../../stores/foldersStore';
+import SearchInput from '../Search/SearchInput.vue';
 import AddArticleModal from '../AddArticleModal.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useSearchStore } from '../../stores/searchStore';
+import { storeToRefs } from 'pinia';
 
 const foldersStore = useFoldersStore();
 const articleStore = useArticleStore();
+const { searchQuery, filteredArticles } = storeToRefs(useSearchStore());
 const isAddModalOpened = ref<boolean>(false);
 
 const onSelectArticle = (article: Article) => {
@@ -23,6 +27,12 @@ const handleAddArticle = () => {
 const handleCloseModal = () => {
   isAddModalOpened.value = false;
 }
+const articles = computed(() => {
+  if (searchQuery.value) {
+    return filteredArticles.value
+  }
+  return articleStore.articles
+})
 </script>
 
 <template>
@@ -38,14 +48,14 @@ const handleCloseModal = () => {
     </Header>
     <Gap direction="vertical" :default="4" />
     <Stack direction="row" :gap="2" stretched>
-      <Input placeholder="Поиск по статьям" />
+      <SearchInput />
       <Button squared mode="default">
         <Icon name="sort-descending" />
       </Button>
     </Stack>
     <Gap direction="vertical" :default="4" />
     <Stack stretched :gap="2" direction="column">
-      <div v-for="article of articleStore.articles" :key="article.name">
+      <div v-for="article of articles" :key="article.name">
         <ArticleCard :article="article" :onClick="() => onSelectArticle(article)" />
       </div>
     </Stack>

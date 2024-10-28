@@ -3,6 +3,10 @@ import { Article } from '../types/Article';
 import { Text, Stack, Card, Gap } from 'gui'
 import Favicon from '../components/Favicon.vue'
 import { useArticleStore } from '../stores/articleStore';
+import { storeToRefs } from 'pinia';
+import { useSearchStore } from '../stores/searchStore';
+import { computed } from 'vue';
+import { trimAroundSubstring } from '../utils/trimAroundSubstring';
 
 interface ArticleCardProps {
   article: Article;
@@ -11,6 +15,11 @@ interface ArticleCardProps {
 
 const props = defineProps<ArticleCardProps>()
 const articleStore = useArticleStore();
+const { searchQuery } = storeToRefs(useSearchStore());
+const markdown = props.article.markdown
+const searchResultText = computed(() => {
+  return trimAroundSubstring(markdown, searchQuery.value, 2, 15)
+})
 </script>
 
 <template>
@@ -19,7 +28,7 @@ const articleStore = useArticleStore();
     <Text ellipsis typography="title-4-semibold">{{ article.name }}</Text>
     <!-- <Text ellipsis typography="subtitle-2-semibold">{{ article.excerpt }}</Text> -->
     <Gap direction="vertical" :default="1" />
-    <Text ellipsis :clamp="2" typography="paragraph-3-regular">{{ article.markdown }}</Text>
+    <Text ellipsis :clamp="2" typography="paragraph-3-regular">{{ searchResultText || article.markdown }}</Text>
     <Gap direction="vertical" :default="2" />
     <Stack direction="row" :gap="2">
       <!-- <Favicon v-if="article.faviconUrl" :src="article.faviconUrl" /> -->

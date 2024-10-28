@@ -23,7 +23,7 @@ const convertParseitFileToArticle = (file: ParseitFile): Article => {
 
 export const useArticleStore = defineStore('articleStore', {
   state: (): ArticleState => ({
-    articles: [],
+    articles: [] as Article[],
     selectedArticle: null,
     articleView: 'reader',
     _initialized: false,
