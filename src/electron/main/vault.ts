@@ -4,10 +4,7 @@ import path from 'path';
 import { createFile } from './files.ts';
 import { createDirectory, getMainWindow } from './utils.ts';
 import { getSettings } from './settings.ts'
-
-const DEFAULT_VAULT_NAME = 'Parseit'
-const ARCHIVE_DIR_NAME = '.archive'
-const DEFAULT_DIR_NAME = 'Сохранено'
+import { DEFAULT_VAULT_NAME, ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME } from './utils.ts'
 
 const askAppPath = async () => {
   const documentsPath = app.getPath('documents');

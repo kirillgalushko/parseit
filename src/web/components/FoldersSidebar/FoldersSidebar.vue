@@ -26,17 +26,6 @@ const foldersStore = useFoldersStore();
           <FolderFilesCount>{{ folder.filesCount }}</FolderFilesCount>
         </template>
       </SidebarItem>
-
-      <!-- Mocked -->
-      <SidebarItem>
-        <template #left>
-          <Icon name="archive" />
-        </template>
-        Архив
-        <template #right>
-          <FolderFilesCount>0</FolderFilesCount>
-        </template>
-      </SidebarItem>
     </SidebarList>
   </Sidebar>
 </template>

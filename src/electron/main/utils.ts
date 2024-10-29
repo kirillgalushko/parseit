@@ -4,8 +4,11 @@ import path from 'path'
 import { BrowserWindow  } from 'electron';
 import chokidar from 'chokidar'
 
-
 const mkdir = promisify(fs.mkdir);
+
+export const DEFAULT_VAULT_NAME = 'Parseit'
+export const ARCHIVE_DIR_NAME = '.archive'
+export const DEFAULT_DIR_NAME = 'Сохранено'
 
 export const createDirectory = (dirPath: string) => {
   return mkdir(dirPath, { recursive: true });
@@ -83,4 +86,10 @@ export function getUniqueFileName(filePath, count = 1) {
   const newFilePath = count === 1 ? filePath : path.join(dir, `${baseName}_${count}${ext}`);
 
   return fs.existsSync(newFilePath) ? getUniqueFileName(filePath, count + 1) : newFilePath;
+}
+
+export const moveFile = (oldPath, newPath) => {
+  fs.rename(oldPath, newPath, (err) => {
+    if (err) throw err;
+  });
 }

@@ -88,6 +88,16 @@ export const useArticleStore = defineStore('articleStore', {
         }
       }
     },
+    archiveArticle(article: Article) {
+      if (isDesktopApp()) {
+        window.api.archiveFile(article.filePath);
+      } else {
+        this.articles = this.articles.filter(a => a.id !== article.id)
+        if (this.selectedArticle?.id === article.id) {
+          this.selectedArticle = null;
+        }
+      }
+    },
     updateArticle(article: Article) {
       if (isDesktopApp()) {
         window.api.writeFile(article.filePath, article.markdown)

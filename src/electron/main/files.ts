@@ -1,8 +1,10 @@
 import { ipcMain  } from 'electron';
 import fs from 'fs';
-import { listFiles, listFolders } from './utils.ts';
+import path from 'path';
+import { getSettings } from './settings.ts'
+import { listFiles, listFolders, moveFile } from './utils.ts';
 import { type ParseitFile, type ParseitFolder } from '../../common/types.ts'
-import { getFileName, getFileExtension, writeFileWithDirs, getUniqueFileName } from './utils.ts'
+import { getFileName, getFileExtension, writeFileWithDirs, getUniqueFileName, ARCHIVE_DIR_NAME } from './utils.ts'
 
 export const readFile = async (filePath) => {
   try {
@@ -41,6 +43,18 @@ export const deleteFile = async (filePath) => {
   }
 };
 
+export const archiveFile = async (filePath) => {
+  try {
+    const vaultPath = getSettings().vaultPath
+    const fileName = path.basename(filePath)
+    if (!vaultPath) throw new Error('No vault path');
+    moveFile(filePath, path.join(vaultPath, ARCHIVE_DIR_NAME, fileName))
+  } catch (error) {
+    console.error('Ошибка при перемещении файла:', error);
+    throw error;
+  }
+};
+
 export const getAllFiles = async (directory: string) => {
   const allFilesList = await listFiles(directory)
   const filesWithContent: ParseitFile[] = [];
@@ -58,7 +72,8 @@ export const getAllFolders = async (directory: string) => {
   const folderWithInfo: ParseitFolder[] = [];
   for (const folderPath of allFoldersList) {
     const files = await listFiles(folderPath);
-    const name = getFileName(folderPath)
+    const realName = getFileName(folderPath)
+    const name = realName === ARCHIVE_DIR_NAME ? 'Архив' : realName
     folderWithInfo.push({ filesCount: files.length, folderPath, name })
   }
   return folderWithInfo
@@ -68,6 +83,7 @@ export default () => {
   ipcMain.handle('read-file', (_event, filePath: string) => readFile(filePath));
   ipcMain.handle('write-file', (_event, filePath: string, content: string) => writeFile(filePath, content));
   ipcMain.handle('delete-file', (_event, filePath: string) => deleteFile(filePath));
+  ipcMain.handle('archive-file', (_event, filePath: string) => archiveFile(filePath));
   ipcMain.handle('get-all-files', (_event, directoryPath: string) => getAllFiles(directoryPath));
   ipcMain.handle('get-all-folders', (_event, directoryPath: string) => getAllFolders(directoryPath));
 

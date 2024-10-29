@@ -19,6 +19,12 @@ const handleRemoveArticle = () => {
   }
 }
 
+const handleArchiveArticle = () => {
+  if (articleStore.selectedArticle) {
+    articleStore.archiveArticle(articleStore.selectedArticle)
+  }
+}
+
 const handleCloseArticle = () => {
   articleStore.setSelectedArticle(null)
 }
@@ -33,7 +39,7 @@ const actions = [{
   type: 'button',
   name: 'Архивировать',
   icon: 'archive',
-  actionHandler: handleRemoveArticle,
+  actionHandler: handleArchiveArticle,
 }, {
   type: 'button',
   name: 'Удалить',
