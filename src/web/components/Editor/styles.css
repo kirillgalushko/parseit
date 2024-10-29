@@ -2,6 +2,12 @@
   padding: 18px 25px;
 }
 
+.toastui-viewer,
+.toastui-editor-defaultUI .ProseMirror {
+  max-width: 800px;
+  margin: auto;
+}
+
 .toastui-editor-dark,
 .toastui-editor-defaultUI {
   border: 0;
@@ -15,6 +21,8 @@
   border-radius: 0;
   background-color: hsl(var(--background));
   border-color: hsl(var(--border));
+  display: flex;
+  justify-content: center;
 }
 
 .toastui-editor-defaultUI-toolbar button {
