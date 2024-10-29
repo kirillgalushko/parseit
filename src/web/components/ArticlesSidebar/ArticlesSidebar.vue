@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Stack, Sidebar, Input, Gap, Icon } from 'gui'
+import { Button, Stack, Sidebar, Gap, Icon } from 'gui'
 import Header from '../Header.vue'
 import { Article } from '../../types/Article';
 import ArticleCard from '../ArticleCard.vue'
@@ -10,10 +10,12 @@ import AddArticleModal from '../AddArticleModal.vue';
 import { computed, ref } from 'vue';
 import { useSearchStore } from '../../stores/searchStore';
 import { storeToRefs } from 'pinia';
+import Sorting from '../Sorting.vue';
+import { sortArticles } from '../../utils/sortArticles';
 
 const foldersStore = useFoldersStore();
 const articleStore = useArticleStore();
-const { searchQuery, filteredArticles } = storeToRefs(useSearchStore());
+const { searchQuery, filteredArticles, sorting } = storeToRefs(useSearchStore());
 const isAddModalOpened = ref<boolean>(false);
 
 const onSelectArticle = (article: Article) => {
@@ -29,9 +31,9 @@ const handleCloseModal = () => {
 }
 const articles = computed(() => {
   if (searchQuery.value) {
-    return filteredArticles.value
+    return sortArticles(filteredArticles.value, sorting.value)
   }
-  return articleStore.articles
+  return sortArticles(articleStore.articles, sorting.value)
 })
 </script>
 
@@ -49,9 +51,7 @@ const articles = computed(() => {
     <Gap direction="vertical" :default="4" />
     <Stack direction="row" :gap="2" stretched>
       <SearchInput />
-      <Button squared mode="default">
-        <Icon name="sort-descending" />
-      </Button>
+      <Sorting />
     </Stack>
     <Gap direction="vertical" :default="4" />
     <Stack stretched :gap="2" direction="column">

@@ -2,14 +2,23 @@ import { defineStore } from 'pinia';
 import { Article } from '../types/Article.ts';
 import { useArticleStore } from './articleStore';
 
+export enum Sorting {
+  Newest = 'newest',
+  Oldest = 'oldest',
+  Atoz = 'atoz',
+  Ztoa = 'ztoa',
+}
+
 interface SearchState {
   searchQuery: string;
   filteredArticles: Article[];
+  sorting: Sorting;
 }
 
 const defaultState: SearchState = {
   searchQuery: '',
   filteredArticles: [],
+  sorting: Sorting.Newest,
 }
 
 const checkArticleByFilter = (query: string, article: Article) => {
@@ -24,6 +33,9 @@ export const useSearchStore = defineStore('searchArticles', {
       this.searchQuery = query;
       const foundArticles = articlesStore.articles.filter((article) => checkArticleByFilter(query, article))
       this.filteredArticles = foundArticles
+    },
+    setSorting(sorting: Sorting) {
+      this.sorting = sorting
     },
   },
 });
