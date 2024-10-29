@@ -5,6 +5,8 @@ export interface Article {
   filePath: string;
   body: string;
   url?: string;
+  domain?: string;
+  faviconUrl?: string;
 }
 
 export type ViewVariant = 'editor' | 'reader'

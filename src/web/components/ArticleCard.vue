@@ -33,8 +33,8 @@ const searchResultText = computed(() => {
     </Text>
     <Gap direction="vertical" :default="2" />
     <Stack direction="row" :gap="2">
-      <!-- <Favicon v-if="article.faviconUrl" :src="article.faviconUrl" /> -->
-      <!-- <Text ellipsis typography="paragraph-3-regular" mode="secondary">{{ article.domain }}</Text> -->
+      <Favicon v-if="article.faviconUrl" :src="article.faviconUrl" />
+      <Text ellipsis typography="paragraph-3-regular" mode="secondary">{{ article.domain }}</Text>
     </Stack>
   </Card>
 </template>
