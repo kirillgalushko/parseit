@@ -28,6 +28,12 @@ const actions = [{
   name: 'Открыть в новой вкладке',
   icon: 'external-link',
   actionHandler: handleOpenPage,
+},
+{
+  type: 'button',
+  name: 'Архивировать',
+  icon: 'archive',
+  actionHandler: handleRemoveArticle,
 }, {
   type: 'button',
   name: 'Удалить',
@@ -50,6 +56,8 @@ const actions = [{
         <Tab name="reader">Режим чтения</Tab>
         <Tab name="html">HTML</Tab>
       </Tabs>
+    </Stack>
+    <Stack alignItems="center" direction="row" :gap="2">
       <div v-for="action in actions">
         <template v-if="action.type === 'button'">
           <Tooltip>
@@ -71,10 +79,13 @@ const actions = [{
 
 <style scoped>
 .toolbar {
-  width: 100%;
   border-bottom: 1px solid hsl(var(--border));
-  padding: var(--gap-3);
-  padding-top: var(--gap-4);
-  height: calc(40px + (var(--gap-3)));
+  padding: var(--gap-2) var(--gap-4);
+  height: 60px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: space-between;
 }
 </style>
