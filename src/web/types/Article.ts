@@ -5,4 +5,4 @@ export interface Article {
   filePath: string;
 }
 
-export type ViewVariant = 'html' | 'reader'
+export type ViewVariant = 'editor' | 'reader'

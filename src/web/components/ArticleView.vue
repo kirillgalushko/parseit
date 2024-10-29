@@ -3,14 +3,16 @@ import Toolbar from './Toolbar.vue';
 import { Article } from '../types/Article';
 import PlaceholderView from './PlaceholderView.vue';
 import Editor from './Editor/Editor.vue'
+import Viewer from './Editor/Viewer.vue'
 import { useArticleStore } from '../stores/articleStore';
+import { storeToRefs } from 'pinia';
 
 interface ArticleViewProps {
   article?: Article | null
 }
 
 const props = defineProps<ArticleViewProps>()
-const { articleView } = useArticleStore()
+const { articleView } = storeToRefs(useArticleStore())
 </script>
 
 <template>
@@ -23,8 +25,11 @@ const { articleView } = useArticleStore()
           <!-- <h1>{{ props.article.title }}</h1>
           <h5>{{ props.article.excerpt }}</h5> -->
           <!-- <iframe v-if="articleView === 'html'" :srcdoc="props.article.originalHtml"></iframe> -->
-          <div v-if="articleView === 'reader'">
+          <div v-if="articleView === 'editor'">
             <Editor :article="props.article" />
+          </div>
+          <div v-if="articleView === 'reader'">
+            <Viewer :article="props.article" />
           </div>
         </div>
       </div>

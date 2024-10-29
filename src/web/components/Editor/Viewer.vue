@@ -1,37 +1,26 @@
 <script setup lang="ts">
-import Editor from '@toast-ui/editor';
+import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer';
 import 'prismjs/themes/prism.css';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { onMounted, ref, watch } from 'vue';
-import { useArticleStore } from '../../stores/articleStore';
 import { Article } from '../../types/Article';
 import './styles.css'
 
-interface EditorProps {
+interface ViewerProps {
   article: Article
 }
 
-const props = defineProps<EditorProps>();
-const emit = defineEmits(['update:markdown']);
-const articleStore = useArticleStore();
-const editorRef = ref();
-const editorInstance = ref<Editor | null>(null);
+const props = defineProps<ViewerProps>();
+const viewerRef = ref();
+const viewerInstance = ref<Viewer | null>(null);
 
-const handleChange = (newMarkdown: string) => {
-  articleStore.updateArticle({
-    ...props.article,
-    markdown: newMarkdown
-  });
-}
-
-const createEditor = () => {
-  editorInstance.value = new Editor({
-    el: editorRef.value,
+const createViewer = () => {
+  viewerInstance.value = new Viewer({
+    el: viewerRef.value,
     height: 'auto',
     previewStyle: 'vertical',
-    initialEditType: "wysiwyg",
     hideModeSwitch: true,
     linkAttributes: {
       target: "_blank",
@@ -41,26 +30,21 @@ const createEditor = () => {
     initialValue: props.article.markdown,
     usageStatistics: false,
     theme: 'dark',
-    events: {
-      change: () => {
-        handleChange(editorInstance.value?.getMarkdown());
-      },
-    },
     plugins: [codeSyntaxHighlight],
   });
 }
 
 onMounted(() => {
-  createEditor()
+  createViewer()
 });
 
 watch(() => props.article.markdown, () => {
-  createEditor();
+  createViewer();
 });
 </script>
 
 <template>
   <div>
-    <div ref="editorRef"></div>
+    <div ref="viewerRef"></div>
   </div>
 </template>

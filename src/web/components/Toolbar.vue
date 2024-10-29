@@ -54,7 +54,7 @@ const actions = [{
     <Stack alignItems="center" direction="row" :gap="2">
       <Tabs :value="articleStore.articleView" :onChange="onChangeViewVariant">
         <Tab name="reader">Режим чтения</Tab>
-        <Tab name="html">HTML</Tab>
+        <Tab name="editor">Редактор</Tab>
       </Tabs>
     </Stack>
     <Stack alignItems="center" direction="row" :gap="2">
