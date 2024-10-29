@@ -10,7 +10,7 @@ const onChangeViewVariant = (variant: string) => {
 }
 
 const handleOpenPage = () => {
-  window.open(articleStore.selectedArticle?.originalUrl, '_blank');
+  window.open(articleStore.selectedArticle?.url, '_blank');
 }
 
 const handleRemoveArticle = () => {
