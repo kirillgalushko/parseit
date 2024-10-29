@@ -44,7 +44,5 @@ watch(() => props.article.markdown, () => {
 </script>
 
 <template>
-  <div>
-    <div ref="viewerRef"></div>
-  </div>
+  <div class="toastui-viewer" ref="viewerRef"></div>
 </template>
