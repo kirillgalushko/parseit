@@ -36,7 +36,7 @@ const articles = computed(() => {
 </script>
 
 <template>
-  <Sidebar :width="300" :padding="8">
+  <Sidebar :width="300" max-width="40vw" :padding="8">
     <AddArticleModal :isOpened="isAddModalOpened" :onClose="handleCloseModal" />
     <Header>
       <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
