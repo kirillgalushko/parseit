@@ -5,6 +5,7 @@ import { useFoldersStore } from './foldersStore';
 import { StateWithInitialization } from './types'
 import { isDesktopApp } from '../utils/isDesktopApp'
 import { ParseitFile } from '../../common/types';
+import { ARCHIVE_DIR_NAME } from '../../common/constants';
 
 interface ArticleState extends StateWithInitialization {
   articles: Article[],
@@ -34,6 +35,7 @@ const convertParseitFileToArticle = (file: ParseitFile): Article => {
     url: meta?.url,
     faviconUrl: meta?.faviconUrl,
     domain: meta?.domain,
+    createdAt: meta?.createdAt,
   }
 }
 
@@ -75,7 +77,11 @@ export const useArticleStore = defineStore('articleStore', {
     createArticle(name: string, content: string) {
       if (isDesktopApp()) {
         const foldersStore = useFoldersStore();
-        window.api.createAppFile(name, content, foldersStore.selectedFolder?.name)
+        if (foldersStore.selectedFolder?.folderPath.includes(ARCHIVE_DIR_NAME)) {
+          window.api.createAppFile(name, content)
+        } else {
+          window.api.createAppFile(name, content, foldersStore.selectedFolder?.name)
+        }
       }
     },
     removeArticle(article: Article) {
