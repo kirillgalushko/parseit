@@ -95,7 +95,7 @@ const parseWebpage = async (url: string): Promise<ParsedWebpage | undefined> => 
     const doc = await getDocument(html)
     const faviconUrl = parseFaviconUrl(url, doc)
     const reader = new Readability(doc);
-    return { ...(reader.parse()), originalHtml: html, domain, faviconUrl }
+    return { ...(reader.parse()), originalHtml: html, domain, faviconUrl, originalUrl: url }
   } catch (error) {
     console.error('Ошибка при извлечении контента:', error);
     return undefined

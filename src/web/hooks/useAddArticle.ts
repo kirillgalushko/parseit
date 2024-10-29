@@ -1,13 +1,23 @@
 import { ref } from "vue";
+import yaml from 'js-yaml';
 import { useArticleStore } from "../stores/articleStore";
 import TurndownService from 'turndown';
 import parseWebpage from '../api/parseWebpage';
 import { ParsedWebpage } from "../types/ParsedWebpage";
 
+function createMarkdownWithYaml(metadata, content) {
+  const yamlContent = yaml.dump(metadata);
+  return `---\n${yamlContent}---\n\n${content}`;
+}
+
 const convertParsedWebpageToMarkdown = (page: ParsedWebpage): string => {
   const turndownService = new TurndownService({ headingStyle: 'atx' });
   const markdown = turndownService.turndown(page.content);
-  return markdown
+  const meta = {
+    url: page.originalUrl,
+  }
+  const withMeta = createMarkdownWithYaml(meta, markdown)
+  return withMeta
 }
 
 export const useAddArticle = () => {
