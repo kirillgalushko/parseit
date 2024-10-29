@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { Article, ViewVariant } from '../types/Article';
-import { useSettingsStore } from './settingsStore';
+import yaml from 'js-yaml';
 import { useFoldersStore } from './foldersStore';
 import { StateWithInitialization } from './types'
 import { isDesktopApp } from '../utils/isDesktopApp'
@@ -12,12 +12,26 @@ interface ArticleState extends StateWithInitialization {
   articleView: ViewVariant,
 }
 
+function parseMarkdownWithYaml(content: string) {
+  const match = content.match(/^-{3}\n([\s\S]*?)\n-{3}/);
+  if (!match) {
+    return { meta: null, content };
+  }
+  const yamlContent = match[1];
+  const body = content.replace(match[0], '').trim();
+  const meta = yaml.load(yamlContent);
+  return { meta, body };
+}
+
 const convertParseitFileToArticle = (file: ParseitFile): Article => {
+  const { meta, body } = parseMarkdownWithYaml(file.content);
   return {
     id: file.filePath,
     name: file.name,
     markdown: file.content,
     filePath: file.filePath,
+    body: body || file.content,
+    url: meta?.url,
   }
 }
 

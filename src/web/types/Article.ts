@@ -3,6 +3,8 @@ export interface Article {
   name: string;
   markdown: string;
   filePath: string;
+  body: string;
+  url?: string;
 }
 
 export type ViewVariant = 'editor' | 'reader'

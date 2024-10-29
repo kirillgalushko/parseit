@@ -17,9 +17,8 @@ interface ArticleCardProps {
 const props = defineProps<ArticleCardProps>()
 const articleStore = useArticleStore();
 const { searchQuery } = storeToRefs(useSearchStore());
-const markdown = props.article.markdown
 const searchResultText = computed(() => {
-  return trimAroundSubstring(markdown, searchQuery.value, 2, 15)
+  return trimAroundSubstring(props.article.body, searchQuery.value, 2, 15)
 })
 </script>
 
@@ -30,7 +29,7 @@ const searchResultText = computed(() => {
     <!-- <Text ellipsis typography="subtitle-2-semibold">{{ article.excerpt }}</Text> -->
     <Gap direction="vertical" :default="1" />
     <Text ellipsis :clamp="2" typography="paragraph-3-regular">
-      <HighlightText :text="searchResultText || article.markdown" :searchQuery="searchQuery" />
+      <HighlightText :text="searchResultText || article.body" :searchQuery="searchQuery" />
     </Text>
     <Gap direction="vertical" :default="2" />
     <Stack direction="row" :gap="2">
