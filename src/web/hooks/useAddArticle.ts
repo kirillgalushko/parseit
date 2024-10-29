@@ -17,6 +17,7 @@ const convertParsedWebpageToMarkdown = (page: ParsedWebpage): string => {
     url: page.originalUrl,
     faviconUrl: page.faviconUrl,
     domain: page.domain,
+    createdAt: new Date().toISOString()
   }
   const withMeta = createMarkdownWithYaml(meta, markdown)
   return withMeta

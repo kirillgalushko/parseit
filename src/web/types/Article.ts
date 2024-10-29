@@ -7,6 +7,7 @@ export interface Article {
   url?: string;
   domain?: string;
   faviconUrl?: string;
+  createdAt?: string;
 }
 
 export type ViewVariant = 'editor' | 'reader'
