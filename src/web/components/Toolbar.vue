@@ -2,6 +2,7 @@
 import { Button, Stack, Tabs, Tab, Icon, Separator, Tooltip } from 'gui';
 import { useArticleStore } from '../stores/articleStore';
 import { ViewVariant } from '../types/Article';
+import { isArchivedFile } from '../utils/isArchivedFile';
 
 const articleStore = useArticleStore();
 
@@ -25,9 +26,28 @@ const handleArchiveArticle = () => {
   }
 }
 
+const handleRecoverArticle = () => {
+  if (articleStore.selectedArticle) {
+    articleStore.recoverArticle(articleStore.selectedArticle)
+  }
+}
+
 const handleCloseArticle = () => {
   articleStore.setSelectedArticle(null)
 }
+
+const isInArchive = isArchivedFile(articleStore.selectedArticle?.filePath || '')
+const archiveAction = isInArchive ? {
+  type: 'button',
+  name: 'Восстановить файл',
+  icon: 'archive-off',
+  actionHandler: handleRecoverArticle,
+} as const : {
+  type: 'button',
+  name: 'Архивировать',
+  icon: 'archive',
+  actionHandler: handleArchiveArticle,
+} as const
 
 const actions = [{
   type: 'button',
@@ -35,12 +55,8 @@ const actions = [{
   icon: 'external-link',
   actionHandler: handleOpenPage,
 },
+  archiveAction,
 {
-  type: 'button',
-  name: 'Архивировать',
-  icon: 'archive',
-  actionHandler: handleArchiveArticle,
-}, {
   type: 'button',
   name: 'Удалить',
   icon: 'trash',

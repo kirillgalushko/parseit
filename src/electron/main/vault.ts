@@ -4,7 +4,7 @@ import path from 'path';
 import { createFile } from './files.ts';
 import { createDirectory, getMainWindow } from './utils.ts';
 import { getSettings } from './settings.ts'
-import { DEFAULT_VAULT_NAME, ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME } from './utils.ts'
+import { ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME, DEFAULT_VAULT_NAME } from '../../common/constants.ts'
 
 const askAppPath = async () => {
   const documentsPath = app.getPath('documents');

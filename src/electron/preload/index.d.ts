@@ -1,5 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import type { readFile, getAllFiles, writeFile, deleteFile, getAllFolders, archiveFile } from '../main/files'
+import type { readFile, getAllFiles, writeFile, deleteFile, getAllFolders, archiveFile, recoverFile } from '../main/files'
 import type { createAppVault, createParseitFile } from '../main/vault'
 import type { getSettings, setSettings } from '../main/settings'
 import type { fetchHtml } from '../main/html'
@@ -13,6 +13,7 @@ declare global {
       writeFile: typeof writeFile,
       deleteFile: typeof deleteFile,
       archiveFile: typeof archiveFile,
+      recoverFile: typeof recoverFile,
       getAllFiles: typeof getAllFiles,
       getAllFolders: typeof getAllFolders,
       createAppVault: typeof createAppVault,
