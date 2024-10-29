@@ -32,7 +32,7 @@ const searchResultText = computed(() => {
       <HighlightText :text="searchResultText || article.body" :searchQuery="searchQuery" />
     </Text>
     <Gap direction="vertical" :default="2" />
-    <Stack direction="row" :gap="2">
+    <Stack direction="row" :gap="2" stretched>
       <Favicon v-if="article.faviconUrl" :src="article.faviconUrl" />
       <Text ellipsis typography="paragraph-3-regular" mode="secondary">{{ article.domain }}</Text>
     </Stack>
