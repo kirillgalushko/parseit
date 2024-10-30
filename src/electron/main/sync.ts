@@ -10,6 +10,7 @@ const sendFilesUpdatedEvent = () => {
 
 const subscribe = () => {
   const directoryToWatch = getSettings().vaultPath
+  if (!directoryToWatch) throw new Error('No vault found')
   watcher = watchDirectory(directoryToWatch, () => {
     sendFilesUpdatedEvent();
   })
