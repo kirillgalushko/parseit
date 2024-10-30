@@ -14,7 +14,7 @@ const defaultSettings: Settings = {
 const prepareState = (settings: Settings) => {
   return Object.fromEntries(
     Object.entries(settings).filter(([key]) => !key.startsWith('_'))
-  );
+  ) as Settings;
 }
 
 export const useSettingsStore = defineStore('settings', {
