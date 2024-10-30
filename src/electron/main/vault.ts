@@ -5,6 +5,7 @@ import { createFile } from './files.ts';
 import { createDirectory, getMainWindow } from './utils.ts';
 import { getSettings } from './settings.ts'
 import { ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME, DEFAULT_VAULT_NAME } from '../../common/constants.ts'
+import { eventBus } from './eventBus.ts';
 
 const askAppPath = async () => {
   const documentsPath = app.getPath('documents');
@@ -27,11 +28,12 @@ export const createAppVault = async () => {
   await createDirectory(appDataPath);
   await createDirectory(path.join(appDataPath, ARCHIVE_DIR_NAME));
   await createDirectory(path.join(appDataPath, DEFAULT_DIR_NAME));
+  eventBus.emit('vault:created', appDataPath);
   return appDataPath;
 }
 
 export const createParseitFile = async (name: string, content: string, folderName?: string) => {
-  const vaultPath = getSettings().vaultPath
+  const vaultPath = (await getSettings()).vaultPath
   if (vaultPath) {
     const filePath = path.join(vaultPath, (folderName || DEFAULT_DIR_NAME), sanitizeFilename(name) + '.md')
     await createFile(filePath, content)

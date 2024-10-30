@@ -46,7 +46,7 @@ export const deleteFile = async (filePath) => {
 
 export const archiveFile = async (filePath) => {
   try {
-    const vaultPath = getSettings().vaultPath
+    const vaultPath = (await getSettings()).vaultPath
     const fileName = path.basename(filePath)
     if (!vaultPath) throw new Error('No vault path');
     moveFile(filePath, path.join(vaultPath, ARCHIVE_DIR_NAME, fileName))
@@ -58,7 +58,7 @@ export const archiveFile = async (filePath) => {
 
 export const recoverFile = async (filePath) => {
   try {
-    const vaultPath = getSettings().vaultPath
+    const vaultPath = (await getSettings()).vaultPath
     const fileName = path.basename(filePath)
     if (!vaultPath) throw new Error('No vault path');
     moveFile(filePath, path.join(vaultPath, DEFAULT_DIR_NAME, fileName))

@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path'
 import { BrowserWindow  } from 'electron';
 import chokidar from 'chokidar'
+import { access } from 'fs/promises';
 
 const mkdir = promisify(fs.mkdir);
 
@@ -88,4 +89,13 @@ export const moveFile = (oldPath, newPath) => {
   fs.rename(oldPath, newPath, (err) => {
     if (err) throw err;
   });
+}
+
+export const isFolderExists = async (folderPath: string) => {
+  try {
+    await access(folderPath); // returns void
+    return true
+  } catch (error) {
+    return false
+  }
 }

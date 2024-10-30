@@ -21,7 +21,7 @@ const handleAddVault = async () => {
     Для работы приложения выберите, где разместить хранилище.
     <Gap :default="3" direction="vertical" />
     <Stack direction="row" :gap="2" stretched>
-      <Input v-model="VaultUrl" stretched />
+      <Input v-model="settingsStore.vaultPath" stretched />
       <Button mode="accent" @click="handleAddVault">
         Создать
       </Button>
