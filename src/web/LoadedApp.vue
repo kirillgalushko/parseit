@@ -3,11 +3,13 @@ import ArticleView from './components/ArticleView.vue'
 import { useArticleStore } from './stores/articleStore';
 import FoldersSidebar from './components/FoldersSidebar/FoldersSidebar.vue'
 import ArticlesSidebar from './components/ArticlesSidebar/ArticlesSidebar.vue'
+import AddVaultModal from './components/AddVaultModal.vue'
 
 const articleStore = useArticleStore();
 </script>
 
 <template>
+  <AddVaultModal />
   <div class="app-layout">
     <div class="grid">
       <FoldersSidebar />
