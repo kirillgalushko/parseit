@@ -24,8 +24,8 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@renderer/*": [
-        "src/web/*"
+      "src/*": [
+        "src/*"
       ]
     },
   },

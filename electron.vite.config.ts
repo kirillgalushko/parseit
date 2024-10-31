@@ -32,6 +32,11 @@ export default defineConfig({
         }
       }
     },
-    plugins: [vue()]
+    plugins: [vue()],
+    resolve: {
+      alias: {
+        'src': resolve(__dirname, 'src')
+      }
+    }
   }
 })
