@@ -1,11 +1,10 @@
 import { ipcMain  } from 'electron';
 import fs from 'fs';
 import path from 'path';
-import { getSettings } from './settings.ts'
-import { listFiles, listFolders, moveFile } from './utils.ts';
-import { type ParseitFile, type ParseitFolder } from '../../common/types.ts'
-import { getFileName, getFileExtension, writeFileWithDirs, getUniqueFileName } from './utils.ts'
-import { ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME } from '../../common/constants.ts'
+import { getSettings } from 'src/electron/main/settings.ts';
+import { listFiles, listFolders, moveFile, getFileName, getFileExtension, writeFileWithDirs, getUniqueFileName } from 'src/electron/main/utils.ts';
+import { type ParseitFile, type ParseitFolder } from 'src/common/types.ts'
+import { ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME } from 'src/common/constants.ts'
 
 export const readFile = async (filePath) => {
   try {

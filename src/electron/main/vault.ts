@@ -1,11 +1,11 @@
 import { ipcMain, dialog, app  } from 'electron';
 import sanitizeFilename from 'sanitize-filename';
 import path from 'path';
-import { createFile } from './files.ts';
-import { createDirectory, getMainWindow } from './utils.ts';
-import { getSettings } from './settings.ts'
-import { ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME, DEFAULT_VAULT_NAME } from '../../common/constants.ts'
-import { eventBus } from './eventBus.ts';
+import { createFile } from 'src/electron/main/files.ts';
+import { createDirectory, getMainWindow } from 'src/electron/main/utils.ts';
+import { getSettings } from 'src/electron/main/settings.ts'
+import { ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME, DEFAULT_VAULT_NAME } from 'src/common/constants.ts'
+import { eventBus } from 'src/electron/main/eventBus.ts';
 
 const askAppPath = async () => {
   const documentsPath = app.getPath('documents');

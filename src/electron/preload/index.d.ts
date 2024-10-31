@@ -1,8 +1,8 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import type { readFile, getAllFiles, writeFile, deleteFile, getAllFolders, archiveFile, recoverFile } from '../main/files'
-import type { createAppVault, createParseitFile } from '../main/vault'
-import type { getSettings, setSettings } from '../main/settings'
-import type { fetchHtml } from '../main/html'
+import type { readFile, getAllFiles, writeFile, deleteFile, getAllFolders, archiveFile, recoverFile } from 'src/electron/main/files'
+import type { createAppVault, createParseitFile } from 'src/electron/main/vault'
+import type { getSettings, setSettings } from 'src/electron/main/settings'
+import type { fetchHtml } from 'src/electron/main/html'
 
 
 declare global {

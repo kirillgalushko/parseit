@@ -1,6 +1,6 @@
-import { getMainWindow, watchDirectory } from './utils.ts';
-import { getSettings } from './settings.ts'
-import { eventBus } from './eventBus.ts';
+import { getMainWindow, watchDirectory } from 'src/electron/main/utils.ts';
+import { getSettings } from 'src/electron/main/settings.ts'
+import { eventBus } from 'src/electron/main/eventBus.ts';
 
 let watcher;
 

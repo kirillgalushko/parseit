@@ -11,7 +11,12 @@ export default defineConfig({
         }
       }
     },
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin()],
+    resolve: {
+      alias: {
+        'src': resolve(__dirname, 'src')
+      }
+    }
   },
   preload: {
     build: {
@@ -21,7 +26,12 @@ export default defineConfig({
         }
       }
     },
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin()],
+    resolve: {
+      alias: {
+        'src': resolve(__dirname, 'src')
+      }
+    }
   },
   renderer: {
     root: '.',

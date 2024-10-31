@@ -8,5 +8,11 @@
     "moduleResolution": "NodeNext",
     "noEmit": true,
     "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "src/*": [
+        "src/*"
+      ]
+    },
   }
 }

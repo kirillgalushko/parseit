@@ -1,9 +1,9 @@
 import { ipcMain  } from 'electron';
 import Store from 'electron-store';
-import { Settings } from '../../common/types.ts'
-import { defaultAppSettings } from '../../common/constants.ts'
-import { isFolderExists } from './utils.ts'
-import { eventBus } from './eventBus.ts';
+import { Settings } from 'src/common/types.ts'
+import { defaultAppSettings } from 'src/common/constants.ts'
+import { isFolderExists } from 'src/electron/main/utils.ts'
+import { eventBus } from 'src/electron/main/eventBus.ts';
 
 const store = new Store<Settings>({
   defaults: defaultAppSettings,
