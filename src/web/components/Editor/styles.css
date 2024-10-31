@@ -28,10 +28,21 @@
 .toastui-editor-defaultUI-toolbar button {
   border-color: hsl(var(--border));
   color: hsl(var(--foreground));
+  border-radius: 6px;
+  transition: all 0.2s;
 }
 
 .toastui-editor-toolbar-icons {
-  /* filter: invert(); */
+  background-position-y: -49px;
+}
+
+.toastui-editor-defaultUI-toolbar button:not(:disabled):hover {
+  border-color: hsl(var(--border));
+  background-color: hsl(var(--accent));
+}
+
+.toastui-editor-defaultUI-toolbar button:active {
+  scale: 0.94;
 }
 
 .toastui-editor-toolbar-divider {
@@ -133,6 +144,25 @@
   border-color: hsl(var(--border));
 }
 
+.toastui-editor-contents .task-list-item::before {
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.toastui-editor-contents ol > li::before {
+  margin-top: 3px;
+  color: hsl(var(--muted-foreground));
+}
+
+.toastui-editor-contents ul > li::before {
+  margin-top: 10px;
+  background-color: hsl(var(--muted-foreground));
+}
+
+.toastui-editor-contents hr {
+  border-color: hsl(var(--border));
+}
+
 .toastui-editor-dropdown-toolbar {
   border-color: hsl(var(--border));
   background-color: hsl(var(--popover));
@@ -158,15 +188,30 @@
   border-color: hsl(var(--border));
   border-radius: 6px;
 }
+
+.toastui-editor-popup-body {
+  font-size: 14px;
+  font-family: var(--font-family);
+}
+
 .toastui-editor-popup-add-heading ul {
   padding: 4px;
 }
 .toastui-editor-popup-add-heading ul li {
   border-radius: 4px;
   padding: 6px 8px;
+  transition: all 0.2s;
 }
 .toastui-editor-popup-add-heading ul li:hover {
   background-color: hsl(var(--accent));
+}
+
+.toastui-editor-popup-add-heading ul li:active {
+  scale: 0.96;
+}
+
+.toastui-editor-popup-add-heading ul li > * {
+  line-height: 1;
 }
 
 .toastui-editor-popup-add-table .toastui-editor-table-cell {
