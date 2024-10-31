@@ -8,6 +8,7 @@ export function createWindow(): void {
     height: 670,
     show: false,
     autoHideMenuBar: true,
+    icon: join(__dirname, '../../public/icon.png'),
     webPreferences: {
       preload: join(__dirname, '../preload/index.mjs'),
       sandbox: false,
