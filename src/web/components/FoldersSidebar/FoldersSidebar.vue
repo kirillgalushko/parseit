@@ -4,6 +4,7 @@ import Header from '../Header.vue'
 import Logo from '../Logo.vue'
 import { useFoldersStore } from '../../stores/foldersStore'
 import FolderFilesCount from './FolderFilesCount.vue'
+import { isArchiveFolder } from '../../utils/isArchive'
 
 const foldersStore = useFoldersStore();
 </script>
@@ -19,7 +20,7 @@ const foldersStore = useFoldersStore();
         :selected="foldersStore.selectedFolder?.folderPath === folder.folderPath"
         @click="() => foldersStore.setSelectedFolder(folder)">
         <template #left>
-          <Icon name="folder" />
+          <Icon :name="isArchiveFolder(folder) ? 'archive' : 'folder'" />
         </template>
         {{ folder.name }}
         <template #right>

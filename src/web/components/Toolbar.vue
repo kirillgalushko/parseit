@@ -2,7 +2,7 @@
 import { Button, Stack, Tabs, Tab, Icon, Separator, Tooltip } from 'gui';
 import { useArticleStore } from '../stores/articleStore';
 import { ViewVariant } from '../types/Article';
-import { isArchivedFile } from '../utils/isArchivedFile';
+import { isArchivedArticle } from '../utils/isArchive';
 
 const articleStore = useArticleStore();
 
@@ -36,7 +36,7 @@ const handleCloseArticle = () => {
   articleStore.setSelectedArticle(null)
 }
 
-const isInArchive = isArchivedFile(articleStore.selectedArticle?.filePath || '')
+const isInArchive = isArchivedArticle(articleStore.selectedArticle)
 const archiveAction = isInArchive ? {
   type: 'button',
   name: 'Восстановить файл',
