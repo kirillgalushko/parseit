@@ -120,7 +120,7 @@
 }
 
 .toastui-editor-contents table th {
-  background-color: hsl(var(--secondary));
+  background-color: transparent;
   color: hsl(var(--secondary-foreground));
 }
 
@@ -150,4 +150,169 @@
   border-color: hsl(var(--border));
   border-radius: 4px;
   background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IuugiOydtOyWtF8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiCgkgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMzAgMzAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMwIDMwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO2ZpbGw6IzU1NTU1NTt9Cjwvc3R5bGU+CjxnPgoJPGc+CgkJPGc+CgkJCTxnPgoJCQkJPGc+CgkJCQkJPHBhdGggY2xhc3M9InN0MCIgZD0iTTE1LjUsMTIuNWwyLDJMMTIsMjBoLTJ2LTJMMTUuNSwxMi41eiBNMTgsMTBsMiwybC0xLjUsMS41bC0yLTJMMTgsMTB6Ii8+CgkJCQk8L2c+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+CjwvZz4KPC9zdmc+Cg==)
+}
+
+.toastui-editor-popup {
+  background-color: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border-color: hsl(var(--border));
+  border-radius: 6px;
+}
+.toastui-editor-popup-add-heading ul {
+  padding: 4px;
+}
+.toastui-editor-popup-add-heading ul li {
+  border-radius: 4px;
+  padding: 6px 8px;
+}
+.toastui-editor-popup-add-heading ul li:hover {
+  background-color: hsl(var(--accent));
+}
+
+.toastui-editor-popup-add-table .toastui-editor-table-cell {
+  background: hsl(var(--popover));
+  border-color: hsl(var(--border));
+}
+.toastui-editor-popup-add-table .toastui-editor-table-cell.header {
+  background: hsl(var(--popover));
+  border-color: hsl(var(--border));
+}
+
+.toastui-editor-popup-add-table .toastui-editor-table-description {
+  color: hsl(var(--popover-foreground));
+}
+
+.toastui-editor-defaultUI .toastui-editor-close-button,
+.toastui-editor-defaultUI .toastui-editor-ok-button,
+.toastui-editor-popup-add-image .toastui-editor-file-select-button {
+  --button-bg: var(--primary);
+  --button-text: var(--primary-foreground);
+  padding: 8px 16px;
+  height: 40px;
+  font-size: 14px;
+  border: 0;
+  font-weight: 500;
+  line-height: 20px;
+  border-radius: 6px;
+  font-family: var(--font-family);
+  background-color: hsl(var(--button-bg));
+  color: hsl(var(--button-text));
+  transition: all 0.2s;
+  width: auto;
+}
+
+.toastui-editor-defaultUI .toastui-editor-close-button:hover,
+.toastui-editor-defaultUI .toastui-editor-ok-button:hover,
+.toastui-editor-file-select-button:hover {
+  background-color: hsl(var(--button-bg) / .8);
+}
+.toastui-editor-defaultUI .toastui-editor-close-button:active,
+.toastui-editor-defaultUI .toastui-editor-ok-button:active,
+.toastui-editor-file-select-button:active {
+  scale: 0.96;
+}
+
+.toastui-editor-defaultUI .toastui-editor-close-button {
+  --button-bg: var(--secondary);
+  --button-text: var(--secondary-foreground);
+}
+
+.toastui-editor-defaultUI .toastui-editor-ok-button {
+  --button-bg: var(--primary);
+  --button-text: var(--primary-foreground);
+}
+
+.toastui-editor-popup-add-image .toastui-editor-file-name {
+  border-color: hsl(var(--border));
+  color: hsl(var(--foreground));
+  height: 40px;
+  font-weight: 500;
+  line-height: 20px;
+  border-radius: 6px;
+  font-family: var(--font-family);
+  display: inline-flex;
+  align-items: center;
+}
+
+.toastui-editor-popup-add-image .toastui-editor-tabs .tab-item.active {
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--foreground));
+}
+
+.toastui-editor-popup-add-image .toastui-editor-file-name.has-file {
+  color: hsl(var(--foreground));
+}
+
+.toastui-editor-popup-add-image .toastui-editor-tabs .tab-item {
+  border-color: hsl(var(--border));
+}
+
+.toastui-editor-popup-add-image .toastui-editor-tabs .tab-item:hover {
+  border-color: hsl(var(--foreground));
+}
+
+.toastui-editor-popup-body input[type='text'] {
+  border-color: hsl(var(--border));
+  color: hsl(var(--foreground));
+  background-color: transparent;
+  height: 40px;
+  font-weight: 500;
+  line-height: 20px;
+  border-radius: 6px;
+  font-family: var(--font-family);
+  display: inline-flex;
+  align-items: center;
+}
+
+.toastui-editor-popup-body input[type='text']:focus {
+  border-color: hsl(var(--border));
+  outline: none;
+}
+
+.toastui-editor-tooltip {
+  background-color: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: var(--font-family);
+}
+
+.toastui-editor-tooltip .arrow {
+  display: none;
+}
+
+.toastui-editor-context-menu {
+  background-color: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  border-color: hsl(var(--border));
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.toastui-editor-context-menu .menu-group {
+  border-color: hsl(var(--border));
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+
+.toastui-editor-context-menu .menu-item {
+  border-radius: 4px;
+  padding: 6px 8px;
+  height: auto;
+  line-height: 1;
+  transition: all 0.2s;
+}
+
+.toastui-editor-context-menu .menu-group:last-child {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.toastui-editor-context-menu li:not(.disabled):hover {
+  background-color: hsl(var(--accent));
+}
+
+.toastui-editor-context-menu .menu-item:active {
+  scale: 0.96;
 }
