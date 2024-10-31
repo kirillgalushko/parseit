@@ -1,3 +1,3 @@
 export interface StateWithInitialization {
-  _initialized: boolean;
+  _initialized: boolean
 }

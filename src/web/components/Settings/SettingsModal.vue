@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useSettingsStore } from 'src/web/stores/settingsStore';
 import { Modal, Input, Button, Stack, Gap, Tooltip } from 'gui'
-import { isDesktopApp } from 'src/web/utils/isDesktopApp';
+import { storeToRefs } from 'pinia'
+import { useSettingsStore } from 'src/web/stores/settingsStore'
+import { isDesktopApp } from 'src/web/utils/isDesktopApp'
 
-const settingsStore = useSettingsStore();
+const settingsStore = useSettingsStore()
 const { vaultPath } = storeToRefs(settingsStore)
 
 const handleAddVault = async () => {
   if (isDesktopApp()) {
-    const vaultPath = await window.api.createAppVault();
+    const vaultPath = await window.api.createAppVault()
     if (vaultPath) {
-      settingsStore.setSettingsItem('vaultPath', vaultPath);
+      settingsStore.setSettingsItem('vaultPath', vaultPath)
     }
   }
 }

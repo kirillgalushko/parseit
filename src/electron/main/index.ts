@@ -1,11 +1,11 @@
-import { app, BrowserWindow } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
-import { createWindow } from 'src/electron/main/window.ts'
+import { app, BrowserWindow } from 'electron'
 import filesModule from 'src/electron/main/files.ts'
-import vaultModule from 'src/electron/main/vault.ts'
+import htmlModule from 'src/electron/main/html.ts'
 import settingsModule from 'src/electron/main/settings.ts'
 import sync from 'src/electron/main/sync.ts'
-import htmlModule from 'src/electron/main/html.ts'
+import vaultModule from 'src/electron/main/vault.ts'
+import { createWindow } from 'src/electron/main/window.ts'
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
@@ -14,11 +14,11 @@ app.whenReady().then(() => {
   })
 
   createWindow()
-  filesModule();
-  vaultModule();
-  settingsModule();
-  htmlModule();
-  sync.subscribe();
+  filesModule()
+  vaultModule()
+  settingsModule()
+  htmlModule()
+  sync.subscribe()
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -26,7 +26,7 @@ app.whenReady().then(() => {
 })
 
 app.on('window-all-closed', () => {
-  sync.unsubscribe();
+  sync.unsubscribe()
 
   if (process.platform !== 'darwin') {
     app.quit()

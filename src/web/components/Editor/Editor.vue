@@ -1,30 +1,29 @@
 <script setup lang="ts">
-import Editor from '@toast-ui/editor';
-import 'prismjs/themes/prism.css';
-import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js';
-import '@toast-ui/editor/dist/toastui-editor.css';
+import Editor from '@toast-ui/editor'
+import 'prismjs/themes/prism.css'
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css'
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js'
+import '@toast-ui/editor/dist/toastui-editor.css'
 import '@toast-ui/editor/dist/i18n/ru-ru'
-import { onMounted, ref, watch } from 'vue';
-import { useArticleStore } from 'src/web/stores/articleStore';
-import { Article } from 'src/web/types/Article';
+import { useArticleStore } from 'src/web/stores/articleStore'
+import { Article } from 'src/web/types/Article'
+import { onMounted, ref, watch } from 'vue'
 import './styles.css'
 
 interface EditorProps {
   article: Article
 }
 
-const props = defineProps<EditorProps>();
-const emit = defineEmits(['update:markdown']);
-const articleStore = useArticleStore();
-const editorRef = ref();
-const editorInstance = ref<Editor | null>(null);
+const props = defineProps<EditorProps>()
+const articleStore = useArticleStore()
+const editorRef = ref()
+const editorInstance = ref<Editor | null>(null)
 
 const handleChange = (newMarkdown: string) => {
   articleStore.updateArticle({
     ...props.article,
     markdown: newMarkdown
-  });
+  })
 }
 
 const createEditor = () => {
@@ -32,11 +31,11 @@ const createEditor = () => {
     el: editorRef.value,
     height: 'auto',
     previewStyle: 'vertical',
-    initialEditType: "wysiwyg",
+    initialEditType: 'wysiwyg',
     hideModeSwitch: true,
     linkAttributes: {
-      target: "_blank",
-      rel: "noopener noreferrer",
+      target: '_blank',
+      rel: 'noopener noreferrer'
     },
     language: 'ru-RU',
     frontMatter: true,
@@ -45,20 +44,23 @@ const createEditor = () => {
     theme: 'dark',
     events: {
       change: () => {
-        handleChange(editorInstance.value?.getMarkdown());
-      },
+        handleChange(editorInstance.value?.getMarkdown())
+      }
     },
-    plugins: [codeSyntaxHighlight],
-  });
+    plugins: [codeSyntaxHighlight]
+  })
 }
 
 onMounted(() => {
   createEditor()
-});
+})
 
-watch(() => props.article.markdown, () => {
-  createEditor();
-});
+watch(
+  () => props.article.markdown,
+  () => {
+    createEditor()
+  }
+)
 </script>
 
 <template>

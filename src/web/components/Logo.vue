@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { inject, Ref } from 'vue';
-import logoLong from 'src/web/assets/logo-white-long.svg'
 import logoCompact from 'src/web/assets/logo-white-clip.svg'
+import logoLong from 'src/web/assets/logo-white-long.svg'
+import { inject, Ref } from 'vue'
 
 const isCompact = inject<Ref<boolean>>('sidebar-is-compact')
 </script>
 
 <template>
   <div :class="['logo', { compact: isCompact }]">
-    <img :src="isCompact ? logoCompact : logoLong" alt="Logo">
+    <img :src="isCompact ? logoCompact : logoLong" alt="Logo" />
   </div>
 </template>
 

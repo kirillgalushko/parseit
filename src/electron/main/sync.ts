@@ -1,32 +1,32 @@
-import { getMainWindow, watchDirectory } from 'src/electron/main/utils.ts';
+import { eventBus } from 'src/electron/main/eventBus.ts'
 import { getSettings } from 'src/electron/main/settings.ts'
-import { eventBus } from 'src/electron/main/eventBus.ts';
+import { getMainWindow, watchDirectory } from 'src/electron/main/utils.ts'
 
-let watcher;
+let watcher
 
 const sendFilesUpdatedEvent = () => {
-  const mainWindow = getMainWindow();
-  mainWindow.webContents.send('files-updated');
+  const mainWindow = getMainWindow()
+  mainWindow.webContents.send('files-updated')
 }
 
 const subscribe = async (vaultPath?: string) => {
   const directoryToWatch = vaultPath || (await getSettings()).vaultPath
   if (!directoryToWatch) throw new Error('No vault found')
   watcher = watchDirectory(directoryToWatch, () => {
-    sendFilesUpdatedEvent();
+    sendFilesUpdatedEvent()
   })
 }
 
 const unsubscribe = () => {
-  watcher?.close();
+  watcher?.close()
 }
 
 eventBus.on('vault:created', async (vaultPath) => {
-  subscribe(vaultPath);
-  sendFilesUpdatedEvent();
-});
+  subscribe(vaultPath)
+  sendFilesUpdatedEvent()
+})
 
 export default {
   subscribe,
-  unsubscribe,
+  unsubscribe
 }

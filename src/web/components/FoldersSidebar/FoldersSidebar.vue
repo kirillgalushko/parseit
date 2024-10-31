@@ -1,32 +1,32 @@
 <script setup lang="ts">
 import { Sidebar, Gap, Icon, SidebarItem, SidebarList } from 'gui'
+import { ParseitFolder } from 'src/common/types'
+import FolderFilesCount from 'src/web/components/FoldersSidebar/FolderFilesCount.vue'
 import Header from 'src/web/components/Header.vue'
 import Logo from 'src/web/components/Logo.vue'
-import { useFoldersStore } from 'src/web/stores/foldersStore'
-import FolderFilesCount from 'src/web/components/FoldersSidebar/FolderFilesCount.vue'
-import { isArchiveFolder } from 'src/web/utils/isArchive'
 import SettingsModal from 'src/web/components/Settings/SettingsModal.vue'
+import { useFoldersStore } from 'src/web/stores/foldersStore'
+import { isArchiveFolder } from 'src/web/utils/isArchive'
 import { computed, ref } from 'vue'
-import { ParseitFolder } from 'src/common/types'
 
-const foldersStore = useFoldersStore();
-const isSettingsOpened = ref<boolean>(false);
+const foldersStore = useFoldersStore()
+const isSettingsOpened = ref<boolean>(false)
 const sortedFolders = computed(() => {
   // O(n)
-  let archiveFolder: ParseitFolder | null = null;
-  const nonArchiveFolders: ParseitFolder[] = [];
+  let archiveFolder: ParseitFolder | null = null
+  const nonArchiveFolders: ParseitFolder[] = []
   for (const folder of foldersStore.folders) {
     if (isArchiveFolder(folder)) {
-      archiveFolder = folder;
+      archiveFolder = folder
     } else {
-      nonArchiveFolders.push(folder);
+      nonArchiveFolders.push(folder)
     }
   }
   if (archiveFolder) {
-    nonArchiveFolders.push(archiveFolder);
+    nonArchiveFolders.push(archiveFolder)
   }
-  return nonArchiveFolders;
-});
+  return nonArchiveFolders
+})
 
 const handleOpenSettings = () => {
   isSettingsOpened.value = true
@@ -44,9 +44,11 @@ const handleCloseSettings = () => {
     </Header>
     <Gap direction="vertical" :default="4" />
     <SidebarList>
-      <SidebarItem v-for="folder of sortedFolders"
+      <SidebarItem
+        v-for="folder of sortedFolders"
         :selected="foldersStore.selectedFolder?.folderPath === folder.folderPath"
-        @click="() => foldersStore.setSelectedFolder(folder)">
+        @click="() => foldersStore.setSelectedFolder(folder)"
+      >
         <template #left>
           <Icon :name="isArchiveFolder(folder) ? 'archive' : 'folder'" />
         </template>

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { Button, Stack, Tabs, Tab, Icon, Separator, Tooltip } from 'gui';
-import { useArticleStore } from 'src/web/stores/articleStore';
-import { ViewVariant } from 'src/web/types/Article';
-import { isArchivedArticle } from 'src/web/utils/isArchive';
+import { Button, Stack, Tabs, Tab, Icon, Separator, Tooltip } from 'gui'
+import { useArticleStore } from 'src/web/stores/articleStore'
+import { ViewVariant } from 'src/web/types/Article'
+import { isArchivedArticle } from 'src/web/utils/isArchive'
 
-const articleStore = useArticleStore();
+const articleStore = useArticleStore()
 
 const onChangeViewVariant = (variant: string) => {
   articleStore.setArticleView(variant as ViewVariant)
 }
 
 const handleOpenPage = () => {
-  window.open(articleStore.selectedArticle?.url, '_blank');
+  window.open(articleStore.selectedArticle?.url, '_blank')
 }
 
 const handleRemoveArticle = () => {
@@ -37,38 +37,42 @@ const handleCloseArticle = () => {
 }
 
 const isInArchive = isArchivedArticle(articleStore.selectedArticle)
-const archiveAction = isInArchive ? {
-  type: 'button',
-  name: 'Восстановить файл',
-  icon: 'archive-off',
-  actionHandler: handleRecoverArticle,
-} as const : {
-  type: 'button',
-  name: 'Архивировать',
-  icon: 'archive',
-  actionHandler: handleArchiveArticle,
-} as const
+const archiveAction = isInArchive
+  ? ({
+      type: 'button',
+      name: 'Восстановить файл',
+      icon: 'archive-off',
+      actionHandler: handleRecoverArticle
+    } as const)
+  : ({
+      type: 'button',
+      name: 'Архивировать',
+      icon: 'archive',
+      actionHandler: handleArchiveArticle
+    } as const)
 
-const actions = [{
-  type: 'button',
-  name: 'Открыть в новой вкладке',
-  icon: 'external-link',
-  actionHandler: handleOpenPage,
-},
+const actions = [
+  {
+    type: 'button',
+    name: 'Открыть в новой вкладке',
+    icon: 'external-link',
+    actionHandler: handleOpenPage
+  },
   archiveAction,
-{
-  type: 'button',
-  name: 'Удалить',
-  icon: 'trash',
-  actionHandler: handleRemoveArticle,
-},
-{ type: 'separator', },
-{
-  type: 'button',
-  name: 'Закрыть',
-  icon: 'x',
-  actionHandler: handleCloseArticle,
-}]
+  {
+    type: 'button',
+    name: 'Удалить',
+    icon: 'trash',
+    actionHandler: handleRemoveArticle
+  },
+  { type: 'separator' },
+  {
+    type: 'button',
+    name: 'Закрыть',
+    icon: 'x',
+    actionHandler: handleCloseArticle
+  }
+]
 </script>
 
 <template>

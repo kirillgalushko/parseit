@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { useAddArticle } from 'src/web/hooks/useAddArticle';
-import { Button, Stack, Input, Text, Gap } from 'gui';
+import { Button, Stack, Input, Text, Gap } from 'gui'
+import { useAddArticle } from 'src/web/hooks/useAddArticle'
 
-const { articleUrl, addArticle } = useAddArticle();
+const { articleUrl, addArticle } = useAddArticle()
 </script>
 
 <template>
   <div :class="['placeholder']">
     <Text typography="title-1-semibold">Добавьте статью</Text>
-    <Text typography="paragraph-2-regular" mode="secondary">Введите url статьи и нажмите Enter</Text>
+    <Text typography="paragraph-2-regular" mode="secondary"
+      >Введите url статьи и нажмите Enter</Text
+    >
     <Gap direction="vertical" :default="4" />
     <Stack direction="column" :gap="3">
       <Input v-model="articleUrl" placeholder="https://..." />

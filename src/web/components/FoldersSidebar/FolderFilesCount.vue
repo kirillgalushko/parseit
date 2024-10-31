@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { inject, Ref } from 'vue';
-import { Badge } from 'gui';
+import { Badge } from 'gui'
+import { inject, Ref } from 'vue'
 
-const sidebarWidth = inject<Ref<number>>('sidebar-width');
+const sidebarWidth = inject<Ref<number>>('sidebar-width')
 </script>
 
 <template>

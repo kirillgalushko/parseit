@@ -1,56 +1,59 @@
-import { defineStore } from 'pinia';
-import { useSettingsStore } from 'src/web/stores/settingsStore';
-import { StateWithInitialization } from 'src/web/stores/types';
-import { isDesktopApp } from 'src/web/utils/isDesktopApp';
-import { ParseitFolder } from 'src/common/types';
-import { isArchiveFolder } from 'src/web/utils/isArchive';
+import { defineStore } from 'pinia'
+import { ParseitFolder } from 'src/common/types'
+import { useSettingsStore } from 'src/web/stores/settingsStore'
+import { StateWithInitialization } from 'src/web/stores/types'
+import { isArchiveFolder } from 'src/web/utils/isArchive'
+import { isDesktopApp } from 'src/web/utils/isDesktopApp'
 
 interface Folder extends ParseitFolder {}
 
 interface FolderState extends StateWithInitialization {
-  folders: Folder[],
-  selectedFolder: Folder | null,
+  folders: Folder[]
+  selectedFolder: Folder | null
 }
 
 export const useFoldersStore = defineStore('foldersStore', {
   state: (): FolderState => ({
     folders: [],
     selectedFolder: null,
-    _initialized: false,
+    _initialized: false
   }),
   actions: {
     async init() {
       if (isDesktopApp()) {
-        const settings = useSettingsStore();
+        const settings = useSettingsStore()
         if (settings.vaultPath) {
-          const folders = await window.api.getAllFolders(settings.vaultPath);
+          const folders = await window.api.getAllFolders(settings.vaultPath)
           this.folders = folders
           if (folders.length) {
-            this.selectedFolder = folders.find(f => !isArchiveFolder(f)) ?? null;
+            this.selectedFolder = folders.find((f) => !isArchiveFolder(f)) ?? null
           }
         }
       }
-      this._initialized = true;
+      this._initialized = true
     },
     async updateFolders() {
-      const settings = useSettingsStore();
-        if (settings.vaultPath) {
-          const folders = await window.api.getAllFolders(settings.vaultPath);
-          this.folders = folders
-        }
-        if (this.selectedFolder && !this.folders.find(a => a.folderPath === this.selectedFolder?.folderPath)) {
-          this.selectedFolder = null
-        }
-    },
-    addFolder(folder: Folder) {
-      // this.articles.push(article);
-    },
-    createFolder(name: string) {
-      if (isDesktopApp()) {
-          // window.api.createFolder(name)
+      const settings = useSettingsStore()
+      if (settings.vaultPath) {
+        const folders = await window.api.getAllFolders(settings.vaultPath)
+        this.folders = folders
+      }
+      if (
+        this.selectedFolder &&
+        !this.folders.find((a) => a.folderPath === this.selectedFolder?.folderPath)
+      ) {
+        this.selectedFolder = null
       }
     },
-    removeFolder(folder: Folder) {
+    addFolder(_folder: Folder) {
+      // this.articles.push(article);
+    },
+    createFolder(_name: string) {
+      if (isDesktopApp()) {
+        // window.api.createFolder(name)
+      }
+    },
+    removeFolder(_folder: Folder) {
       if (isDesktopApp()) {
         // window.api.deleteFolder(folder.folderPath);
       } else {
@@ -67,12 +70,11 @@ export const useFoldersStore = defineStore('foldersStore', {
     //     const changedFolderIndex = this.folders.findIndex(a => a.id === folder.id)
     //     if (changedFolderIndex) {
     //       this.folders[changedFolderIndex] = folder
-    //     } 
+    //     }
     //   }
     // },
     setSelectedFolder(folder: Folder | null) {
-      this.selectedFolder = folder;
-    },
-  },
+      this.selectedFolder = folder
+    }
+  }
 })
-

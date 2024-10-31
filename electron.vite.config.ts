@@ -1,6 +1,6 @@
-import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
+import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 
 export default defineConfig({
   main: {
@@ -14,7 +14,7 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()],
     resolve: {
       alias: {
-        'src': resolve(__dirname, 'src')
+        src: resolve(__dirname, 'src')
       }
     }
   },
@@ -29,7 +29,7 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()],
     resolve: {
       alias: {
-        'src': resolve(__dirname, 'src')
+        src: resolve(__dirname, 'src')
       }
     }
   },
@@ -45,7 +45,7 @@ export default defineConfig({
     plugins: [vue()],
     resolve: {
       alias: {
-        'src': resolve(__dirname, 'src')
+        src: resolve(__dirname, 'src')
       }
     }
   }

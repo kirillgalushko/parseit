@@ -1,23 +1,27 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch } from 'vue'
 
 interface HighlightTextProps {
-  text: string;
-  searchQuery?: string | null;
+  text: string
+  searchQuery?: string | null
 }
 
-const props = defineProps<HighlightTextProps>();
-const highlightedContent = ref('');
+const props = defineProps<HighlightTextProps>()
+const highlightedContent = ref('')
 
 function highlightMatches(text: string, substring?: string | null) {
-  if (!substring) return text;
-  const regex = new RegExp(`(${substring})`, 'gi');
-  return text.replace(regex, `<span class="global-search-highlight">$1</span>`);
+  if (!substring) return text
+  const regex = new RegExp(`(${substring})`, 'gi')
+  return text.replace(regex, `<span class="global-search-highlight">$1</span>`)
 }
 
-watch(() => props.searchQuery, (newQuery) => {
-  highlightedContent.value = highlightMatches(props.text, newQuery);
-}, { immediate: true });
+watch(
+  () => props.searchQuery,
+  (newQuery) => {
+    highlightedContent.value = highlightMatches(props.text, newQuery)
+  },
+  { immediate: true }
+)
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Toolbar from 'src/web/components/Toolbar.vue';
-import { Article } from 'src/web/types/Article';
-import PlaceholderView from 'src/web/components/PlaceholderView.vue';
-import Editor from 'src/web/components/Editor/Editor.vue';
-import Viewer from 'src/web/components/Editor/Viewer.vue';
-import { useArticleStore } from 'src/web/stores/articleStore';
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
+import Editor from 'src/web/components/Editor/Editor.vue'
+import Viewer from 'src/web/components/Editor/Viewer.vue'
+import PlaceholderView from 'src/web/components/PlaceholderView.vue'
+import Toolbar from 'src/web/components/Toolbar.vue'
+import { useArticleStore } from 'src/web/stores/articleStore'
+import { Article } from 'src/web/types/Article'
 
 interface ArticleViewProps {
   article?: Article | null
@@ -54,7 +54,7 @@ const { articleView } = storeToRefs(useArticleStore())
 
 .article-content {
   width: 100%;
-  margin: 0 auto
+  margin: 0 auto;
 }
 
 .article-content:deep(img) {
