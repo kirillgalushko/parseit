@@ -5,13 +5,16 @@ import Logo from '../Logo.vue'
 import { useFoldersStore } from '../../stores/foldersStore'
 import FolderFilesCount from './FolderFilesCount.vue'
 import { isArchiveFolder } from '../../utils/isArchive'
-import { computed } from 'vue'
+import SettingsModal from '../Settings/SettingsModal.vue'
+import { computed, ref } from 'vue'
+import { ParseitFolder } from 'src/common/types'
 
 const foldersStore = useFoldersStore();
+const isSettingsOpened = ref<boolean>(false);
 const sortedFolders = computed(() => {
   // O(n)
-  let archiveFolder = null;
-  const nonArchiveFolders = [];
+  let archiveFolder: ParseitFolder | null = null;
+  const nonArchiveFolders: ParseitFolder[] = [];
   for (const folder of foldersStore.folders) {
     if (isArchiveFolder(folder)) {
       archiveFolder = folder;
@@ -24,6 +27,14 @@ const sortedFolders = computed(() => {
   }
   return nonArchiveFolders;
 });
+
+const handleOpenSettings = () => {
+  isSettingsOpened.value = true
+}
+
+const handleCloseSettings = () => {
+  isSettingsOpened.value = false
+}
 </script>
 
 <template>
@@ -44,7 +55,14 @@ const sortedFolders = computed(() => {
           <FolderFilesCount>{{ folder.filesCount }}</FolderFilesCount>
         </template>
       </SidebarItem>
+      <SidebarItem @click="handleOpenSettings">
+        <template #left>
+          <Icon name="settings" />
+        </template>
+        Настройки
+      </SidebarItem>
     </SidebarList>
+    <SettingsModal :isOpened="isSettingsOpened" :onClose="handleCloseSettings" />
   </Sidebar>
 </template>
 
