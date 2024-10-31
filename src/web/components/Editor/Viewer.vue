@@ -4,6 +4,7 @@ import 'prismjs/themes/prism.css';
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import '@toast-ui/editor/dist/i18n/ru-ru'
 import { onMounted, ref, watch } from 'vue';
 import { Article } from '../../types/Article';
 import './styles.css'
@@ -26,6 +27,7 @@ const createViewer = () => {
       target: "_blank",
       rel: "noopener noreferrer",
     },
+    language: 'ru-RU',
     frontMatter: true,
     initialValue: props.article.markdown,
     usageStatistics: false,
