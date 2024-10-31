@@ -6,7 +6,7 @@ import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/d
 import '@toast-ui/editor/dist/toastui-editor.css';
 import '@toast-ui/editor/dist/i18n/ru-ru'
 import { onMounted, ref, watch } from 'vue';
-import { Article } from '../../types/Article';
+import { Article } from 'src/web/types/Article';
 import './styles.css'
 
 interface ViewerProps {

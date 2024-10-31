@@ -1,7 +1,7 @@
-import { isDesktopApp } from "../utils/isDesktopApp";
-import { useArticleStore } from "../stores/articleStore"
+import { isDesktopApp } from "src/web/utils/isDesktopApp";
+import { useArticleStore } from "src/web/stores/articleStore";
 import { onMounted, watch } from "vue";
-import { useFoldersStore } from "../stores/foldersStore";
+import { useFoldersStore } from "src/web/stores/foldersStore";
 
 export const useFilesWatcher = () => {
   const foldersStore = useFoldersStore();

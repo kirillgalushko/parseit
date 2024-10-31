@@ -1,6 +1,6 @@
-import { useArticleStore } from "../stores/articleStore"
-import { useSettingsStore } from "../stores/settingsStore"
-import { useFoldersStore } from '../stores/foldersStore'
+import { useArticleStore } from "src/web/stores/articleStore"
+import { useSettingsStore } from "src/web/stores/settingsStore"
+import { useFoldersStore } from 'src/web/stores/foldersStore'
 import { onMounted, ref } from "vue";
 
 export const useAppInit = () => {

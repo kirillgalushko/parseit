@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { Article } from '../types/Article.ts';
-import { useArticleStore } from './articleStore';
+import { Article } from 'src/web/types/Article.ts';
+import { useArticleStore } from 'src/web/stores/articleStore';
 
 export enum Sorting {
   Newest = 'newest',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button, Icon, Dropdown, DropdownList, DropdownItem } from 'gui'
-import { useSearchStore, Sorting } from '../stores/searchStore';
+import { useSearchStore, Sorting } from 'src/web/stores/searchStore';
 
 const searchStore = useSearchStore();
 const sortingMap = {

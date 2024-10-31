@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import { useSettingsStore } from './settingsStore';
-import { StateWithInitialization } from './types'
-import { isDesktopApp } from '../utils/isDesktopApp'
-import { ParseitFolder } from '../../common/types';
-import { isArchiveFolder } from '../utils/isArchive';
+import { useSettingsStore } from 'src/web/stores/settingsStore';
+import { StateWithInitialization } from 'src/web/stores/types';
+import { isDesktopApp } from 'src/web/utils/isDesktopApp';
+import { ParseitFolder } from 'src/common/types';
+import { isArchiveFolder } from 'src/web/utils/isArchive';
 
 interface Folder extends ParseitFolder {}
 

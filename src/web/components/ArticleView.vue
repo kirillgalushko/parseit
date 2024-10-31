@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Toolbar from './Toolbar.vue';
-import { Article } from '../types/Article';
-import PlaceholderView from './PlaceholderView.vue';
-import Editor from './Editor/Editor.vue'
-import Viewer from './Editor/Viewer.vue'
-import { useArticleStore } from '../stores/articleStore';
+import Toolbar from 'src/web/components/Toolbar.vue';
+import { Article } from 'src/web/types/Article';
+import PlaceholderView from 'src/web/components/PlaceholderView.vue';
+import Editor from 'src/web/components/Editor/Editor.vue';
+import Viewer from 'src/web/components/Editor/Viewer.vue';
+import { useArticleStore } from 'src/web/stores/articleStore';
 import { storeToRefs } from 'pinia';
 
 interface ArticleViewProps {

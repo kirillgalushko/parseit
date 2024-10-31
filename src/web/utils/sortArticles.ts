@@ -1,5 +1,5 @@
-import { Sorting } from "../stores/searchStore";
-import { Article } from "../types/Article";
+import { Sorting } from "src/web/stores/searchStore";
+import { Article } from "src/web/types/Article";
 
 export function sortArticles(articles: Article[], sortingType: Sorting): Article[] {
   return [...articles].sort((a, b) => {

@@ -2,7 +2,7 @@ import { ref } from "vue";
 import yaml from 'js-yaml';
 import { useArticleStore } from "../stores/articleStore";
 import TurndownService from 'turndown';
-import parseWebpage from '../api/parseWebpage';
+import parseWebpage from 'src/web/api/parseWebpage';
 import { ParsedWebpage } from "../types/ParsedWebpage";
 
 function createMarkdownWithYaml(metadata, content) {

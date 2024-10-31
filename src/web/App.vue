@@ -1,10 +1,10 @@
 <script setup lang="ts">
 
-import { useSettingsStore } from './stores/settingsStore'
-import { useAppInit } from './hooks/useAppInit'
-import { useFilesWatcher } from './hooks/useFilesWatcher'
-import LoadedApp from './LoadedApp.vue'
-import AppLoader from './components/AppLoader.vue'
+import { useSettingsStore } from 'src/web/stores/settingsStore';
+import { useAppInit } from 'src/web/hooks/useAppInit';
+import { useFilesWatcher } from 'src/web/hooks/useFilesWatcher'
+import LoadedApp from 'src/web/LoadedApp.vue';
+import AppLoader from 'src/web/components/AppLoader.vue';
 
 const { isInitialized } = useAppInit();
 const appSettings = useSettingsStore();

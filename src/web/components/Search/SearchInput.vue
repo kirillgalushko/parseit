@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSearchStore } from '../../stores/searchStore';
+import { useSearchStore } from 'src/web/stores/searchStore';
 import { Input } from 'gui'
 import { computed } from 'vue';
 

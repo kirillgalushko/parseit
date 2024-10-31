@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import Logo from './Logo.vue'
 import { Modal, Button, Input, Gap, Stack } from 'gui'
-import { useSettingsStore } from '../stores/settingsStore'
-import { isDesktopApp } from '../utils/isDesktopApp';
+import { useSettingsStore } from 'src/web/stores/settingsStore';
+import { isDesktopApp } from 'src/web/utils/isDesktopApp';
 
 const settingsStore = useSettingsStore();
 

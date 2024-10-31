@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import { Settings as AppSettings } from '../../common/types';
-import { defaultAppSettings } from '../../common/constants.ts'
-import { StateWithInitialization } from './types'
-import { isDesktopApp } from '../utils/isDesktopApp';
+import { Settings as AppSettings } from 'src/common/types';
+import { defaultAppSettings } from 'src/common/constants.ts'
+import { StateWithInitialization } from 'src/web/stores/types';
+import { isDesktopApp } from 'src/web/utils/isDesktopApp';
 
 type Settings = AppSettings & StateWithInitialization
 

@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { Button, Stack, Sidebar, Gap, Icon } from 'gui'
-import Header from '../Header.vue'
-import { Article } from '../../types/Article';
-import ArticleCard from '../ArticleCard.vue'
-import { useArticleStore } from '../../stores/articleStore';
-import { useFoldersStore } from '../../stores/foldersStore';
-import SearchInput from '../Search/SearchInput.vue';
-import AddArticleModal from '../AddArticleModal.vue';
+import Header from 'src/web/components/Header.vue';
+import { Article } from 'src/web/types/Article';
+import ArticleCard from 'src/web/components/ArticleCard.vue';
+import { useArticleStore } from 'src/web/stores/articleStore';
+import { useFoldersStore } from 'src/web/stores/foldersStore';
+import SearchInput from 'src/web/components/Search/SearchInput.vue';
+import AddArticleModal from 'src/web/components/AddArticleModal.vue';
 import { computed, ref } from 'vue';
-import { useSearchStore } from '../../stores/searchStore';
+import { useSearchStore } from 'src/web/stores/searchStore';
 import { storeToRefs } from 'pinia';
-import Sorting from '../Sorting.vue';
-import { sortArticles } from '../../utils/sortArticles';
+import Sorting from 'src/web/components/Sorting.vue';
+import { sortArticles } from 'src/web/utils/sortArticles';
 
 const foldersStore = useFoldersStore();
 const articleStore = useArticleStore();

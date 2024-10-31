@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useSettingsStore } from '../../stores/settingsStore';
+import { useSettingsStore } from 'src/web/stores/settingsStore';
 import { Modal, Input, Button, Stack, Gap, Tooltip } from 'gui'
-import { isDesktopApp } from '../../utils/isDesktopApp';
+import { isDesktopApp } from 'src/web/utils/isDesktopApp';
 
 const settingsStore = useSettingsStore();
 const { vaultPath } = storeToRefs(settingsStore)

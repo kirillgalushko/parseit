@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Article } from '../types/Article';
+import { Article } from 'src/web/types/Article';
 import { Text, Stack, Card, Gap } from 'gui'
-import Favicon from '../components/Favicon.vue'
-import { useArticleStore } from '../stores/articleStore';
+import Favicon from 'src/web/components/Favicon.vue';
+import { useArticleStore } from 'src/web/stores/articleStore';
 import { storeToRefs } from 'pinia';
-import { useSearchStore } from '../stores/searchStore';
+import { useSearchStore } from 'src/web/stores/searchStore';
 import { computed } from 'vue';
-import { trimAroundSubstring } from '../utils/trimAroundSubstring';
-import HighlightText from './HighlightText.vue'
+import { trimAroundSubstring } from 'src/web/utils/trimAroundSubstring';
+import HighlightText from 'src/web/components/HighlightText.vue';
 
 interface ArticleCardProps {
   article: Article;

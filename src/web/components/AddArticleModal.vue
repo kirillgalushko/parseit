@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Modal, Button, Input, Gap } from 'gui'
-import { useAddArticle } from '../hooks/useAddArticle';
+import { useAddArticle } from 'src/web/hooks/useAddArticle';
 
 interface AddArticleModalProps {
   onClose: () => void

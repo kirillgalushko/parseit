@@ -1,6 +1,6 @@
 import { Readability } from '@mozilla/readability';
-import { isDesktopApp } from '../utils/isDesktopApp';
-import { ParsedWebpage } from '../types/ParsedWebpage'
+import { isDesktopApp } from 'src/web/utils/isDesktopApp';
+import { ParsedWebpage } from 'src/web/types/ParsedWebpage';
 
 const cleanDoc = (doc: Document) => {
   const images = doc.querySelectorAll('img');

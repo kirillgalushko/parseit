@@ -1,6 +1,6 @@
 import { onMounted, watch } from 'vue'
-import { useArticleStore } from '../stores/articleStore';
-import { useAddArticle } from './useAddArticle';
+import { useArticleStore } from 'src/web/stores/articleStore';
+import { useAddArticle } from 'src/web/hooks/useAddArticle';
 
 const urls = [
   'https://vuejs.org/guide/essentials/lifecycle.html',

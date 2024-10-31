@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Sidebar, Gap, Icon, SidebarItem, SidebarList } from 'gui'
-import Header from '../Header.vue'
-import Logo from '../Logo.vue'
-import { useFoldersStore } from '../../stores/foldersStore'
-import FolderFilesCount from './FolderFilesCount.vue'
-import { isArchiveFolder } from '../../utils/isArchive'
-import SettingsModal from '../Settings/SettingsModal.vue'
+import Header from 'src/web/components/Header.vue'
+import Logo from 'src/web/components/Logo.vue'
+import { useFoldersStore } from 'src/web/stores/foldersStore'
+import FolderFilesCount from 'src/web/components/FoldersSidebar/FolderFilesCount.vue'
+import { isArchiveFolder } from 'src/web/utils/isArchive'
+import SettingsModal from 'src/web/components/Settings/SettingsModal.vue'
 import { computed, ref } from 'vue'
 import { ParseitFolder } from 'src/common/types'
 

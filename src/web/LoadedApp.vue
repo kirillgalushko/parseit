@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import ArticleView from './components/ArticleView.vue'
-import { useArticleStore } from './stores/articleStore';
-import FoldersSidebar from './components/FoldersSidebar/FoldersSidebar.vue'
-import ArticlesSidebar from './components/ArticlesSidebar/ArticlesSidebar.vue'
-import AddVaultModal from './components/AddVaultModal.vue'
+import ArticleView from 'src/web/components/ArticleView.vue';
+import { useArticleStore } from 'src/web/stores/articleStore';
+import FoldersSidebar from 'src/web/components/FoldersSidebar/FoldersSidebar.vue';
+import ArticlesSidebar from 'src/web/components/ArticlesSidebar/ArticlesSidebar.vue';
+import AddVaultModal from 'src/web/components/AddVaultModal.vue';
 
 const articleStore = useArticleStore();
 </script>

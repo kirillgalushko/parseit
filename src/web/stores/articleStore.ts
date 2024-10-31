@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
-import { Article, ViewVariant } from '../types/Article';
+import { Article, ViewVariant } from 'src/web/types/Article';
 import yaml from 'js-yaml';
-import { useFoldersStore } from './foldersStore';
-import { StateWithInitialization } from './types'
-import { isDesktopApp } from '../utils/isDesktopApp'
-import { ParseitFile } from '../../common/types';
-import { ARCHIVE_DIR_NAME } from '../../common/constants';
+import { useFoldersStore } from 'src/web/stores/foldersStore';
+import { StateWithInitialization } from 'src/web/stores/types';
+import { isDesktopApp } from 'src/web/utils/isDesktopApp';
+import { ParseitFile } from 'src/common/types';
+import { ARCHIVE_DIR_NAME } from 'src/common/constants';
 
 interface ArticleState extends StateWithInitialization {
   articles: Article[],
