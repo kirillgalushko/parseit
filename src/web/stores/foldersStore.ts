@@ -3,6 +3,7 @@ import { useSettingsStore } from './settingsStore';
 import { StateWithInitialization } from './types'
 import { isDesktopApp } from '../utils/isDesktopApp'
 import { ParseitFolder } from '../../common/types';
+import { isArchiveFolder } from '../utils/isArchive';
 
 interface Folder extends ParseitFolder {}
 
@@ -25,7 +26,7 @@ export const useFoldersStore = defineStore('foldersStore', {
           const folders = await window.api.getAllFolders(settings.vaultPath);
           this.folders = folders
           if (folders.length) {
-            this.selectedFolder = folders[0];
+            this.selectedFolder = folders.find(f => !isArchiveFolder(f)) ?? null;
           }
         }
       }

@@ -5,8 +5,25 @@ import Logo from '../Logo.vue'
 import { useFoldersStore } from '../../stores/foldersStore'
 import FolderFilesCount from './FolderFilesCount.vue'
 import { isArchiveFolder } from '../../utils/isArchive'
+import { computed } from 'vue'
 
 const foldersStore = useFoldersStore();
+const sortedFolders = computed(() => {
+  // O(n)
+  let archiveFolder = null;
+  const nonArchiveFolders = [];
+  for (const folder of foldersStore.folders) {
+    if (isArchiveFolder(folder)) {
+      archiveFolder = folder;
+    } else {
+      nonArchiveFolders.push(folder);
+    }
+  }
+  if (archiveFolder) {
+    nonArchiveFolders.push(archiveFolder);
+  }
+  return nonArchiveFolders;
+});
 </script>
 
 <template>
@@ -16,7 +33,7 @@ const foldersStore = useFoldersStore();
     </Header>
     <Gap direction="vertical" :default="4" />
     <SidebarList>
-      <SidebarItem v-for="folder of foldersStore.folders"
+      <SidebarItem v-for="folder of sortedFolders"
         :selected="foldersStore.selectedFolder?.folderPath === folder.folderPath"
         @click="() => foldersStore.setSelectedFolder(folder)">
         <template #left>
