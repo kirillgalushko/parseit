@@ -1,28 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "Запуск TypeScript..."
-npm run tsc
-
-if [ $? -ne 0 ]; then
-  echo "TypeScript обнаружил ошибки. Коммит отменен."
-  exit 1
-fi
-
-echo "Запуск ESLint..."
-npm run lint
-
-if [ $? -ne 0 ]; then
-  echo "ESLint обнаружил ошибки. Коммит отменен."
-  exit 1
-fi
-
-echo "Запуск Prettier..."
-npm run prettier
-
-if [ $? -ne 0 ]; then
-  echo "Prettier обнаружил ошибки. Коммит отменен."
-  exit 1
-fi
-
-echo "Коммит выполнен успешно!"
+npx lint-staged
