@@ -16,7 +16,8 @@
     "pack:win": "npm run build-app && electron-builder --win",
     "pack:mac": "npm run build-app && electron-builder --mac",
     "pack:linux": "npm run build-app && electron-builder --linux",
-    "release": "node release.js"
+    "release": "node release.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
@@ -53,6 +54,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "eslint-plugin-vue": "^9.30.0",
+    "husky": "^8.0.0",
     "inquirer": "^12.0.0",
     "prettier": "^3.3.3",
     "typescript": "^5.5.3",
