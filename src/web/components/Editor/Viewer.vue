@@ -20,7 +20,7 @@ const viewerInstance = ref<Viewer | null>(null)
 const createViewer = () => {
   viewerInstance.value = new Viewer({
     el: viewerRef.value,
-    height: 'auto',
+    height: '100%',
     previewStyle: 'vertical',
     hideModeSwitch: true,
     linkAttributes: {

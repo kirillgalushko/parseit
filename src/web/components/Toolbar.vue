@@ -118,5 +118,6 @@ const actions = computed(() => [
   align-items: center;
   box-sizing: border-box;
   justify-content: space-between;
+  background-color: hsl(var(--background));
 }
 </style>

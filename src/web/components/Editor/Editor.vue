@@ -29,7 +29,7 @@ const handleChange = (newMarkdown: string) => {
 const createEditor = () => {
   editorInstance.value = new Editor({
     el: editorRef.value,
-    height: 'auto',
+    height: '100%',
     previewStyle: 'vertical',
     initialEditType: 'wysiwyg',
     hideModeSwitch: true,
@@ -64,7 +64,5 @@ watch(
 </script>
 
 <template>
-  <div>
-    <div ref="editorRef"></div>
-  </div>
+  <div ref="editorRef"></div>
 </template>

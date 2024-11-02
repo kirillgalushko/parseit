@@ -6,6 +6,9 @@
 .toastui-editor-defaultUI .ProseMirror {
   max-width: 800px;
   margin: auto;
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
 }
 
 .toastui-editor-dark,

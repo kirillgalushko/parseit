@@ -18,21 +18,10 @@ const { articleView } = storeToRefs(useArticleStore())
 <template>
   <div :class="['article']">
     <Toolbar v-if="props.article" />
-    <div class="scrollable">
-      <div class="article-content">
-        <PlaceholderView v-if="!props.article" />
-        <div v-if="props.article">
-          <!-- <h1>{{ props.article.title }}</h1>
-          <h5>{{ props.article.excerpt }}</h5> -->
-          <!-- <iframe v-if="articleView === 'html'" :srcdoc="props.article.originalHtml"></iframe> -->
-          <div v-if="articleView === 'editor'">
-            <Editor :article="props.article" />
-          </div>
-          <div v-if="articleView === 'reader'">
-            <Viewer :article="props.article" />
-          </div>
-        </div>
-      </div>
+    <div class="article-content">
+      <PlaceholderView v-if="!props.article" />
+      <Editor v-if="props.article && articleView === 'editor'" :article="props.article" />
+      <Viewer v-if="props.article && articleView === 'reader'" :article="props.article" />
     </div>
   </div>
 </template>
@@ -46,29 +35,16 @@ const { articleView } = storeToRefs(useArticleStore())
   flex-direction: column;
 }
 
-.scrollable {
-  height: 100%;
-  overflow: auto;
-  position: relative;
-}
-
 .article-content {
   width: 100%;
+  height: 100%;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 }
 
 .article-content:deep(img) {
   max-width: 100%;
   height: auto;
-}
-
-.article-content:deep(iframe) {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
 }
 </style>
