@@ -20,7 +20,7 @@ const articleStore = useArticleStore()
 <style scoped>
 .app-layout {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto auto minmax(200px, 1fr);
   height: 100%;
   grid-template-rows: 100vh;
 }

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Button, Stack, Tabs, Tab, Icon, Separator, Tooltip } from 'gui'
+import { Button, Stack, Icon, Separator, Tooltip, Tabs, Tab } from 'gui'
 import { storeToRefs } from 'pinia'
+import { useSize } from 'src/web/hooks/useSize'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { ViewVariant } from 'src/web/types/Article'
 import { isArchivedArticle } from 'src/web/utils/isArchive'
@@ -78,17 +79,32 @@ const actions = computed(() => [
     actionHandler: handleCloseArticle
   }
 ])
+
+const { elementRef, width } = useSize()
+const smallSizebar = computed(() => Boolean(width.value < 414))
 </script>
 
 <template>
-  <div :class="['toolbar']">
+  <div ref="elementRef" :class="['toolbar']">
     <Stack alignItems="center" direction="row" :gap="2">
       <Tabs :value="articleStore.articleView" :onChange="onChangeViewVariant">
-        <Tab name="reader">Режим чтения</Tab>
-        <Tab name="editor">Редактор</Tab>
+        <Tooltip>
+          <Tab name="reader">
+            <template v-if="!smallSizebar">Режим чтения</template>
+            <Icon v-if="smallSizebar" name="eye" style="font-size: 16px" />
+          </Tab>
+          <template #popper> Режим чтения </template>
+        </Tooltip>
+        <Tooltip>
+          <Tab name="editor">
+            <template v-if="!smallSizebar">Редактор</template>
+            <Icon v-if="smallSizebar" name="pencil" style="font-size: 16px" />
+          </Tab>
+          <template #popper> Редактор </template>
+        </Tooltip>
       </Tabs>
     </Stack>
-    <Stack alignItems="center" direction="row" :gap="2">
+    <Stack alignItems="center" direction="row">
       <div v-for="action in actions">
         <template v-if="action.type === 'button'">
           <Tooltip>
