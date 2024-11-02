@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { Button, Stack, Tabs, Tab, Icon, Separator, Tooltip } from 'gui'
+import { storeToRefs } from 'pinia'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { ViewVariant } from 'src/web/types/Article'
 import { isArchivedArticle } from 'src/web/utils/isArchive'
+import { computed } from 'vue'
 
 const articleStore = useArticleStore()
+const { selectedArticle } = storeToRefs(articleStore)
 
 const onChangeViewVariant = (variant: string) => {
   articleStore.setArticleView(variant as ViewVariant)
@@ -36,28 +39,30 @@ const handleCloseArticle = () => {
   articleStore.setSelectedArticle(null)
 }
 
-const isInArchive = isArchivedArticle(articleStore.selectedArticle)
+const isInArchive = isArchivedArticle(selectedArticle.value)
 const archiveAction = isInArchive
   ? ({
-      type: 'button',
-      name: 'Восстановить файл',
-      icon: 'archive-off',
-      actionHandler: handleRecoverArticle
-    } as const)
-  : ({
-      type: 'button',
-      name: 'Архивировать',
-      icon: 'archive',
-      actionHandler: handleArchiveArticle
-    } as const)
-
-const actions = [
-  {
     type: 'button',
-    name: 'Открыть в новой вкладке',
-    icon: 'external-link',
-    actionHandler: handleOpenPage
-  },
+    name: 'Восстановить файл',
+    icon: 'archive-off',
+    actionHandler: handleRecoverArticle
+  } as const)
+  : ({
+    type: 'button',
+    name: 'Архивировать',
+    icon: 'archive',
+    actionHandler: handleArchiveArticle
+  } as const)
+
+const isWithUrl = computed(() => Boolean(selectedArticle.value?.url))
+const openPageAction = {
+  type: 'button',
+  name: 'Открыть в новой вкладке',
+  icon: 'external-link',
+  actionHandler: handleOpenPage
+}
+const actions = computed(() => [
+  ...(isWithUrl.value ? [openPageAction] : []),
   archiveAction,
   {
     type: 'button',
@@ -72,7 +77,7 @@ const actions = [
     icon: 'x',
     actionHandler: handleCloseArticle
   }
-]
+])
 </script>
 
 <template>
