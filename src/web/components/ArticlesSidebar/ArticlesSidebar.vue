@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { Button, Stack, Sidebar, Gap, Icon } from 'gui'
+import { Button, Stack, Sidebar, Gap, Icon, Tooltip } from 'gui'
 import { storeToRefs } from 'pinia'
 import AddArticleModal from 'src/web/components/AddArticleModal.vue'
 import ArticleCard from 'src/web/components/ArticleCard.vue'
 import Header from 'src/web/components/Header.vue'
 import SearchInput from 'src/web/components/Search/SearchInput.vue'
 import Sorting from 'src/web/components/Sorting.vue'
+import { useSize } from 'src/web/hooks/useSize'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { useFoldersStore } from 'src/web/stores/foldersStore'
 import { useSearchStore } from 'src/web/stores/searchStore'
@@ -35,19 +36,27 @@ const articles = computed(() => {
   }
   return sortArticles(articleStore.articles, sorting.value)
 })
+const { elementRef, width } = useSize()
+const isSmallSize = computed(() => width.value < 220)
 </script>
 
 <template>
   <Sidebar :width="300" max-width="40vw" :padding="8">
-    <div class="sidebar-content">
+    <div ref="elementRef" class="sidebar-content">
       <AddArticleModal :isOpened="isAddModalOpened" :onClose="handleCloseModal" />
       <Header>
-        <div
-          style="display: flex; justify-content: space-between; align-items: center; width: 100%"
-        >
-          {{ foldersStore.selectedFolder?.name }}
-          <Button mode="accent" @click="handleAddArticle">
-            <Icon name="circle-plus" /> Добавить
+        <div class="header-content">
+          <Tooltip class="ellipsis">
+            <span>
+              {{ foldersStore.selectedFolder?.name }}
+            </span>
+            <template #popper>
+              {{ foldersStore.selectedFolder?.name }}
+            </template>
+          </Tooltip>
+          <Button :squared="isSmallSize" mode="accent" @click="handleAddArticle">
+            <Icon name="circle-plus" />
+            <template v-if="!isSmallSize">Добавить </template>
           </Button>
         </div>
       </Header>
@@ -83,5 +92,18 @@ const articles = computed(() => {
   padding-left: var(--sidebar-padding);
   padding-right: var(--half-sidebar-padding);
   margin-right: calc(0px - var(--half-sidebar-padding));
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 4px;
+}
+.ellipsis {
+  cursor: default;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
