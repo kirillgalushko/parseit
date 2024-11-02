@@ -46,7 +46,12 @@ export default [
 
       'no-console': 'off',
       'no-debugger': 'warn',
-      'prettier/prettier': 'warn'
+      'prettier/prettier': [
+        'warn',
+        {
+          endOfLine: 'auto'
+        }
+      ]
     },
     settings: {
       'import/resolver': {
