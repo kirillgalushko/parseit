@@ -2,7 +2,7 @@
 import { Button, Stack, Input, Text, Gap } from 'gui'
 import { useAddArticle } from 'src/web/hooks/useAddArticle'
 
-const { articleUrl, addArticle } = useAddArticle()
+const { articleUrl, addArticle, isLoading } = useAddArticle()
 </script>
 
 <template>
@@ -14,7 +14,9 @@ const { articleUrl, addArticle } = useAddArticle()
     <Gap direction="vertical" :default="4" />
     <Stack direction="column" :gap="3">
       <Input v-model="articleUrl" placeholder="https://..." />
-      <Button mode="accent" @click="addArticle">Добавить статью</Button>
+      <Button :isLoading="isLoading" :disabled="isLoading" mode="accent" @click="addArticle"
+        >Добавить статью</Button
+      >
     </Stack>
   </div>
 </template>

@@ -6,11 +6,11 @@ interface AddArticleModalProps {
   onClose: () => void
 }
 
-const { addArticle, articleUrl } = useAddArticle()
+const { addArticle, articleUrl, isLoading } = useAddArticle()
 const props = defineProps<AddArticleModalProps>()
 
-const handleAddArticle = () => {
-  addArticle()
+const handleAddArticle = async () => {
+  await addArticle()
   props.onClose()
 }
 </script>
@@ -22,7 +22,9 @@ const handleAddArticle = () => {
     <Input v-model="articleUrl" />
     <template #footer>
       <Button @click="props.onClose"> Закрыть </Button>
-      <Button mode="accent" @click="handleAddArticle"> Сохранить </Button>
+      <Button :isLoading="isLoading" :disabled="isLoading" mode="accent" @click="handleAddArticle">
+        Сохранить
+      </Button>
     </template>
   </Modal>
 </template>

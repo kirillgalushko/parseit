@@ -42,17 +42,17 @@ const handleCloseArticle = () => {
 const isInArchive = isArchivedArticle(selectedArticle.value)
 const archiveAction = isInArchive
   ? ({
-    type: 'button',
-    name: 'Восстановить файл',
-    icon: 'archive-off',
-    actionHandler: handleRecoverArticle
-  } as const)
+      type: 'button',
+      name: 'Восстановить файл',
+      icon: 'archive-off',
+      actionHandler: handleRecoverArticle
+    } as const)
   : ({
-    type: 'button',
-    name: 'Архивировать',
-    icon: 'archive',
-    actionHandler: handleArchiveArticle
-  } as const)
+      type: 'button',
+      name: 'Архивировать',
+      icon: 'archive',
+      actionHandler: handleArchiveArticle
+    } as const)
 
 const isWithUrl = computed(() => Boolean(selectedArticle.value?.url))
 const openPageAction = {

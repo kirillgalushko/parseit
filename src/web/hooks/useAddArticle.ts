@@ -1,9 +1,9 @@
 import yaml from 'js-yaml'
 import parseWebpage from 'src/web/api/parseWebpage'
+import { useArticleStore } from 'src/web/stores/articleStore'
+import { ParsedWebpage } from 'src/web/types/ParsedWebpage'
 import TurndownService from 'turndown'
 import { ref } from 'vue'
-import { useArticleStore } from '../stores/articleStore'
-import { ParsedWebpage } from '../types/ParsedWebpage'
 
 function createMarkdownWithYaml(metadata, content) {
   const yamlContent = yaml.dump(metadata)
@@ -24,6 +24,7 @@ const convertParsedWebpageToMarkdown = (page: ParsedWebpage): string => {
 }
 
 export const useAddArticle = () => {
+  const isLoading = ref(false)
   const articleUrl = ref<string>('')
   const articleStore = useArticleStore()
 
@@ -40,9 +41,11 @@ export const useAddArticle = () => {
     }
   }
 
-  const handleAddArticle = () => {
+  const handleAddArticle = async () => {
     if (articleUrl.value) {
-      parsePageAndCreateArticle(articleUrl.value)
+      isLoading.value = true
+      await parsePageAndCreateArticle(articleUrl.value)
+      isLoading.value = false
       articleUrl.value = ''
     }
   }
@@ -50,6 +53,7 @@ export const useAddArticle = () => {
   return {
     articleUrl,
     addArticle: handleAddArticle,
-    parsePageAndCreateArticle
+    parsePageAndCreateArticle,
+    isLoading
   }
 }
