@@ -4,6 +4,7 @@ export interface Article {
   markdown: string
   filePath: string
   body: string
+  excerpt: string
   url?: string
   domain?: string
   faviconUrl?: string

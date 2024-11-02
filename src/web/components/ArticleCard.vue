@@ -30,10 +30,9 @@ const searchResultText = computed(() => {
     :onClick="props.onClick"
   >
     <Text ellipsis typography="title-4-semibold">{{ article.name }}</Text>
-    <!-- <Text ellipsis typography="subtitle-2-semibold">{{ article.excerpt }}</Text> -->
     <Gap direction="vertical" :default="1" />
     <Text ellipsis :clamp="2" typography="paragraph-3-regular">
-      <HighlightText :text="searchResultText || article.body" :searchQuery="searchQuery" />
+      <HighlightText :text="searchResultText || article.excerpt" :searchQuery="searchQuery" />
     </Text>
     <Gap direction="vertical" :default="2" />
     <Stack direction="row" :gap="2" stretched>

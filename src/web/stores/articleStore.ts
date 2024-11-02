@@ -32,6 +32,7 @@ const convertParseitFileToArticle = (file: ParseitFile): Article => {
     markdown: file.content,
     filePath: file.filePath,
     body: body || file.content,
+    excerpt: (body || file.content).slice(0, 250),
     url: meta?.url,
     faviconUrl: meta?.faviconUrl,
     domain: meta?.domain,
