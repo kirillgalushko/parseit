@@ -1,7 +1,14 @@
-export function trimAroundSubstring(text, substring, wordsBefore = 3, wordsAfter = 3) {
+export function trimAroundSubstring(
+  text: string,
+  substring: string,
+  wordsBefore = 3,
+  wordsAfter = 3
+) {
   if (!substring) return null
   const words = text.split(/\s+/)
-  const index = words.findIndex((word) => word.includes(substring))
+
+  const lowerCaseSubstring = substring.toLowerCase()
+  const index = words.findIndex((word) => word.toLowerCase().includes(lowerCaseSubstring))
 
   if (index === -1) return null
 
