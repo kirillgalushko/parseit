@@ -11,26 +11,17 @@ const articleStore = useArticleStore()
 <template>
   <AddVaultModal />
   <div class="app-layout">
-    <div class="grid">
-      <FoldersSidebar />
-      <ArticlesSidebar />
-      <ArticleView :article="articleStore.selectedArticle" />
-    </div>
+    <FoldersSidebar />
+    <ArticlesSidebar />
+    <ArticleView :article="articleStore.selectedArticle" />
   </div>
 </template>
 
 <style scoped>
 .app-layout {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-}
-
-.grid {
   display: grid;
   grid-template-columns: auto auto 1fr;
   height: 100%;
+  grid-template-rows: 100vh;
 }
 </style>

@@ -39,33 +39,53 @@ const handleCloseSettings = () => {
 
 <template>
   <Sidebar :compactWidth="120" :width="150" minWidth="80px" maxWidth="300px" :padding="8">
-    <Header>
-      <Logo />
-    </Header>
-    <Gap direction="vertical" :default="4" />
-    <SidebarList>
-      <SidebarItem
-        v-for="folder of sortedFolders"
-        :selected="foldersStore.selectedFolder?.folderPath === folder.folderPath"
-        @click="() => foldersStore.setSelectedFolder(folder)"
-      >
-        <template #left>
-          <Icon :name="isArchiveFolder(folder) ? 'archive' : 'folder'" />
-        </template>
-        {{ folder.name }}
-        <template #right>
-          <FolderFilesCount>{{ folder.filesCount }}</FolderFilesCount>
-        </template>
-      </SidebarItem>
-      <SidebarItem @click="handleOpenSettings">
-        <template #left>
-          <Icon name="settings" />
-        </template>
-        Настройки
-      </SidebarItem>
-    </SidebarList>
-    <SettingsModal :isOpened="isSettingsOpened" :onClose="handleCloseSettings" />
+    <div class="sidebar-content">
+      <Header>
+        <Logo />
+      </Header>
+      <Gap direction="vertical" :default="4" />
+      <div class="folders-list">
+        <SidebarList>
+          <SidebarItem
+            v-for="folder of sortedFolders"
+            :selected="foldersStore.selectedFolder?.folderPath === folder.folderPath"
+            @click="() => foldersStore.setSelectedFolder(folder)"
+          >
+            <template #left>
+              <Icon :name="isArchiveFolder(folder) ? 'archive' : 'folder'" />
+            </template>
+            {{ folder.name }}
+            <template #right>
+              <FolderFilesCount>{{ folder.filesCount }}</FolderFilesCount>
+            </template>
+          </SidebarItem>
+          <SidebarItem @click="handleOpenSettings">
+            <template #left>
+              <Icon name="settings" />
+            </template>
+            Настройки
+          </SidebarItem>
+        </SidebarList>
+      </div>
+      <SettingsModal :isOpened="isSettingsOpened" :onClose="handleCloseSettings" />
+    </div>
   </Sidebar>
 </template>
 
-<style scoped></style>
+<style scoped>
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.folders-list {
+  --sidebar-padding: 8px;
+  --half-sidebar-padding: calc(var(--sidebar-padding) / 2);
+  overflow-y: auto;
+  flex: 1;
+  margin-left: calc(0px - var(--sidebar-padding));
+  padding-left: var(--sidebar-padding);
+  padding-right: var(--half-sidebar-padding);
+  margin-right: calc(0px - var(--half-sidebar-padding));
+}
+</style>

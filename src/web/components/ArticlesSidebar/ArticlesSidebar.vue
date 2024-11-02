@@ -39,25 +39,49 @@ const articles = computed(() => {
 
 <template>
   <Sidebar :width="300" max-width="40vw" :padding="8">
-    <AddArticleModal :isOpened="isAddModalOpened" :onClose="handleCloseModal" />
-    <Header>
-      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%">
-        {{ foldersStore.selectedFolder?.name }}
-        <Button mode="accent" @click="handleAddArticle">
-          <Icon name="circle-plus" /> Добавить
-        </Button>
+    <div class="sidebar-content">
+      <AddArticleModal :isOpened="isAddModalOpened" :onClose="handleCloseModal" />
+      <Header>
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; width: 100%"
+        >
+          {{ foldersStore.selectedFolder?.name }}
+          <Button mode="accent" @click="handleAddArticle">
+            <Icon name="circle-plus" /> Добавить
+          </Button>
+        </div>
+      </Header>
+      <Gap direction="vertical" :default="4" />
+      <Stack direction="row" :gap="2" stretched>
+        <SearchInput />
+        <Sorting />
+      </Stack>
+      <Gap direction="vertical" :default="4" />
+      <div class="articles-list">
+        <Stack stretched :gap="2" direction="column">
+          <div v-for="article of articles" :key="article.name">
+            <ArticleCard :article="article" :onClick="() => onSelectArticle(article)" />
+          </div>
+        </Stack>
       </div>
-    </Header>
-    <Gap direction="vertical" :default="4" />
-    <Stack direction="row" :gap="2" stretched>
-      <SearchInput />
-      <Sorting />
-    </Stack>
-    <Gap direction="vertical" :default="4" />
-    <Stack stretched :gap="2" direction="column">
-      <div v-for="article of articles" :key="article.name">
-        <ArticleCard :article="article" :onClick="() => onSelectArticle(article)" />
-      </div>
-    </Stack>
+    </div>
   </Sidebar>
 </template>
+
+<style scoped>
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.articles-list {
+  --sidebar-padding: 8px;
+  --half-sidebar-padding: calc(var(--sidebar-padding) / 2);
+  overflow-y: auto;
+  flex: 1;
+  margin-left: calc(0px - var(--sidebar-padding));
+  padding-left: var(--sidebar-padding);
+  padding-right: var(--half-sidebar-padding);
+  margin-right: calc(0px - var(--half-sidebar-padding));
+}
+</style>
