@@ -1,5 +1,37 @@
-# Vue 3 + TypeScript + Vite
+# Parseit
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Parseit — это настольное приложение для парсинга веб-страниц по URL и сохранения их в виде статей в формате Markdown. Статьи сохраняются локально в файловой системе, после чего их можно редактировать и управлять ими.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Использованные технологии
+
+- <img src="https://vuejs.org/images/logo.png" width="14"> **Vue 3** — фронтенд фреймворк для построения пользовательского интерфейса.
+- <img src="https://www.electronjs.org/assets/img/logo.svg" width="14"/> **Electron** — платформа для создания кроссплатформенных настольных приложений на основе веб-технологий.
+- <img src="https://vitejs.dev/logo.svg" width="14"/> **Vite** — инструмент для сборки и разработки, обеспечивающий быструю компиляцию и оптимизацию.
+- **GUI** — собственная библиотека компонентов, созданная для Parseit. Не использует готовые UI Kit's.
+- <img src="https://pinia.vuejs.org/logo.svg" width="14"/> **Pinia** — управление состоянием Vue приложения.
+
+## Разработка
+
+### Запуск приложения
+
+Для запуска Parseit в демо-режиме в браузере используйте команду:
+
+```bash
+npm run dev
+```
+
+Для запуска Parseit в режиме разработки Electron-приложения используйте команду:
+
+```bash
+npm run dev-app
+```
+
+### Релиз
+
+Для релиза новой версии Parseit используйте команду:
+
+```bash
+npm run release
+```
+
+Эта команда предложит выбрать тип изменений `major/minor/patch`, автоматически обновит версию приложения в `package.json`. После создаст новый тег, что автоматически запустит сборку приложения с помощью **GitHub Actions**.
