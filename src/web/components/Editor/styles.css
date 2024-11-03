@@ -29,6 +29,11 @@
   justify-content: center;
 }
 
+.toastui-editor-contents h1 {
+  border-color: hsl(var(--border));
+  border-width: 1px;
+}
+
 .toastui-editor-defaultUI-toolbar button {
   border-color: hsl(var(--border));
   color: hsl(var(--foreground));
