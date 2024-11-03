@@ -40,7 +40,9 @@ const { contextMenuData, targetRef } = useContextMenu()
       <Gap direction="vertical" :default="2" />
       <Stack direction="row" :gap="2" stretched>
         <Favicon v-if="article.faviconUrl" :src="article.faviconUrl" />
-        <Text ellipsis typography="paragraph-3-regular" mode="secondary">{{ article.domain }}</Text>
+        <Text ellipsis typography="paragraph-3-regular" mode="secondary">{{
+          article.siteName || article.domain
+        }}</Text>
       </Stack>
     </Card>
   </div>
