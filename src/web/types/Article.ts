@@ -9,6 +9,8 @@ export interface Article {
   domain?: string
   faviconUrl?: string
   createdAt?: string
+  author?: string
+  siteName?: string
 }
 
 export type ViewVariant = 'editor' | 'reader'

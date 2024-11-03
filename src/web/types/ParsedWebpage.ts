@@ -8,4 +8,6 @@ export interface ParsedWebpage {
   originalUrl?: string
   domain?: string
   faviconUrl?: string
+  byline?: string
+  siteName?: string
 }

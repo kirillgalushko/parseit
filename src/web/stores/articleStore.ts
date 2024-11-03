@@ -36,7 +36,9 @@ const convertParseitFileToArticle = (file: ParseitFile): Article => {
     url: meta?.url,
     faviconUrl: meta?.faviconUrl,
     domain: meta?.domain,
-    createdAt: meta?.createdAt
+    createdAt: meta?.createdAt,
+    author: meta?.author,
+    siteName: meta?.siteName
   }
 }
 

@@ -10,16 +10,27 @@ function createMarkdownWithYaml(metadata, content) {
   return `---\n${yamlContent}---\n\n${content}`
 }
 
+function addArticleHeadersToMarkdown(page: ParsedWebpage, markdown: string) {
+  const headers = `
+${page.title ? `# ${page.title}\n\n` : ''}
+${page.byline ? `> Автор: ${page.byline}\n\n` : ''}
+`
+  return headers + markdown
+}
+
 const convertParsedWebpageToMarkdown = (page: ParsedWebpage): string => {
   const turndownService = new TurndownService({ headingStyle: 'atx' })
   const markdown = turndownService.turndown(page.content)
+  const markdownWithHeaders = addArticleHeadersToMarkdown(page, markdown)
   const meta = {
     url: page.originalUrl,
     faviconUrl: page.faviconUrl,
     domain: page.domain,
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    siteName: page.siteName,
+    author: page.byline
   }
-  const withMeta = createMarkdownWithYaml(meta, markdown)
+  const withMeta = createMarkdownWithYaml(meta, markdownWithHeaders)
   return withMeta
 }
 
