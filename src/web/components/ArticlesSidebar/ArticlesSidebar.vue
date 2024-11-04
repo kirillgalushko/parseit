@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { Button, Stack, Sidebar, Gap, Icon, Tooltip } from 'gui'
+import { Button, Stack, Sidebar, Gap, Icon, Tooltip, useSize } from 'gui'
 import { storeToRefs } from 'pinia'
 import AddArticleModal from 'src/web/components/AddArticleModal.vue'
 import ArticleCard from 'src/web/components/ArticleCard.vue'
 import Header from 'src/web/components/Header.vue'
 import SearchInput from 'src/web/components/Search/SearchInput.vue'
 import Sorting from 'src/web/components/Sorting.vue'
-import { useSize } from 'src/web/hooks/useSize'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { useFoldersStore } from 'src/web/stores/foldersStore'
 import { useSearchStore } from 'src/web/stores/searchStore'

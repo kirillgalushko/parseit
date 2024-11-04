@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { Button, Stack, Icon, Separator, Tooltip, Tabs, Tab } from 'gui'
+import { Button, Stack, Icon, Separator, Tooltip, Tabs, Tab, useSize } from 'gui'
 import { storeToRefs } from 'pinia'
 import { useArticleActions } from 'src/web/hooks/useArticleActions'
-import { useSize } from 'src/web/hooks/useSize'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { ViewVariant } from 'src/web/types/Article'
 import { computed } from 'vue'
