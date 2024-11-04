@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ContextMenu, ContextMenuList, ContextMenuItem, Icon, useContextMenu } from 'gui'
+import { ContextMenu, ContextMenuList, ContextMenuItem, Icon, useContextMenu, Confirm } from 'gui'
 import { useArticleActions } from 'src/web/hooks/useArticleActions'
 import { Article } from 'src/web/types/Article'
 import { Ref } from 'vue'
@@ -11,10 +11,11 @@ export interface ArticleCardContextMenuProps {
 
 const props = defineProps<ArticleCardContextMenuProps>()
 
-const { actions } = useArticleActions(props.article)
+const { actions, confirmModalData } = useArticleActions(props.article)
 </script>
 
 <template>
+  <Confirm v-bind="confirmModalData" />
   <ContextMenu v-bind="$attrs" :data="props.data">
     <ContextMenuList>
       <ContextMenuItem v-for="action of actions" @click="action.actionHandler">

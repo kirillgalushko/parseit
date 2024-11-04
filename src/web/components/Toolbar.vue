@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Stack, Icon, Separator, Tooltip, Tabs, Tab, useSize } from 'gui'
+import { Button, Stack, Icon, Separator, Tooltip, Tabs, Tab, useSize, Confirm } from 'gui'
 import { storeToRefs } from 'pinia'
 import { useArticleActions } from 'src/web/hooks/useArticleActions'
 import { useArticleStore } from 'src/web/stores/articleStore'
@@ -8,7 +8,7 @@ import { computed } from 'vue'
 
 const articleStore = useArticleStore()
 const { selectedArticle } = storeToRefs(articleStore)
-const { actions: articleActions } = useArticleActions(selectedArticle)
+const { actions: articleActions, confirmModalData } = useArticleActions(selectedArticle)
 
 const onChangeViewVariant = (variant: string) => {
   articleStore.setArticleView(variant as ViewVariant)
@@ -34,6 +34,7 @@ const smallSizebar = computed(() => Boolean(width.value < 414))
 </script>
 
 <template>
+  <Confirm v-bind="confirmModalData" />
   <div ref="elementRef" :class="['toolbar']">
     <Stack alignItems="center" direction="row" :gap="2">
       <Tabs :value="articleStore.articleView" :onChange="onChangeViewVariant">

@@ -1,3 +1,4 @@
+import { useConfirm } from 'gui'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { Article } from 'src/web/types/Article'
 import { isArchivedArticle } from 'src/web/utils/isArchive'
@@ -5,14 +6,23 @@ import { computed, Ref } from 'vue'
 
 export const useArticleActions = (article: Ref<Article>) => {
   const articleStore = useArticleStore()
+  const { confirm, ...confirmModalData } = useConfirm()
 
   const handleOpenPage = () => {
     window.open(article.value?.url, '_blank')
   }
 
-  const handleRemoveArticle = () => {
+  const handleRemoveArticle = async () => {
     if (article.value) {
-      articleStore.removeArticle(article.value)
+      try {
+        await confirm({
+          title: 'Удалить статью?',
+          description: 'Эти изменения нельзя будет отменить.'
+        })
+        articleStore.removeArticle(article.value)
+      } catch (_) {
+        // Canceled
+      }
     }
   }
 
@@ -60,5 +70,5 @@ export const useArticleActions = (article: Ref<Article>) => {
       actionHandler: handleRemoveArticle
     }
   ])
-  return { actions }
+  return { actions, confirmModalData }
 }
