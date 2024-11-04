@@ -18,16 +18,19 @@ const handleCloseArticle = () => {
   articleStore.setSelectedArticle(null)
 }
 
-const actions = computed(() => [
-  ...articleActions.value,
-  { type: 'separator' },
-  {
-    type: 'button',
-    name: 'Закрыть',
-    icon: 'x',
-    actionHandler: handleCloseArticle
-  }
-])
+const actions = computed(
+  () =>
+    [
+      ...articleActions.value,
+      { type: 'separator' },
+      {
+        type: 'button',
+        name: 'Закрыть',
+        icon: 'x',
+        actionHandler: handleCloseArticle
+      }
+    ] as const
+)
 
 const { elementRef, width } = useSize()
 const smallSizebar = computed(() => Boolean(width.value < 414))
@@ -41,14 +44,14 @@ const smallSizebar = computed(() => Boolean(width.value < 414))
         <Tooltip>
           <Tab name="reader">
             <template v-if="!smallSizebar">Режим чтения</template>
-            <Icon v-if="smallSizebar" name="eye" style="font-size: 16px" />
+            <Icon v-if="smallSizebar" name="eye" class="tab-icon" />
           </Tab>
           <template #popper> Режим чтения </template>
         </Tooltip>
         <Tooltip>
           <Tab name="editor">
             <template v-if="!smallSizebar">Редактор</template>
-            <Icon v-if="smallSizebar" name="pencil" style="font-size: 16px" />
+            <Icon v-if="smallSizebar" name="pencil" class="tab-icon" />
           </Tab>
           <template #popper> Редактор </template>
         </Tooltip>
@@ -85,5 +88,9 @@ const smallSizebar = computed(() => Boolean(width.value < 414))
   box-sizing: border-box;
   justify-content: space-between;
   background-color: hsl(var(--background));
+}
+
+.tab-icon {
+  font-size: 16px;
 }
 </style>

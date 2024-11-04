@@ -4,7 +4,7 @@ import { Article } from 'src/web/types/Article'
 import { isArchivedArticle } from 'src/web/utils/isArchive'
 import { computed, Ref } from 'vue'
 
-export const useArticleActions = (article: Ref<Article>) => {
+export const useArticleActions = (article: Ref<Article | null>) => {
   const articleStore = useArticleStore()
   const { confirm, ...confirmModalData } = useConfirm()
 
