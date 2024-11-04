@@ -95,7 +95,6 @@ export const isFolderExists = async (folderPath: string) => {
   try {
     await access(folderPath) // returns void
     return true
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_error) {
     return false
   }
