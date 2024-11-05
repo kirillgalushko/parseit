@@ -8,6 +8,7 @@ import '@toast-ui/editor/dist/i18n/ru-ru'
 import { Loader } from 'gui'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { Article } from 'src/web/types/Article'
+import { debounce } from 'src/web/utils/debounce'
 import { onMounted, ref, watch } from 'vue'
 import './styles.css'
 
@@ -21,13 +22,17 @@ const editorRef = ref()
 const isSaving = ref()
 const editorInstance = ref<Editor | null>(null)
 
-const handleChange = async (newMarkdown: string) => {
-  isSaving.value = true
+const debounceUpdateArticle = debounce(async (newMarkdown: string) => {
   await articleStore.updateArticle({
     ...props.article,
     markdown: newMarkdown
   })
   isSaving.value = false
+}, 200)
+
+const handleChange = async (newMarkdown: string) => {
+  isSaving.value = true
+  await debounceUpdateArticle(newMarkdown)
 }
 
 const createEditor = () => {
@@ -63,7 +68,7 @@ watch(
   () => props.article.markdown,
   () => {
     const hasChanges = editorInstance.value?.getMarkdown() !== props.article.markdown
-    if (hasChanges) {
+    if (hasChanges && !isSaving.value) {
       createEditor()
     }
   }
