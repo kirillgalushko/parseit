@@ -44,7 +44,6 @@ export const listFolders = (currentPath) => {
 
 export const watchDirectory = (directoryPath, callback: () => void) => {
   const watcher = chokidar.watch(directoryPath, {
-    ignored: /(^|[\/\\])\../,
     persistent: true
   })
   watcher
