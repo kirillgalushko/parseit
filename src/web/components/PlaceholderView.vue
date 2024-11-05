@@ -6,19 +6,25 @@ const { articleUrl, addArticle, isLoading } = useAddArticle()
 </script>
 
 <template>
-  <div :class="['placeholder']">
+  <form @submit.prevent="addArticle" :class="['placeholder']">
     <Text typography="title-1-semibold">Добавьте статью</Text>
     <Text typography="paragraph-2-regular" mode="secondary"
       >Введите url статьи и нажмите Enter</Text
     >
     <Gap direction="vertical" :default="4" />
+
     <Stack direction="column" :gap="3">
       <Input v-model="articleUrl" placeholder="https://..." />
-      <Button :isLoading="isLoading" :disabled="isLoading" mode="accent" @click="addArticle"
+      <Button
+        :isLoading="isLoading"
+        :disabled="isLoading"
+        mode="accent"
+        type="submit"
+        @click="addArticle"
         >Добавить статью</Button
       >
     </Stack>
-  </div>
+  </form>
 </template>
 
 <style scoped>
