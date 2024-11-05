@@ -95,7 +95,7 @@ watch(
   padding: 0 4px;
   bottom: 0;
   right: 10px;
-  z-index: 10;
+  z-index: 20;
   display: flex;
   align-items: center;
   gap: 2px;
