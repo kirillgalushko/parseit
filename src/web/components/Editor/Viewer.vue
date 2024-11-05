@@ -43,7 +43,10 @@ onMounted(() => {
 watch(
   () => props.article.markdown,
   () => {
-    createViewer()
+    const hasChanges = viewerInstance.value?.getMarkdown() !== props.article.markdown
+    if (hasChanges) {
+      createViewer()
+    }
   }
 )
 </script>

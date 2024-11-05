@@ -70,7 +70,10 @@ export const useArticleStore = defineStore('articleStore', {
           this.articles = articles
         }
       }
-      if (this.selectedArticle && !this.articles.find((a) => a.id === this.selectedArticle?.id)) {
+      const newSelectedArticle = this.articles.find((a) => a.id === this.selectedArticle?.id)
+      if (this.selectedArticle && newSelectedArticle) {
+        this.selectedArticle = newSelectedArticle
+      } else {
         this.selectedArticle = null
       }
     },

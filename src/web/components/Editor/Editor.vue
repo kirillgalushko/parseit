@@ -62,7 +62,10 @@ onMounted(() => {
 watch(
   () => props.article.markdown,
   () => {
-    createEditor()
+    const hasChanges = editorInstance.value?.getMarkdown() !== props.article.markdown
+    if (hasChanges) {
+      createEditor()
+    }
   }
 )
 </script>

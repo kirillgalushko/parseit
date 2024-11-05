@@ -5,23 +5,17 @@ import Viewer from 'src/web/components/Editor/Viewer.vue'
 import PlaceholderView from 'src/web/components/PlaceholderView.vue'
 import Toolbar from 'src/web/components/Toolbar.vue'
 import { useArticleStore } from 'src/web/stores/articleStore'
-import { Article } from 'src/web/types/Article'
 
-interface ArticleViewProps {
-  article?: Article | null
-}
-
-const props = defineProps<ArticleViewProps>()
-const { articleView } = storeToRefs(useArticleStore())
+const { articleView, selectedArticle } = storeToRefs(useArticleStore())
 </script>
 
 <template>
   <div :class="['article']">
-    <Toolbar v-if="props.article" />
+    <Toolbar v-if="selectedArticle" />
     <div class="article-content">
-      <PlaceholderView v-if="!props.article" />
-      <Editor v-if="props.article && articleView === 'editor'" :article="props.article" />
-      <Viewer v-if="props.article && articleView === 'reader'" :article="props.article" />
+      <PlaceholderView v-if="!selectedArticle" />
+      <Editor v-if="selectedArticle && articleView === 'editor'" :article="selectedArticle" />
+      <Viewer v-if="selectedArticle && articleView === 'reader'" :article="selectedArticle" />
     </div>
   </div>
 </template>

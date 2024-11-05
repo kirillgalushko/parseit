@@ -3,9 +3,6 @@ import AddVaultModal from 'src/web/components/AddVaultModal.vue'
 import ArticlesSidebar from 'src/web/components/ArticlesSidebar/ArticlesSidebar.vue'
 import ArticleView from 'src/web/components/ArticleView.vue'
 import FoldersSidebar from 'src/web/components/FoldersSidebar/FoldersSidebar.vue'
-import { useArticleStore } from 'src/web/stores/articleStore'
-
-const articleStore = useArticleStore()
 </script>
 
 <template>
@@ -13,7 +10,7 @@ const articleStore = useArticleStore()
   <div class="app-layout">
     <FoldersSidebar />
     <ArticlesSidebar />
-    <ArticleView :article="articleStore.selectedArticle" />
+    <ArticleView />
   </div>
 </template>
 
