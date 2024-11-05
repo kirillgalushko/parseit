@@ -5,6 +5,7 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js'
 import '@toast-ui/editor/dist/toastui-editor.css'
 import '@toast-ui/editor/dist/i18n/ru-ru'
+import { Loader } from 'gui'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { Article } from 'src/web/types/Article'
 import { onMounted, ref, watch } from 'vue'
@@ -17,13 +18,16 @@ interface EditorProps {
 const props = defineProps<EditorProps>()
 const articleStore = useArticleStore()
 const editorRef = ref()
+const isSaving = ref()
 const editorInstance = ref<Editor | null>(null)
 
-const handleChange = (newMarkdown: string) => {
-  articleStore.updateArticle({
+const handleChange = async (newMarkdown: string) => {
+  isSaving.value = true
+  await articleStore.updateArticle({
     ...props.article,
     markdown: newMarkdown
   })
+  isSaving.value = false
 }
 
 const createEditor = () => {
@@ -65,4 +69,29 @@ watch(
 
 <template>
   <div ref="editorRef"></div>
+  <div v-if="isSaving" class="editor-status">
+    <Loader />
+    Сохранение
+  </div>
 </template>
+
+<style scoped>
+.editor-status {
+  font-size: 12px;
+  color: hsl(var(--foreground));
+  position: fixed;
+  background-color: hsl(var(--background));
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border: 1px solid hsl(var(--border));
+  padding: 0 4px;
+  bottom: 0;
+  right: 10px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  cursor: default;
+}
+</style>

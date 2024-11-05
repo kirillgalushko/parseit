@@ -107,9 +107,9 @@ export const useArticleStore = defineStore('articleStore', {
         window.api.recoverFile(article.filePath)
       }
     },
-    updateArticle(article: Article) {
+    async updateArticle(article: Article) {
       if (isDesktopApp()) {
-        window.api.writeFile(article.filePath, article.markdown)
+        await window.api.writeFile(article.filePath, article.markdown)
       } else {
         const changedArticleIndex = this.articles.findIndex((a) => a.id === article.id)
         if (changedArticleIndex) {
