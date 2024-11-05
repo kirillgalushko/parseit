@@ -17,12 +17,21 @@ const handleAddArticle = async () => {
 
 <template>
   <Modal v-bind="$attrs" :onClose="props.onClose" showCloseButton title="Сохранить статью">
-    Введите url статьи и нажмите Enter
-    <Gap :default="3" direction="vertical" />
-    <Input v-model="articleUrl" />
+    <form id="add-article-modal" @submit.prevent="handleAddArticle">
+      Введите url статьи и нажмите Enter
+      <Gap :default="3" direction="vertical" />
+      <Input v-model="articleUrl" />
+    </form>
     <template #footer>
       <Button @click="props.onClose"> Закрыть </Button>
-      <Button :isLoading="isLoading" :disabled="isLoading" mode="accent" @click="handleAddArticle">
+      <Button
+        :isLoading="isLoading"
+        :disabled="isLoading"
+        mode="accent"
+        type="submit"
+        @click="handleAddArticle"
+        form="add-article-modal"
+      >
         Сохранить
       </Button>
     </template>
