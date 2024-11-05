@@ -1,6 +1,17 @@
 <script setup lang="ts">
-import { Modal, Input, Button, Stack, Gap, Tooltip } from 'gui'
+import {
+  Modal,
+  Input,
+  Button,
+  Stack,
+  Gap,
+  Tooltip,
+  Select,
+  SelectOption,
+  RegisteredOption
+} from 'gui'
 import { storeToRefs } from 'pinia'
+import { AppTheme } from 'src/common/types'
 import { useSettingsStore } from 'src/web/stores/settingsStore'
 import { isDesktopApp } from 'src/web/utils/isDesktopApp'
 
@@ -14,6 +25,10 @@ const handleAddVault = async () => {
       settingsStore.setSettingsItem('vaultPath', vaultPath)
     }
   }
+}
+
+const handleChangeTheme = (theme: RegisteredOption) => {
+  settingsStore.setSettingsItem('theme', theme.value as AppTheme)
 }
 </script>
 
@@ -30,6 +45,13 @@ const handleAddVault = async () => {
       </Tooltip>
       <Button @click="handleAddVault">Выбрать папку</Button>
     </Stack>
+    <Gap :default="4" direction="vertical" />
+    Тема оформления:
+    <Gap :default="2" direction="vertical" />
+    <Select :value="settingsStore.theme" @change="handleChangeTheme">
+      <SelectOption value="dark" label="Тёмная тема" />
+      <SelectOption value="light" label="Светлая тема" />
+    </Select>
   </Modal>
 </template>
 

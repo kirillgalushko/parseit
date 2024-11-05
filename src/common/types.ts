@@ -1,5 +1,7 @@
+export type AppTheme = 'dark' | 'light'
+
 export interface Settings {
-  theme: 'dark' | 'light'
+  theme: AppTheme
   vaultPath: string | null
 }
 
