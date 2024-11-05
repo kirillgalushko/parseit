@@ -41,13 +41,39 @@
   transition: all 0.2s;
 }
 
-.toastui-editor-toolbar-icons {
+.dark-theme .toastui-editor-toolbar-icons {
   background-position-y: -49px;
+}
+
+.toastui-editor-defaultUI-toolbar button {
+  transition:
+    scale 0.2s,
+    background-color 0.2s;
 }
 
 .toastui-editor-defaultUI-toolbar button:not(:disabled):hover {
   border-color: hsl(var(--border));
   background-color: hsl(var(--accent));
+}
+
+.light-theme .toastui-editor-toolbar-icons:not(:disabled).active {
+  background-color: hsl(var(--accent-foreground));
+  background-position-y: -49px;
+}
+
+.light-theme .toastui-editor-toolbar-icons:not(:disabled).active:hover {
+  background-color: hsl(var(--accent-foreground));
+  background-position-y: -49px;
+}
+
+.dark-theme .toastui-editor-toolbar-icons:not(:disabled).active {
+  background-color: hsl(var(--accent-foreground));
+  background-position-y: 3px;
+}
+
+.dark-theme .toastui-editor-toolbar-icons:not(:disabled).active:hover {
+  background-color: hsl(var(--accent-foreground));
+  background-position-y: 3px;
 }
 
 .toastui-editor-defaultUI-toolbar button:active {
