@@ -16,18 +16,16 @@ function highlightMatches(text: string, substring?: string | null) {
 }
 
 watch(
-  () => props.searchQuery,
-  (newQuery) => {
-    highlightedContent.value = highlightMatches(props.text, newQuery)
+  () => props.searchQuery || props.text,
+  () => {
+    highlightedContent.value = highlightMatches(props.text, props.searchQuery)
   },
   { immediate: true }
 )
 </script>
 
 <template>
-  <div>
-    <div v-html="highlightedContent"></div>
-  </div>
+  <div v-html="highlightedContent"></div>
 </template>
 
 <style>
