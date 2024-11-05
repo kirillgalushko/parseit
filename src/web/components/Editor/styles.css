@@ -135,6 +135,7 @@
 
 .toastui-editor-contents a {
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .toastui-editor-ww-code-block-language {
