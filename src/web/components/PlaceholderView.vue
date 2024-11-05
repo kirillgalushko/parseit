@@ -29,9 +29,11 @@ const { articleUrl, addArticle, isLoading } = useAddArticle()
   top: 0;
   bottom: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-bottom: 30%;
+  padding-bottom: 20%;
+  width: 80%;
+  max-width: 350px;
+  margin: 0 auto;
 }
 </style>
