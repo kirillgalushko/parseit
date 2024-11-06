@@ -1,6 +1,5 @@
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { useFoldersStore } from 'src/web/stores/foldersStore'
-import { isDesktopApp } from 'src/web/utils/isDesktopApp'
 import { onMounted, watch } from 'vue'
 
 export const useFilesWatcher = () => {
@@ -22,8 +21,6 @@ export const useFilesWatcher = () => {
   )
 
   onMounted(() => {
-    if (isDesktopApp()) {
-      watchChanges()
-    }
+    watchChanges()
   })
 }

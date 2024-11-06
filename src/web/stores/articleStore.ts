@@ -5,7 +5,6 @@ import { ParseitFile } from 'src/common/types'
 import { useFoldersStore } from 'src/web/stores/foldersStore'
 import { StateWithInitialization } from 'src/web/stores/types'
 import { Article, ViewVariant } from 'src/web/types/Article'
-import { isDesktopApp } from 'src/web/utils/isDesktopApp'
 
 interface ArticleState extends StateWithInitialization {
   articles: Article[]
@@ -14,7 +13,7 @@ interface ArticleState extends StateWithInitialization {
 }
 
 function parseMarkdownWithYaml(content: string) {
-  const match = content.match(/^-{3}\n([\s\S]*?)\n-{3}/)
+  const match = content.match(/^-{3}\r?\n([\s\S]*?)\r?\n-{3}/)
   if (!match) {
     return { meta: null, content }
   }
@@ -51,24 +50,20 @@ export const useArticleStore = defineStore('articleStore', {
   }),
   actions: {
     async init() {
-      if (isDesktopApp()) {
-        const foldersStore = useFoldersStore()
-        if (foldersStore.selectedFolder) {
-          const files = await window.api.getAllFiles(foldersStore.selectedFolder.folderPath)
-          const articles: Article[] = files.map(convertParseitFileToArticle)
-          this.articles = articles
-        }
+      const foldersStore = useFoldersStore()
+      if (foldersStore.selectedFolder) {
+        const files = await window.api.getAllFiles(foldersStore.selectedFolder.folderPath)
+        const articles: Article[] = files.map(convertParseitFileToArticle)
+        this.articles = articles
       }
       this._initialized = true
     },
     async updateArticles() {
-      if (isDesktopApp()) {
-        const foldersStore = useFoldersStore()
-        if (foldersStore.selectedFolder) {
-          const files = await window.api.getAllFiles(foldersStore.selectedFolder.folderPath)
-          const articles: Article[] = files.map(convertParseitFileToArticle)
-          this.articles = articles
-        }
+      const foldersStore = useFoldersStore()
+      if (foldersStore.selectedFolder) {
+        const files = await window.api.getAllFiles(foldersStore.selectedFolder.folderPath)
+        const articles: Article[] = files.map(convertParseitFileToArticle)
+        this.articles = articles
       }
       const newSelectedArticle = this.articles.find((a) => a.id === this.selectedArticle?.id)
       if (this.selectedArticle && newSelectedArticle) {
@@ -81,44 +76,24 @@ export const useArticleStore = defineStore('articleStore', {
       this.articles.push(article)
     },
     createArticle(name: string, content: string) {
-      if (isDesktopApp()) {
-        const foldersStore = useFoldersStore()
-        if (foldersStore.selectedFolder?.folderPath.includes(ARCHIVE_DIR_NAME)) {
-          window.api.createAppFile(name, content)
-        } else {
-          window.api.createAppFile(name, content, foldersStore.selectedFolder?.name)
-        }
-      }
-    },
-    removeArticle(article: Article) {
-      if (isDesktopApp()) {
-        window.api.deleteFile(article.filePath)
+      const foldersStore = useFoldersStore()
+      if (foldersStore.selectedFolder?.folderPath.includes(ARCHIVE_DIR_NAME)) {
+        window.api.createAppFile(name, content)
       } else {
-        this.articles = this.articles.filter((a) => a.id !== article.id)
-        if (this.selectedArticle?.id === article.id) {
-          this.selectedArticle = null
-        }
+        window.api.createAppFile(name, content, foldersStore.selectedFolder?.name)
       }
     },
-    archiveArticle(article: Article) {
-      if (isDesktopApp()) {
-        window.api.archiveFile(article.filePath)
-      }
+    async removeArticle(article: Article) {
+      return window.api.deleteFile(article.filePath)
     },
-    recoverArticle(article: Article) {
-      if (isDesktopApp()) {
-        window.api.recoverFile(article.filePath)
-      }
+    async archiveArticle(article: Article) {
+      return window.api.archiveFile(article.filePath)
+    },
+    async recoverArticle(article: Article) {
+      return window.api.recoverFile(article.filePath)
     },
     async updateArticle(article: Article) {
-      if (isDesktopApp()) {
-        await window.api.writeFile(article.filePath, article.markdown)
-      } else {
-        const changedArticleIndex = this.articles.findIndex((a) => a.id === article.id)
-        if (changedArticleIndex) {
-          this.articles[changedArticleIndex] = article
-        }
-      }
+      return window.api.writeFile(article.filePath, article.markdown)
     },
     setSelectedArticle(article: Article | null) {
       this.selectedArticle = article

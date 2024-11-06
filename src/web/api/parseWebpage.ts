@@ -1,6 +1,5 @@
 import { Readability } from '@mozilla/readability'
 import { ParsedWebpage } from 'src/web/types/ParsedWebpage'
-import { isDesktopApp } from 'src/web/utils/isDesktopApp'
 
 const cleanDoc = (doc: Document) => {
   const images = doc.querySelectorAll('img')
@@ -28,7 +27,7 @@ const fixHtmlLinksDomain = (domain: string, html: string) => {
   return htmlWithFixedDomain
 }
 
-const getHtmlViaProxy = async (url: string) => {
+const _getHtmlViaProxy = async (url: string) => {
   const proxyUrl = `http://localhost:3122/proxy?url=${encodeURIComponent(url)}`
   const domain = getDomain(url)
   const response = await fetch(proxyUrl)
@@ -42,10 +41,7 @@ const getHtmlWithNode = async (url: string) => {
 }
 
 const getHtml = async (url: string) => {
-  if (isDesktopApp()) {
-    return getHtmlWithNode(url)
-  }
-  return getHtmlViaProxy(url)
+  return getHtmlWithNode(url)
 }
 
 const htmlToDocument = (html: string) => {

@@ -20,14 +20,12 @@ export const useFoldersStore = defineStore('foldersStore', {
   }),
   actions: {
     async init() {
-      if (isDesktopApp()) {
-        const settings = useSettingsStore()
-        if (settings.vaultPath) {
-          const folders = await window.api.getAllFolders(settings.vaultPath)
-          this.folders = folders
-          if (folders.length) {
-            this.selectedFolder = folders.find((f) => !isArchiveFolder(f)) ?? null
-          }
+      const settings = useSettingsStore()
+      if (settings.vaultPath) {
+        const folders = await window.api.getAllFolders(settings.vaultPath)
+        this.folders = folders
+        if (folders.length) {
+          this.selectedFolder = folders.find((f) => !isArchiveFolder(f)) ?? null
         }
       }
       this._initialized = true
