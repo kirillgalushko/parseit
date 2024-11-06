@@ -1,6 +1,11 @@
+import readmeMarkdown from 'src/../readme.md?raw'
 import { ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME } from 'src/common/constants'
 import { ParseitFile, ParseitFolder, Settings } from 'src/common/types'
 import demoMarkdown from '../assets/demo/demo.md?raw'
+import example1Markdown from '../assets/demo/example1.md?raw'
+import example2Markdown from '../assets/demo/example2.md?raw'
+import example3Markdown from '../assets/demo/example3.md?raw'
+import metaMarkdown from '../assets/demo/meta.md?raw'
 import mockedArticleHtml from '../assets/demo/mockedArticle.html?raw'
 
 const MOCKED_SETTINGS: Settings = {
@@ -27,8 +32,32 @@ const MOCKED_FOLDERS: ParseitFolder[] = [
 const MOCKED_FILES: ParseitFile[] = [
   {
     name: 'Демо режим',
-    filePath: DEFAULT_DIR_FULL_PATH + '/file',
+    filePath: DEFAULT_DIR_FULL_PATH + '/demo',
     content: demoMarkdown,
+    extension: '.md'
+  },
+  {
+    name: 'Parseit',
+    filePath: DEFAULT_DIR_FULL_PATH + '/reademe',
+    content: metaMarkdown + readmeMarkdown,
+    extension: '.md'
+  },
+  {
+    name: 'Дональд Трамп победил',
+    filePath: ARCHIVE_FULL_PATH + '/example1',
+    content: example1Markdown,
+    extension: '.md'
+  },
+  {
+    name: 'Каких домашних животных держат россияне',
+    filePath: DEFAULT_DIR_FULL_PATH + '/example2',
+    content: example2Markdown,
+    extension: '.md'
+  },
+  {
+    name: 'Зачем в iPhone чип, который убивает FaceID',
+    filePath: DEFAULT_DIR_FULL_PATH + '/example3',
+    content: example3Markdown,
     extension: '.md'
   }
 ]
@@ -117,7 +146,7 @@ export const mockElectronApi = () => {
       )
       MOCKED_FILES.push({
         name: fileName,
-        filePath: DEFAULT_DIR_FULL_PATH + '/' + fileName,
+        filePath: DEFAULT_DIR_FULL_PATH + '/' + fileName + MOCKED_FILES.length,
         content,
         extension: '.md'
       })
