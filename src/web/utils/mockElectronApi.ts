@@ -66,6 +66,7 @@ const getFile = (filePath) => {
   return MOCKED_FILES.find((file) => file.filePath === filePath)
 }
 
+let parsedPages = 0
 let onFilesUpdated = () => {}
 
 export const mockElectronApi = () => {
@@ -144,12 +145,14 @@ export const mockElectronApi = () => {
       console.log(
         `Mock createAppFile called with fileName: ${fileName}, content: ${content}, folderName: ${folderName}`
       )
+      const postfix = parsedPages ? ` ${parsedPages + 1}` : ''
       MOCKED_FILES.push({
-        name: fileName,
-        filePath: DEFAULT_DIR_FULL_PATH + '/' + fileName + MOCKED_FILES.length,
+        name: fileName + postfix,
+        filePath: DEFAULT_DIR_FULL_PATH + '/' + fileName + postfix,
         content,
         extension: '.md'
       })
+      parsedPages += 1
       onFilesUpdated()
       return Promise.resolve()
     },
