@@ -3,7 +3,6 @@ import { ParseitFolder } from 'src/common/types'
 import { useSettingsStore } from 'src/web/stores/settingsStore'
 import { StateWithInitialization } from 'src/web/stores/types'
 import { isArchiveFolder } from 'src/web/utils/isArchive'
-import { isDesktopApp } from 'src/web/utils/isDesktopApp'
 
 interface Folder extends ParseitFolder {}
 
@@ -43,34 +42,6 @@ export const useFoldersStore = defineStore('foldersStore', {
         this.selectedFolder = null
       }
     },
-    addFolder(_folder: Folder) {
-      // this.articles.push(article);
-    },
-    createFolder(_name: string) {
-      if (isDesktopApp()) {
-        // window.api.createFolder(name)
-      }
-    },
-    removeFolder(_folder: Folder) {
-      if (isDesktopApp()) {
-        // window.api.deleteFolder(folder.folderPath);
-      } else {
-        // this.folders = this.folders.filter(a => a.id !== folder.id)
-        // if (this.selectedFolder?.id === folder.id) {
-        //   this.selectedFolder = null;
-        // }
-      }
-    },
-    // updateFolder(folder: Folder) {
-    //   if (isDesktopApp()) {
-    //     window.api.renameFolder(folder.filePath, folder)
-    //   } else {
-    //     const changedFolderIndex = this.folders.findIndex(a => a.id === folder.id)
-    //     if (changedFolderIndex) {
-    //       this.folders[changedFolderIndex] = folder
-    //     }
-    //   }
-    // },
     setSelectedFolder(folder: Folder | null) {
       this.selectedFolder = folder
     }
