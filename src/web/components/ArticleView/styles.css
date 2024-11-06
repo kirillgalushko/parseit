@@ -18,9 +18,6 @@
   border-radius: 0;
 }
 
-.toastui-editor-toolbar {
-}
-
 .toastui-editor-defaultUI-toolbar {
   border-radius: 0;
   background-color: hsl(var(--background));

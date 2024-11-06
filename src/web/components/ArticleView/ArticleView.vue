@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import Editor from 'src/web/components/Editor/Editor.vue'
-import Viewer from 'src/web/components/Editor/Viewer.vue'
-import PlaceholderView from 'src/web/components/PlaceholderView.vue'
-import Toolbar from 'src/web/components/Toolbar.vue'
+import Editor from 'src/web/components/ArticleView/Editor.vue'
+import PlaceholderView from 'src/web/components/ArticleView/PlaceholderView.vue'
+import Toolbar from 'src/web/components/ArticleView/Toolbar.vue'
+import Viewer from 'src/web/components/ArticleView/Viewer.vue'
 import { useArticleStore } from 'src/web/stores/articleStore'
 
 const { articleView, selectedArticle } = storeToRefs(useArticleStore())

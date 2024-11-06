@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppLoader from 'src/web/components/AppLoader.vue'
+import AppLoader from 'src/web/AppLoader.vue'
 import { useAppInit } from 'src/web/hooks/useAppInit'
 import { useAppTheme } from 'src/web/hooks/useAppTheme'
 import { useFilesWatcher } from 'src/web/hooks/useFilesWatcher'
