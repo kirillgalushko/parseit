@@ -6,22 +6,17 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "preserve",
-
-    /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-
-    "composite": true,
+    "composite": false,
     "baseUrl": ".",
     "paths": {
       "src/*": [
@@ -29,5 +24,13 @@
       ]
     },
   },
-  "include": ["src/web/**/*.ts", "src/web/**/*.tsx", "src/**/*.vue", "src/web/env.d.ts", "src/electron/preload/*.d.ts", "src/common/**/*.ts"]
+  "include": [
+    "src/web/**/*.ts",
+    "src/web/**/*.tsx",
+    "src/**/*.vue",
+    "src/web/env.d.ts",
+    "src/electron/preload/*.d.ts",
+    "src/common/**/*.ts",
+    "!src/electron/**/*",
+  ],
 }
