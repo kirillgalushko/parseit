@@ -7,7 +7,7 @@ Parseit — это настольное приложение для парсин
 - <img src="https://vuejs.org/images/logo.png" width="14"> **Vue 3** — фронтенд.
 - <img src="https://www.electronjs.org/assets/img/logo.svg" width="14"/> **Electron** — сборка настольного приложения, взаимодействие с операционной системой.
 - <img src="https://vitejs.dev/logo.svg" width="14"/> **Vite** — сборка проекта для разработки.
-- <img src="./public/gui.svg" width="14"/> **GUI** — собственная [библиотека компонентов](https://github.com/kirillgalushko/gui), созданная для Parseit. Не использует готовые UI Kit's.
+- <img src="https://github.com/kirillgalushko/gui/raw/main/src/stories/assets/gui.svg" width="14"/> **GUI** — собственная [библиотека компонентов](https://github.com/kirillgalushko/gui), созданная для Parseit. Не использует готовые UI Kit's.
 - <img src="https://pinia.vuejs.org/logo.svg" width="14"/> **Pinia** — управление состоянием Vue приложения.
 - 🐶 **Husky** — pre-commit хуки.
 - <img src="https://github.githubassets.com/favicons/favicon-dark.png" width="14"/> **Github Actions** — автоматическая сборка приложения после релиза.
