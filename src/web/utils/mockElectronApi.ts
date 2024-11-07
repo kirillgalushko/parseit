@@ -1,4 +1,4 @@
-import readmeMarkdown from 'src/../readme.md?raw'
+import readmeMarkdown from 'src/../README.md?raw'
 import { ARCHIVE_DIR_NAME, DEFAULT_DIR_NAME } from 'src/common/constants'
 import { ParseitFile, ParseitFolder, Settings } from 'src/common/types'
 import demoMarkdown from '../assets/demo/demo.md?raw'
