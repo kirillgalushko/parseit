@@ -32,5 +32,6 @@
     "src/electron/preload/*.d.ts",
     "src/common/**/*.ts",
     "!src/electron/**/*",
+    "icons.d.ts",
   ],
 }

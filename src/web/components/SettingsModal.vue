@@ -9,7 +9,7 @@ import {
   Select,
   SelectOption,
   RegisteredOption
-} from 'gui'
+} from '@gui/components'
 import { storeToRefs } from 'pinia'
 import { AppTheme } from 'src/common/types'
 import { useSettingsStore } from 'src/web/stores/settingsStore'

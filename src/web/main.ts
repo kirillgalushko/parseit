@@ -4,7 +4,6 @@ import { isDesktopApp } from 'src/web/utils/isDesktopApp'
 import { mockElectronApi } from 'src/web/utils/mockElectronApi'
 
 import { createApp } from 'vue'
-import 'gui/dist/style.css'
 import './style.css'
 
 if (!isDesktopApp()) {

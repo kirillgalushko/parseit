@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Input } from 'gui'
+import { Input } from '@gui/components'
 import { useSearchStore } from 'src/web/stores/searchStore'
 import { computed } from 'vue'
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Modal, Button, Input, Gap } from 'gui'
+import { Modal, Button, Input, Gap } from '@gui/components'
 import { useAddArticle } from 'src/web/hooks/useAddArticle'
 
 interface AddArticleModalProps {

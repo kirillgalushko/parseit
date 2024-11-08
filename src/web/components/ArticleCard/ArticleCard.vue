@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Text, Stack, Card, Gap, useContextMenu } from 'gui'
+import { Text, Stack, Card, Gap, useContextMenu } from '@gui/components'
 import { storeToRefs } from 'pinia'
 import ArticleCardContextMenu from 'src/web/components/ArticleCard/ArticleCardContextMenu.vue'
 import Favicon from 'src/web/components/Favicon.vue'

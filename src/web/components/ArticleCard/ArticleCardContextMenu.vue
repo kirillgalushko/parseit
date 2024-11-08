@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { ContextMenu, ContextMenuList, ContextMenuItem, Icon, useContextMenu, Confirm } from 'gui'
+import {
+  ContextMenu,
+  ContextMenuList,
+  ContextMenuItem,
+  useContextMenu,
+  Confirm
+} from '@gui/components'
 import { useArticleActions } from 'src/web/hooks/useArticleActions'
 import { Article } from 'src/web/types/Article'
 import { Ref } from 'vue'

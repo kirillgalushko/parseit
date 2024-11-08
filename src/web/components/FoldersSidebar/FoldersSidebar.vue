@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { Sidebar, Gap, Icon, SidebarItem, SidebarList } from 'gui'
+import { Sidebar, Gap, SidebarItem, SidebarList } from '@gui/components'
+import ArchiveIcon from '@gui/icons/outline/archive'
+import FolderIcon from '@gui/icons/outline/folder'
+import SettingsIcon from '@gui/icons/outline/settings'
 import { ParseitFolder } from 'src/common/types'
 import FolderFilesCount from 'src/web/components/FoldersSidebar/FolderFilesCount.vue'
 import Header from 'src/web/components/Header.vue'
@@ -52,7 +55,7 @@ const handleCloseSettings = () => {
             @click="() => foldersStore.setSelectedFolder(folder)"
           >
             <template #left>
-              <Icon :name="isArchiveFolder(folder) ? 'archive' : 'folder'" />
+              <component :is="isArchiveFolder(folder) ? ArchiveIcon : FolderIcon" />
             </template>
             {{ folder.name }}
             <template #right>
@@ -61,7 +64,7 @@ const handleCloseSettings = () => {
           </SidebarItem>
           <SidebarItem @click="handleOpenSettings">
             <template #left>
-              <Icon name="settings" />
+              <SettingsIcon />
             </template>
             Настройки
           </SidebarItem>

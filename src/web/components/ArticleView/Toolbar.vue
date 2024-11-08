@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Button, Stack, Icon, Separator, Tooltip, Tabs, Tab, useSize, Confirm } from 'gui'
+import { Button, Stack, Separator, Tooltip, Tabs, Tab, useSize, Confirm } from '@gui/components'
+import EyeIcon from '@gui/icons/outline/eye.js'
+import EditIcon from '@gui/icons/outline/pencil.js'
 import { storeToRefs } from 'pinia'
 import { useArticleActions } from 'src/web/hooks/useArticleActions'
 import { useArticleStore } from 'src/web/stores/articleStore'
@@ -44,14 +46,14 @@ const smallSizebar = computed(() => Boolean(width.value < 414))
         <Tooltip>
           <Tab name="reader">
             <template v-if="!smallSizebar">Режим чтения</template>
-            <Icon v-if="smallSizebar" name="eye" class="tab-icon" />
+            <EyeIcon v-if="smallSizebar" class="tab-icon" />
           </Tab>
           <template #popper> Режим чтения </template>
         </Tooltip>
         <Tooltip>
           <Tab name="editor">
             <template v-if="!smallSizebar">Редактор</template>
-            <Icon v-if="smallSizebar" name="pencil" class="tab-icon" />
+            <EditIcon v-if="smallSizebar" class="tab-icon" />
           </Tab>
           <template #popper> Редактор </template>
         </Tooltip>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Modal, Button, Input, Gap, Stack } from 'gui'
+import { Modal, Button, Input, Gap, Stack } from '@gui/components'
 import { useSettingsStore } from 'src/web/stores/settingsStore'
 import { isDesktopApp } from 'src/web/utils/isDesktopApp'
 

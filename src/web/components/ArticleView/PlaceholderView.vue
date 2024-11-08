@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Stack, Input, Text, Gap } from 'gui'
+import { Button, Stack, Input, Text, Gap } from '@gui/components'
 import { useAddArticle } from 'src/web/hooks/useAddArticle'
 
 const { articleUrl, addArticle, isLoading } = useAddArticle()

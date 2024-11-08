@@ -1,24 +1,29 @@
 <script setup lang="ts">
-import { Button, Icon, Dropdown, DropdownList, DropdownItem } from 'gui'
+import { Button, Dropdown, DropdownList, DropdownItem } from '@gui/components'
+import CalendarMinusIcon from '@gui/icons/outline/calendar-minus.js'
+import CalendarPlusIcon from '@gui/icons/outline/calendar-plus.js'
+import SortAZIcon from '@gui/icons/outline/sort-a-z.js'
+import SortIcon from '@gui/icons/outline/sort-descending.js'
+import SortZAIcon from '@gui/icons/outline/sort-z-a.js'
 import { useSearchStore, Sorting } from 'src/web/stores/searchStore'
 
 const searchStore = useSearchStore()
 const sortingMap = {
   [Sorting.Newest]: {
     title: 'Сначала новые',
-    icon: 'calendar-plus'
+    icon: CalendarPlusIcon
   },
   [Sorting.Oldest]: {
     title: 'Сначала старые',
-    icon: 'calendar-minus'
+    icon: CalendarMinusIcon
   },
   [Sorting.Atoz]: {
     title: 'От А до Я',
-    icon: 'sort-a-z'
+    icon: SortAZIcon
   },
   [Sorting.Ztoa]: {
     title: 'От Я до А',
-    icon: 'sort-z-a'
+    icon: SortZAIcon
   }
 } as const
 
@@ -30,7 +35,7 @@ const handleChangeSortType = (sort: Sorting) => {
 <template>
   <Dropdown placement="bottom-end" :popperHideTriggers="(triggers) => [...triggers, 'click']">
     <Button squared mode="default">
-      <Icon name="sort-descending" />
+      <SortIcon />
     </Button>
     <template #popper>
       <DropdownList>
@@ -38,7 +43,7 @@ const handleChangeSortType = (sort: Sorting) => {
           v-for="[sortKey, sortValue] of Object.entries(sortingMap)"
           @click="() => handleChangeSortType(sortKey as Sorting)"
         >
-          <Icon :name="sortValue.icon" />
+          <component :is="sortValue.icon" />
           {{ sortValue.title }}
         </DropdownItem>
       </DropdownList>

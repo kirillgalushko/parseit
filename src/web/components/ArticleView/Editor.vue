@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { Loader } from '@gui/components'
 import Editor from '@toast-ui/editor'
 import 'prismjs/themes/prism.css'
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css'
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight-all.js'
 import '@toast-ui/editor/dist/toastui-editor.css'
 import '@toast-ui/editor/dist/i18n/ru-ru'
-import { Loader } from 'gui'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { Article } from 'src/web/types/Article'
 import { debounce } from 'src/web/utils/debounce'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Badge } from 'gui'
+import { Badge } from '@gui/components'
 import { inject, Ref } from 'vue'
 
 const sidebarWidth = inject<Ref<number>>('sidebar-width')

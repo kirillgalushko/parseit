@@ -1,4 +1,4 @@
-import { useConfirm } from 'gui'
+import { useConfirm } from '@gui/components'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { Article } from 'src/web/types/Article'
 import { isArchivedArticle } from 'src/web/utils/isArchive'
