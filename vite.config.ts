@@ -8,5 +8,19 @@ export default defineConfig({
     alias: {
       src: resolve(__dirname, 'src')
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'chunks/[name]-[hash].js',
+        entryFileNames: '[name].js',
+        assetFileNames: '[name]-[hash][extname]',
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString()
+          }
+        }
+      }
+    }
   }
 })
