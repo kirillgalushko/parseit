@@ -1,8 +1,10 @@
 import { useConfirm } from '@gui/components'
-import ArchiveIcon from '@gui/icons/outline/archive'
-import RecoverIcon from '@gui/icons/outline/archive-off'
-import LinkIcon from '@gui/icons/outline/external-link'
-import TrashIcon from '@gui/icons/outline/trash'
+import {
+  IconTrashOutline,
+  IconExternalLinkOutline,
+  IconArchiveOffOutline,
+  IconArchiveOutline
+} from '@gui/icons'
 import { useArticleStore } from 'src/web/stores/articleStore'
 import { Article } from 'src/web/types/Article'
 import { isArchivedArticle } from 'src/web/utils/isArchive'
@@ -47,13 +49,13 @@ export const useArticleActions = (article: Ref<Article | null>) => {
     ? ({
         type: 'button',
         name: 'Восстановить файл',
-        icon: RecoverIcon,
+        icon: IconArchiveOffOutline,
         actionHandler: handleRecoverArticle
       } as const)
     : ({
         type: 'button',
         name: 'Архивировать',
-        icon: ArchiveIcon,
+        icon: IconArchiveOutline,
         actionHandler: handleArchiveArticle
       } as const)
 
@@ -61,7 +63,7 @@ export const useArticleActions = (article: Ref<Article | null>) => {
   const openPageAction = {
     type: 'button',
     name: 'Открыть в новой вкладке',
-    icon: LinkIcon,
+    icon: IconExternalLinkOutline,
     actionHandler: handleOpenPage
   }
   const actions = computed(() => [
@@ -70,7 +72,7 @@ export const useArticleActions = (article: Ref<Article | null>) => {
     {
       type: 'button',
       name: 'Удалить',
-      icon: TrashIcon,
+      icon: IconTrashOutline,
       actionHandler: handleRemoveArticle
     }
   ])

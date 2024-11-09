@@ -22,8 +22,8 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
-    "@gui/components": "github:kirillgalushko/gui#code-splitting",
-    "@gui/icons": "github:kirillgalushko/gui-icons#v1.0.2",
+    "@gui/components": "github:kirillgalushko/gui#v4.0.0",
+    "@gui/icons": "github:kirillgalushko/gui-icons#v2.0.2",
     "@mozilla/readability": "0.5.0",
     "@toast-ui/editor": "^3.2.2",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",

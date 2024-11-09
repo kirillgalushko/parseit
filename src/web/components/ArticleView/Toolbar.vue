@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Button, Stack, Separator, Tooltip, Tabs, Tab, useSize, Confirm } from '@gui/components'
-import EyeIcon from '@gui/icons/outline/eye'
-import EditIcon from '@gui/icons/outline/pencil'
-import CloseIcon from '@gui/icons/outline/x'
+import { IconXOutline, IconEyeOutline, IconPencilOutline } from '@gui/icons'
 import { storeToRefs } from 'pinia'
 import { useArticleActions } from 'src/web/hooks/useArticleActions'
 import { useArticleStore } from 'src/web/stores/articleStore'
@@ -29,7 +27,7 @@ const actions = computed(
       {
         type: 'button',
         name: 'Закрыть',
-        icon: CloseIcon,
+        icon: IconXOutline,
         actionHandler: handleCloseArticle
       }
     ] as const
@@ -47,14 +45,14 @@ const smallSizebar = computed(() => Boolean(width.value < 414))
         <Tooltip>
           <Tab name="reader">
             <template v-if="!smallSizebar">Режим чтения</template>
-            <EyeIcon v-if="smallSizebar" class="tab-icon" />
+            <IconPencilOutline v-if="smallSizebar" class="tab-icon" />
           </Tab>
           <template #popper> Режим чтения </template>
         </Tooltip>
         <Tooltip>
           <Tab name="editor">
             <template v-if="!smallSizebar">Редактор</template>
-            <EditIcon v-if="smallSizebar" class="tab-icon" />
+            <IconEyeOutline v-if="smallSizebar" class="tab-icon" />
           </Tab>
           <template #popper> Редактор </template>
         </Tooltip>

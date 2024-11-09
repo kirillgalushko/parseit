@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button, Stack, Sidebar, Gap, Tooltip, useSize } from '@gui/components'
-import PlusIcon from '@gui/icons/outline/circle-plus.js'
+import { IconCirclePlusOutline } from '@gui/icons'
 import { storeToRefs } from 'pinia'
 import AddArticleModal from 'src/web/components/AddArticleModal.vue'
 import ArticleCard from 'src/web/components/ArticleCard/ArticleCard.vue'
@@ -55,7 +55,7 @@ const isSmallSize = computed(() => width.value < 220)
             </template>
           </Tooltip>
           <Button :squared="isSmallSize" mode="accent" @click="handleAddArticle">
-            <PlusIcon />
+            <IconCirclePlusOutline />
             <template v-if="!isSmallSize">Добавить </template>
           </Button>
         </div>

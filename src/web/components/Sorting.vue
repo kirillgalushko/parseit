@@ -1,29 +1,31 @@
 <script setup lang="ts">
 import { Button, Dropdown, DropdownList, DropdownItem } from '@gui/components'
-import CalendarMinusIcon from '@gui/icons/outline/calendar-minus.js'
-import CalendarPlusIcon from '@gui/icons/outline/calendar-plus.js'
-import SortAZIcon from '@gui/icons/outline/sort-a-z.js'
-import SortIcon from '@gui/icons/outline/sort-descending.js'
-import SortZAIcon from '@gui/icons/outline/sort-z-a.js'
+import {
+  IconCalendarMinusOutline,
+  IconCalendarPlusOutline,
+  IconSortAZOutline,
+  IconSortZAOutline,
+  IconSortDescendingOutline
+} from '@gui/icons'
 import { useSearchStore, Sorting } from 'src/web/stores/searchStore'
 
 const searchStore = useSearchStore()
 const sortingMap = {
   [Sorting.Newest]: {
     title: 'Сначала новые',
-    icon: CalendarPlusIcon
+    icon: IconCalendarPlusOutline
   },
   [Sorting.Oldest]: {
     title: 'Сначала старые',
-    icon: CalendarMinusIcon
+    icon: IconCalendarMinusOutline
   },
   [Sorting.Atoz]: {
     title: 'От А до Я',
-    icon: SortAZIcon
+    icon: IconSortAZOutline
   },
   [Sorting.Ztoa]: {
     title: 'От Я до А',
-    icon: SortZAIcon
+    icon: IconSortZAOutline
   }
 } as const
 
@@ -35,7 +37,7 @@ const handleChangeSortType = (sort: Sorting) => {
 <template>
   <Dropdown placement="bottom-end" :popperHideTriggers="(triggers) => [...triggers, 'click']">
     <Button squared mode="default">
-      <SortIcon />
+      <IconSortDescendingOutline />
     </Button>
     <template #popper>
       <DropdownList>
