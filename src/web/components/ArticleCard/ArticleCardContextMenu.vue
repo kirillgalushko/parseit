@@ -25,7 +25,7 @@ const { actions, confirmModalData } = useArticleActions(props.article)
   <ContextMenu v-bind="$attrs" :data="props.data">
     <ContextMenuList>
       <ContextMenuItem v-for="action of actions" @click="action.actionHandler">
-        <Icon :name="action.icon" v-if="action.icon" />
+        <component :is="action.icon" v-if="action.icon" />
         {{ action.name }}
       </ContextMenuItem>
     </ContextMenuList>

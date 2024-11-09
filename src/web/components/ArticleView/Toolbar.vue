@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Button, Stack, Separator, Tooltip, Tabs, Tab, useSize, Confirm } from '@gui/components'
-import EyeIcon from '@gui/icons/outline/eye.js'
-import EditIcon from '@gui/icons/outline/pencil.js'
+import EyeIcon from '@gui/icons/outline/eye'
+import EditIcon from '@gui/icons/outline/pencil'
+import CloseIcon from '@gui/icons/outline/x'
 import { storeToRefs } from 'pinia'
 import { useArticleActions } from 'src/web/hooks/useArticleActions'
 import { useArticleStore } from 'src/web/stores/articleStore'
@@ -28,7 +29,7 @@ const actions = computed(
       {
         type: 'button',
         name: 'Закрыть',
-        icon: 'x',
+        icon: CloseIcon,
         actionHandler: handleCloseArticle
       }
     ] as const
@@ -64,7 +65,7 @@ const smallSizebar = computed(() => Boolean(width.value < 414))
         <template v-if="action.type === 'button'">
           <Tooltip>
             <Button @click="action.actionHandler" mode="ghost" squared>
-              <Icon :name="action.icon" v-if="action.icon" />
+              <component :is="action.icon" v-if="action.icon" />
             </Button>
             <template #popper>
               {{ action.name }}
