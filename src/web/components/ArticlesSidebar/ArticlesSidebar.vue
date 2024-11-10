@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { Button, Stack, Sidebar, Gap, Tooltip, useSize } from '@gui/components'
-import { IconCirclePlusOutline } from '@gui/icons'
+import { Stack, Sidebar, Gap, Tooltip } from '@gui/components'
 import { storeToRefs } from 'pinia'
-import AddArticleModal from 'src/web/components/AddArticleModal.vue'
 import ArticleCard from 'src/web/components/ArticleCard/ArticleCard.vue'
+import AddArticleButton from 'src/web/components/ArticlesSidebar/AddArticleButton.vue'
 import Header from 'src/web/components/Header.vue'
 import SearchInput from 'src/web/components/SearchInput.vue'
 import Sorting from 'src/web/components/Sorting.vue'
@@ -12,38 +11,27 @@ import { useFoldersStore } from 'src/web/stores/foldersStore'
 import { useSearchStore } from 'src/web/stores/searchStore'
 import { Article } from 'src/web/types/Article'
 import { sortArticles } from 'src/web/utils/sortArticles'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 const foldersStore = useFoldersStore()
 const articleStore = useArticleStore()
 const { searchQuery, filteredArticles, sorting } = storeToRefs(useSearchStore())
-const isAddModalOpened = ref<boolean>(false)
 
 const onSelectArticle = (article: Article) => {
   articleStore.setSelectedArticle(article)
 }
 
-const handleAddArticle = () => {
-  isAddModalOpened.value = true
-}
-
-const handleCloseModal = () => {
-  isAddModalOpened.value = false
-}
 const articles = computed(() => {
   if (searchQuery.value) {
     return sortArticles(filteredArticles.value, sorting.value)
   }
   return sortArticles(articleStore.articles, sorting.value)
 })
-const { elementRef, width } = useSize()
-const isSmallSize = computed(() => width.value < 220)
 </script>
 
 <template>
   <Sidebar :width="300" max-width="40vw" :padding="8">
     <div ref="elementRef" class="sidebar-content">
-      <AddArticleModal :isOpened="isAddModalOpened" :onClose="handleCloseModal" />
       <Header>
         <div class="header-content">
           <Tooltip class="ellipsis">
@@ -54,10 +42,7 @@ const isSmallSize = computed(() => width.value < 220)
               {{ foldersStore.selectedFolder?.name }}
             </template>
           </Tooltip>
-          <Button :squared="isSmallSize" mode="accent" @click="handleAddArticle">
-            <IconCirclePlusOutline />
-            <template v-if="!isSmallSize">Добавить </template>
-          </Button>
+          <AddArticleButton />
         </div>
       </Header>
       <Gap direction="vertical" :default="4" />
