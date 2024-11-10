@@ -105,7 +105,7 @@ export const mockElectronApi = () => {
       console.log(`Mock archiveFile called with path: ${filePath}`)
       const file = getFile(filePath)
       if (file) {
-        file.filePath = ARCHIVE_FULL_PATH
+        file.filePath = filePath.replace(DEFAULT_DIR_FULL_PATH, ARCHIVE_FULL_PATH)
       }
       onFilesUpdated()
       return Promise.resolve()
@@ -114,7 +114,7 @@ export const mockElectronApi = () => {
       console.log(`Mock recoverFile called with path: ${filePath}`)
       const file = getFile(filePath)
       if (file) {
-        file.filePath = DEFAULT_DIR_FULL_PATH
+        file.filePath = filePath.replace(ARCHIVE_FULL_PATH, DEFAULT_DIR_FULL_PATH)
       }
       onFilesUpdated()
       return Promise.resolve()

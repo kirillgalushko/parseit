@@ -33,7 +33,7 @@ export const useFoldersStore = defineStore('foldersStore', {
       const settings = useSettingsStore()
       if (settings.vaultPath) {
         const folders = await window.api.getAllFolders(settings.vaultPath)
-        this.folders = folders
+        this.folders = [...folders]
       }
       if (
         this.selectedFolder &&
