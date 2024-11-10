@@ -205,6 +205,8 @@
 .toastui-editor-main-container code[class*='language-'],
 .toastui-editor-main-container pre[class*='language-'] {
   text-shadow: none;
+  background-color: hsl(var(--secondary));
+  background-color: hsl(var(--secondary-foreground));
 }
 
 .toastui-editor-dark .toastui-editor-ww-code-block-highlighting:after {
