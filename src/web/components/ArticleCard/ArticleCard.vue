@@ -32,15 +32,15 @@ const { contextMenuData, targetRef } = useContextMenu()
       stretched
       :onClick="props.onClick"
     >
-      <Text ellipsis typography="title-4-semibold">{{ article.name }}</Text>
-      <Gap direction="vertical" :default="1" />
-      <Text ellipsis :clamp="2" typography="paragraph-3-regular">
+      <Text ellipsis typography="title-4">{{ article.name }}</Text>
+      <Gap direction="vertical" :default="2" />
+      <Text ellipsis :clamp="2" typography="paragraph-2">
         <HighlightText :text="searchResultText || article.excerpt" :searchQuery="searchQuery" />
       </Text>
       <Gap direction="vertical" :default="2" />
       <Stack direction="row" :gap="2" stretched>
         <Favicon v-if="article.faviconUrl" :src="article.faviconUrl" />
-        <Text ellipsis typography="paragraph-3-regular" mode="secondary">{{
+        <Text ellipsis typography="label-3" color="secondary">{{
           article.siteName || article.domain
         }}</Text>
       </Stack>

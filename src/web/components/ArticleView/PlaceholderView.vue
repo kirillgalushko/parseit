@@ -7,12 +7,9 @@ const { articleUrl, addArticle, isLoading } = useAddArticle()
 
 <template>
   <form @submit.prevent="addArticle" :class="['placeholder']">
-    <Text typography="title-1-semibold">Добавьте статью</Text>
-    <Text typography="paragraph-2-regular" mode="secondary"
-      >Введите url статьи и нажмите Enter</Text
-    >
-    <Gap direction="vertical" :default="4" />
-
+    <Text typography="title-3">Добавьте статью</Text>
+    <Text typography="paragraph-1" color="secondary">Введите url статьи и нажмите Enter</Text>
+    <Gap direction="vertical" :default="3" />
     <Stack direction="column" :gap="3">
       <Input v-model="articleUrl" placeholder="https://..." />
       <Button
